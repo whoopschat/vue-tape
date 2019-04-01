@@ -1,0 +1,28 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.vue-tape-toast {
+    position: fixed;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    max-width: 80%;
+    color: #fff;
+    font-size: 0.28rem;
+    line-height: 0.3rem;
+    border-radius: 0.1rem;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .7);
+    padding: 0.2rem 0.2rem;
+    z-index: 999;
+    text-align: center;
+    white-space: normal;
+    word-break: break-all;
+    transform: translate3d(-50%, -50%, 0);
+    -webkit-transform: translate3d(-50%, -50%, 0);
+}
+  

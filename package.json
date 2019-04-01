@@ -1,9 +1,10 @@
 {
   "name": "vue-tape",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a vue library",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +15,8 @@
     "node": ">= 0.10"
   },
   "files": [
-    "lib"
+    "lib",
+    "types"
   ],
   "devDependencies": {
     "vuex": "3.0.1",

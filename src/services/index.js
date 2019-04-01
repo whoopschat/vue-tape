@@ -11,12 +11,14 @@ import { initBack, back, backListener } from "./_back";
 import { setTitle, getTitle } from "./_title";
 import { exposure, initExposure } from "./_exposure";
 import { request } from "./_request";
+import { toast, initToast } from "./_toast";
 
 export function create(vue) {
+    setVue(vue);
     initBack();
+    initToast();
     initExposure();
     initVisibility();
-    setVue(vue);
     return Object.assign(vuex, {
         init,
         query,
@@ -35,5 +37,6 @@ export function create(vue) {
         getTitle,
         exposure,
         request,
+        toast,
     })
 }

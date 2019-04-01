@@ -107,6 +107,11 @@ interface TapeInstance {
      */
     request(options: { method: ?'GET' | 'POST' | 'PUT' | 'DELETE', url: string, json: ?boolean, data: ?object, header: ?object }): Promise<any>;
 
+    /**
+     * Toast消息弹窗
+     */
+    toast(msg: string, duration: ?number): void;
+
 }
 
 declare var Tape: TapeInstance;

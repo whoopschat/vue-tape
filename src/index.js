@@ -1,3 +1,4 @@
+import './style/index.css'
 import { create } from './services'
 
 const _tape = {};

@@ -1,27 +1,34 @@
 /// <reference no-default-lib="true"/>
 
-interface TapeInstance {
+declare var Tape: {
 
     /**
      * 初始化页面
      * @param options 初始化选项
-     * @param statekey 用于隔离state的KEY
      */
-    init(options: { app: object, state: ?object, config: ?object, width: ?number }, stateKey: ?string): void;
+    initPage(options: {
+        el: ?string,
+        page: object,
+        width: ?number,
+        state: ?object,
+        config: ?object,
+        stateKey: ?string,
+        debug: ?boolean
+    }): void;
 
     /**
      * 获取URL中携带的参数
      * @param key 参数名称
      * @param def 默认值
      */
-    query(key: string, def: ?any): string;
+    getQueryString(key: string, def: ?any): string;
 
     /**
      * 获取配置项
      * @param key 配置项
      * @param def 默认值
      */
-    config(key: string, def: ?any): any;
+    getConfig(key: string, def: ?any): any;
 
     /**
      * 设置storage数据
@@ -50,6 +57,23 @@ interface TapeInstance {
     decodeBase64(str: string): string;
 
     /**
+     * 设置DEBUG模式
+     * @param debug 开关
+     */
+    setDebug(debug: boolean): void;
+
+    /**
+     * 是否为DEBUG模式
+     */
+    isDebug(): boolean;
+
+    /**
+     * 监听错误信息
+     * @param callback 回调
+     */
+    onError(callback: (e: any) => void): string;
+
+    /**
      * 监听界面回到前台
      * @param callback 回调
      */
@@ -74,15 +98,19 @@ interface TapeInstance {
     offHide(callback: () => void): string;
 
     /**
-     * 返回到上级页面
+     * 显示Loading弹窗
      */
-    back(): void;
+    showLoading(msg: string): void;
 
     /**
-     * 返回劫持监听
-     * @param listener 返回劫持监听器
+     * 隐藏Loading弹窗
      */
-    backListener(listener: () => boolean | any): void;
+    hideLoading(): void;
+
+    /**
+     * Toast消息弹窗
+     */
+    showToast(msg: string, duration: ?number): void;
 
     /**
      * 设置页面标题
@@ -96,22 +124,61 @@ interface TapeInstance {
     getTitle(): string;
 
     /**
-     * 元素曝光监听
-     * @param options 曝光参数
-     */
-    exposure(options: { selector: string, exposureKey: ?string, delayTime: ?number, displayAll: ?boolean, extraData: ?any, handleExposure: (box: any, extraData: ?any) => void }): void;
-
-    /**
      * 发起网络请求
      * @param options 请求参数
      */
-    request(options: { method: ?'GET' | 'POST' | 'PUT' | 'DELETE', url: string, json: ?boolean, data: ?object, header: ?object }): Promise<any>;
+    request(options: {
+        method: ?'GET' | 'POST' | 'PUT' | 'DELETE',
+        url: string,
+        json: ?boolean,
+        data: ?object,
+        header: ?object
+    }): Promise<any>;
 
     /**
-     * Toast消息弹窗
+     * 返回到上级页面
      */
-    toast(msg: string, duration: ?number): void;
+    back(): void;
+
+    /**
+     * 返回劫持监听
+     * @param listener 返回劫持监听器
+     */
+    backListener(listener: () => boolean | any): void;
+
+    /**
+     * 元素曝光监听
+     * @param options 曝光参数
+     */
+    exposureListener(options: {
+        selector: string,
+        exposureKey: ?string,
+        delayTime: ?number,
+        displayAll: ?boolean,
+        extraData: ?any,
+        handleExposure: (box: any, extraData: ?any) => void
+    }): void;
+
+    /**
+     * 根据HTML创建VUE组件
+     * @param html 模板
+     * @param data 数据
+     */
+    createHtmlComponent(html: ?string, data: ?any): any;
+
+    /**
+     * 获取VUE-TAPE版本号
+     */
+    getVersion(): string;
 
 }
 
-declare var Tape: TapeInstance;
+declare var TapeInstaller: {
+
+    /**
+     * 安装Tape到全局
+     * @param vue vue
+     */
+    install(vue: ?any): void;
+
+}

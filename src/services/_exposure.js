@@ -64,7 +64,7 @@ function _addEvent(elem, event, fn) {
     }
 }
 
-export function initExposure() {
+export function _initExposure() {
     let _handleChanged = () => {
         __changeds__.forEach(scroll => {
             scroll && scroll();
@@ -77,10 +77,11 @@ export function initExposure() {
     setInterval(_handleChanged, 50);
 }
 
-export function exposure({ selector, exposureKey, delayTime, displayAll, extraData, handleExposure }) {
+export function exposureListener({ selector, exposureKey, delayTime, displayAll, extraData, handleExposure }) {
     let _checkExposure = () => {
         let selectorAll = document.documentElement.querySelectorAll(selector) || [];
-        selectorAll.forEach(div => {
+        for (let index = 0; index < selectorAll.length; index++) {
+            const div = selectorAll[index];
             try {
                 let show = _checkVisible(div, displayAll);
                 let time = +(div.getAttribute("exposure-time") || '-1');
@@ -90,7 +91,7 @@ export function exposure({ selector, exposureKey, delayTime, displayAll, extraDa
                 }
             } catch (error) {
             }
-        });
+        }
     }
     _onChanged(_checkExposure);
     _checkExposure();

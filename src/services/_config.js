@@ -1,10 +1,10 @@
 let confs = {};
 
-export function setConfig(config) {
+export function _initConfig(config) {
     Object.assign(confs, config || {})
 }
 
-export function config(key, def) {
+export function getConfig(key, def) {
     let instant = confs;
     if (key) {
         let keys = key.split('.');

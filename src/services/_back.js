@@ -67,7 +67,7 @@ export function backListener(listener) {
     }
 }
 
-export function initBack() {
+export function _initBack() {
     window.addEventListener("popstate", function () {
         let len = _lenHref();
         if (len > 0) {

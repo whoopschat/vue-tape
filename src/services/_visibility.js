@@ -1,7 +1,7 @@
 let __shows__ = [];
 let __hides__ = [];
 
-export function initVisibility() {
+export function _initVisibility() {
     let hidden, visibilityChange;
     if (typeof document.hidden !== "undefined") {
         hidden = "hidden";

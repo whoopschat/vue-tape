@@ -1,4 +1,4 @@
-export function query(name, def = undefined) {
+export function getQueryString(name, def = undefined) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) {

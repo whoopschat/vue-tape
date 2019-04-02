@@ -1,13 +1,18 @@
 const path = require('path');
 const rules = require('./webpack.rules.js');
+const { replace_file_plugin } = require('./webpack.plugins');
+
+const outputPath = path.resolve('./lib');
+
+const entry = {
+    'index': path.resolve('./src/index.js'),
+}
 
 const config = {
-    entry: path.resolve('./src/index.js'),
+    entry: entry,
     output: {
-        path: path.resolve('./lib'),
-        publicPath: '/lib/',
-        filename: 'index.js',
-        library: 'Tape',
+        path: outputPath,
+        filename: '[name].js',
         libraryTarget: 'umd',
     },
     externals: {
@@ -16,8 +21,8 @@ const config = {
         rules,
     },
     plugins: [
-    ],
-    devtool: 'source-map',
+        replace_file_plugin(entry, outputPath)
+    ]
 };
 
 module.exports = config;

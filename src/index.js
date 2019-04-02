@@ -1,4 +1,4 @@
-import './style/index.css'
+import './style'
 import { create } from './services'
 
 const _tape = {};
@@ -15,6 +15,10 @@ _tape.install = function (vue) {
     }
     vue.prototype['Tape'] = tape;
     _installed = true;
+}
+
+if (typeof window !== 'undefined') {
+    window['TapeInstaller'] = _tape;
 }
 
 module.exports = _tape;

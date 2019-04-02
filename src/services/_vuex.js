@@ -87,7 +87,7 @@ class Store {
 
 const store = new Store();
 
-export function initState(value) {
+export function _initState(value) {
   store.__initState(value);
 }
 

@@ -1,4 +1,4 @@
-export function pixelToRem(maxWidth = 750) {
+export function _pixelToRem(maxWidth = 750) {
     const docEl = document.documentElement;
     const dpr = window.devicePixelRatio || 1;
     // adjust body font size

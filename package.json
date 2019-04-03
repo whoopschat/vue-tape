@@ -1,6 +1,6 @@
 {
   "name": "vue-tape",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a vue library",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
@@ -15,9 +15,14 @@
     "node": ">= 0.10"
   },
   "files": [
+    "bin",
     "lib",
-    "types"
+    "types",
+    "tpl"
   ],
+  "bin": {
+    "vue-tape": "./bin/cli.js"
+  },
   "devDependencies": {
     "autoprefixer": "^7.2.3",
     "babel-core": "^6.25.0",

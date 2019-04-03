@@ -1,4 +1,4 @@
-import { getVue, setKey } from './_vue';
+import { getVue, setKey } from './__vue';
 import { _initState } from './_vuex';
 import { _pixelToRem } from './_rempixel';
 import { _initConfig } from './_config';

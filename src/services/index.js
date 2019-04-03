@@ -1,6 +1,6 @@
 import "./_polyfill";
 import vuex from "./_vuex";
-import { setVue } from "./_vue";
+import { setVue, getVue } from "./__vue";
 import { initPage, onError } from "./_app";
 import { getQueryString } from "./_query";
 import { getConfig } from "./_config";
@@ -16,14 +16,15 @@ import { createHtmlComponent } from "./_page";
 import { setDebug, isDebug } from "./_debug";
 import { getVersion } from "./_version";
 
-export function create(vue) {
+export function create(vue, alias) {
     setVue(vue);
-    console.log("VUE-TAPE: version " + getVersion())
-    console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
     _initBack();
     _initDialog();
     _initExposure();
     _initVisibility();
+    console.log("VUE-TAPE: alias " + alias)
+    console.log("VUE-TAPE: version " + getVersion())
+    console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
     return Object.assign(vuex, {
         initPage,
         getQueryString,
@@ -50,5 +51,6 @@ export function create(vue) {
         exposureListener,
         createHtmlComponent,
         getVersion,
+        getVue,
     })
 }

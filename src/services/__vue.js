@@ -26,7 +26,7 @@ export function getVue() {
 }
 
 export function setKey(key) {
-    _key = key;
+    _key = encodeBase64(key);
 }
 
 export function getKey() {

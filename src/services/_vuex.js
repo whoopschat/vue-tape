@@ -1,25 +1,26 @@
 import vuex from 'vuex'
 import { getStorage, setStorage, checkStorage } from './_storage';
-import { getVue, getKey } from './_vue';
+import { getVue, getKey } from './__vue';
+
+let KEY_PREFIX = 'vtape_state_';
 
 class Store {
 
-  __def_state = {};
-  __inited = false;
+  __state__ = {};
+  __inited__ = false;
 
   __initState(value) {
     let vue = getVue();
-    if (!vue || this.__inited) {
+    if (!vue || this.__inited__) {
       return;
     }
     vue.use(vuex);
-    this.__inited = true;
-    this.key = `tape_state_${getKey()}`;
+    this.__inited__ = true;
     this.instance = new vuex.Store({
-      state: getStorage(this.key, Object.assign({}, value || {})),
+      state: getStorage(`${KEY_PREFIX}${getKey()}`, Object.assign({}, value || {})),
       mutations: {
         init: (state, props) => {
-          this.__def_state = props;
+          this.__state__ = props;
           Object.assign(state, Object.assign({}, props, state));
           this.__updateState();
         },
@@ -45,7 +46,7 @@ class Store {
     if (!this.instance) {
       return;
     }
-    setStorage(this.key, this.instance.state);
+    setStorage(`${KEY_PREFIX}${getKey()}`, this.instance.state);
   }
 
   __watchState() {
@@ -62,8 +63,8 @@ class Store {
       return;
     }
     window.addEventListener("storage", () => {
-      if (!checkStorage(this.key, this.state)) {
-        let data = getStorage(this.key, this.__def_state);
+      if (!checkStorage(`${KEY_PREFIX}${getKey()}`, this.state)) {
+        let data = getStorage(`${KEY_PREFIX}${getKey()}`, this.__state__);
         this.instance.commit('set', data, true);
       }
     });

@@ -1,3 +1,5 @@
+import { isDebug } from "./_debug";
+
 function _parseQuery(path) {
   let url = '';
   let params = {};
@@ -37,8 +39,9 @@ const _xhrRequest = (options) => {
   var url = options['url'] || '';
   var header = options['header'] || {};
   var data = options['data'] || {};
-  var req = new XMLHttpRequest();
   var json = options['json'] || false;
+  var req = new XMLHttpRequest();
+  req.timeout = Math.min(1000, options['timeout'] || 5000);
   if (method.toUpperCase() == 'GET') {
     url = _queryString(url, data);
   }
@@ -80,7 +83,7 @@ const _xhrRequest = (options) => {
         options.fail && options.fail({
           errMsg: 'request:fail',
           data: req.response,
-          header: headers
+          header: headers,
         });
       }
     }
@@ -103,11 +106,11 @@ export function request(options) {
       success: resolve,
       fail: reject
     }));
+  }).catch(err => {
+    isDebug() && console.log("request:fail", err);
+    throw err;
   }).then(res => {
-    console.log(res);
-    if (res.statusCode && res.statusCode != 200) {
-      throw res;
-    }
+    isDebug() && console.log("request:ok", res);
     return res;
   });
 }

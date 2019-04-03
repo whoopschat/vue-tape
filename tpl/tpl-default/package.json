@@ -1,0 +1,30 @@
+{
+  "name": "#vue-tape-name#",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "build-qa": "vue-cli-service build --mode qa",
+    "build-pre": "vue-cli-service build --mode pre",
+    "build-prod": "vue-cli-service build --mode prod",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "vue": "2.5.21",
+    "vue-tape": "${vue-tape-version}"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "3.2.0",
+    "@vue/cli-plugin-eslint": "3.2.0",
+    "@vue/cli-service": "3.2.0",
+    "@vue/eslint-config-airbnb": "4.0.0",
+    "babel-eslint": "10.0.1",
+    "babel-plugin-transform-vue-inline-template": "^1.0.6",
+    "babel-polyfill": "6.26.0",
+    "core-js": "2.6.1",
+    "eslint": "5.8.0",
+    "eslint-plugin-vue": "5.0.0",
+    "vue-template-compiler": "2.5.21",
+    "vue3-multipage": "1.0.0"
+  }
+}

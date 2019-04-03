@@ -1,6 +1,6 @@
 /// <reference no-default-lib="true"/>
 
-declare var Tape: {
+declare var VTape: {
 
     /**
      * 初始化页面
@@ -171,14 +171,20 @@ declare var Tape: {
      */
     getVersion(): string;
 
+    /**
+     * 获取Vue对象
+     */
+    getVue(): any;
+
 }
 
-declare var TapeInstaller: {
+declare var VTapeInstaller: {
 
     /**
      * 安装Tape到全局
-     * @param vue vue
+     * @param vue Vue对象
+     * @param alias 别名
      */
-    install(vue: ?any): void;
+    install(vue: ?any, alias: ?string): void;
 
 }

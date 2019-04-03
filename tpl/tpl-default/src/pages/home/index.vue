@@ -1,7 +1,7 @@
 <template>
   <div>
     <div @click="click">
-      <h1>#vue-tape-name# - main</h1>
+      <h1>#vue-tape-name# - home</h1>
       <hr>
       {{ VTape.state.hello }}
     </div>

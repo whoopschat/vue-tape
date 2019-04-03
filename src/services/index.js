@@ -16,13 +16,12 @@ import { createHtmlComponent } from "./_page";
 import { setDebug, isDebug } from "./_debug";
 import { getVersion } from "./_version";
 
-export function create(vue, alias) {
+export function create(vue) {
     setVue(vue);
     _initBack();
     _initDialog();
     _initExposure();
     _initVisibility();
-    console.log("VUE-TAPE: alias " + alias)
     console.log("VUE-TAPE: version " + getVersion())
     console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
     return Object.assign(vuex, {

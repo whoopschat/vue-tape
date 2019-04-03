@@ -11,7 +11,7 @@ function setGlobal(key, value, vue) {
             window[key] = value;
         }
         if (vue && vue.prototype) {
-            vue.prototype[key] = tape;
+            vue.prototype[key] = value;
         }
     }
 }
@@ -20,7 +20,7 @@ _tape.install = function (vue, alias = 'VTape') {
     if (_installed || !vue) {
         return;
     }
-    let tape = create(vue, alias);
+    let tape = create(vue);
     setGlobal('VTape', tape, vue);
     if (alias != 'VTape') {
         setGlobal(alias, tape, vue);

@@ -3,16 +3,17 @@ import { createHtmlComponent } from "./_page";
 let _show_toast_fun = null;
 let _show_loading_fun = null;
 let _hide_loading_fun = null;
+let _timer = null;
 
-export function showLoading(msg) {
-    _show_loading_fun && _show_loading_fun(msg);
+export function showLoading(msg, duration) {
+    _show_loading_fun && _show_loading_fun(msg, duration);
 }
 
 export function hideLoading() {
     _hide_loading_fun && _hide_loading_fun();
 }
 
-export function showToast(msg, duration = 1500) {
+export function showToast(msg, duration) {
     _show_toast_fun && _show_toast_fun(msg, duration);
 }
 
@@ -25,16 +26,15 @@ export function _initDialog() {
         if (duration < 1000 || duration > 5000) {
             duration = 1500;
         }
-        instance.num++;
-        if (instance.num < 2) {
-            instance.html = `<div class="vue-tape-toast">${msg}</div>`
-            setTimeout(() => {
-                instance.num = 0
-                instance.html = ''
-            }, duration)
+        if (_timer) {
+            clearTimeout(_timer);
         }
+        instance.html = `<div class="vue-tape-toast">${msg}</div>`
+        _timer = setTimeout(() => {
+            instance.html = ''
+        }, duration)
     }
-    _show_loading_fun = (msg) => {
+    _show_loading_fun = (msg = '', duration) => {
         instance.html = `<div class="vue-tape-loading">
             <div class="spinner">
                 <div class="bounce1"></div>
@@ -43,8 +43,19 @@ export function _initDialog() {
             </div>
             <div class="text">${msg}</div>
         </div>`;
+        if (_timer) {
+            clearTimeout(_timer);
+        }
+        if (duration > 0) {
+            _timer = setTimeout(() => {
+                instance.html = ''
+            }, duration)
+        }
     }
     _hide_loading_fun = () => {
         instance.html = '';
+        if (_timer) {
+            clearTimeout(_timer);
+        }
     }
 }

@@ -1,6 +1,8 @@
 # vue-tape
 > a vue library
 
+#### [API definition (in TypeScript)](types)
+
 ## Cli
 #### install
 ```

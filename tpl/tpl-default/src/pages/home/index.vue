@@ -3,7 +3,7 @@
     <div @click="click">
       <h1>#vue-tape-name# - home</h1>
       <hr>
-      {{ VTape.state.hello }}
+      {{ Tape.state.hello }}
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     click() {
-      VTape.state.hello = "Ni Hao";
+      Tape.state.hello = "Ni Hao";
     }
   },
   created() {}

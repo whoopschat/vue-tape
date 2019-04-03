@@ -1,6 +1,6 @@
 /// <reference no-default-lib="true"/>
 
-declare var VTape: {
+declare var Tape: {
 
     /**
      * 初始化页面
@@ -99,8 +99,10 @@ declare var VTape: {
 
     /**
      * 显示Loading弹窗
+     * @param msg 内容
+     * @param duration 时间
      */
-    showLoading(msg: string): void;
+    showLoading(msg: ?string, duration: ?number): void;
 
     /**
      * 隐藏Loading弹窗
@@ -108,7 +110,21 @@ declare var VTape: {
     hideLoading(): void;
 
     /**
+     * 显示骨架屏
+     * @param html 模板
+     * @param duration 时间
+     */
+    showSkeleton(html: ?string, duration: ?number): void;
+
+    /**
+     * 隐藏骨架屏
+     */
+    hideSkeleton(): void;
+
+    /**
      * Toast消息弹窗
+     * @param msg 内容
+     * @param duration 时间
      */
     showToast(msg: string, duration: ?number): void;
 
@@ -167,6 +183,11 @@ declare var VTape: {
     createHtmlComponent(html: ?string, data: ?any): any;
 
     /**
+     * 获取页面名称
+     */
+    getPageName(): string;
+
+    /**
      * 获取VUE-TAPE版本号
      */
     getVersion(): string;
@@ -178,7 +199,7 @@ declare var VTape: {
 
 }
 
-declare var VTapeInstaller: {
+declare var TapeInstaller: {
 
     /**
      * 安装Tape到全局

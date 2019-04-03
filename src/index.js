@@ -16,20 +16,20 @@ function setGlobal(key, value, vue) {
     }
 }
 
-_tape.install = function (vue, alias = 'VTape') {
+_tape.install = function (vue, alias = 'Tape') {
     if (_installed || !vue) {
         return;
     }
     let tape = create(vue);
-    setGlobal('VTape', tape, vue);
-    if (alias != 'VTape') {
+    setGlobal('Tape', tape, vue);
+    if (alias != 'Tape') {
         setGlobal(alias, tape, vue);
     }
     _installed = true;
 }
 
 if (typeof window !== 'undefined') {
-    window['VTapeInstaller'] = _tape;
+    window['TapeInstaller'] = _tape;
 }
 
 module.exports = _tape;

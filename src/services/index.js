@@ -14,11 +14,13 @@ import { setTitle, getTitle } from "./_title";
 import { request } from "./_request";
 import { createHtmlComponent } from "./_page";
 import { setDebug, isDebug } from "./_debug";
-import { getVersion } from "./_version";
+import { getVersion, getPageName } from "./_version";
+import { _initSkeleton, showSkeleton, hideSkeleton } from "./_skeleton";
 
 export function create(vue) {
     setVue(vue);
     _initBack();
+    _initSkeleton();
     _initDialog();
     _initExposure();
     _initVisibility();
@@ -39,6 +41,8 @@ export function create(vue) {
         onHide,
         offShow,
         offHide,
+        showSkeleton,
+        hideSkeleton,
         showLoading,
         hideLoading,
         showToast,
@@ -49,6 +53,7 @@ export function create(vue) {
         backListener,
         exposureListener,
         createHtmlComponent,
+        getPageName,
         getVersion,
         getVue,
     })

@@ -94,38 +94,39 @@ table {
 
 .vue-tape-loading {
         position: fixed;
-        display: flex;
-        top: 50%;
-        left: 50%;
-        max-width: 80%;
-        border-radius: 0.1rem;
-        align-items: center;
-        flex-direction: column;
-        box-sizing: border-box;
-        background-color: rgba(0, 0, 0, .7);
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3);
         z-index: 999;
-        text-align: center;
-        white-space: normal;
-        word-break: break-all;
-        transform: translate3d(-50%, -50%, 0);
-        -webkit-transform: translate3d(-50%, -50%, 0);
 }
 
 .vue-tape-loading .text {
+        position: fixed;
+        text-align: center;
+        width: 3rem;
+        left: 50%;
+        top: 50%;
+        margin-left: -1.5rem;
+        margin-top: -0.5rem;
         color: #fff;
         font-size: 0.28rem;
         line-height: 0.3rem;
         text-align: center;
         white-space: normal;
         word-break: break-all;
-        padding: 0.2rem 0.2rem;
 }
 
 .vue-tape-loading .spinner {
-        margin-top: 0.5rem;
-        height: 0.5rem;
-        width: 2rem;
+        position: fixed;
         text-align: center;
+        height: 0.2rem;
+        width: 2rem;
+        left: 50%;
+        top: 50%;
+        margin-left: -1rem;
+        margin-top: -1rem;
 }
 
 .spinner>div {
@@ -169,5 +170,73 @@ table {
         40% {
                 transform: scale(1.0);
                 -webkit-transform: scale(1.0);
+        }
+}
+
+.vue-tape-skeleton {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+        background: #fff;
+}
+
+.skeleton {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+}
+
+.skeleton-wrapper {
+        display: flex;
+        width: 95%;
+        margin: 0 auto .2rem;
+}
+
+.skeleton .skeleton-head, .skeleton .skeleton-nav, .skeleton .skeleton-title, .skeleton .skeleton-content {
+        background: #eee;
+}
+
+.skeleton-nav {
+        height: 150px;
+        margin-bottom: 15px;
+}
+
+.skeleton-head {
+        width: 1.7rem;
+        height: 1.7rem;
+}
+
+.skeleton-body {
+        width: 100%;
+        margin-left: .2rem;
+}
+
+.skeleton-title {
+        width: 30%;
+        height: .3rem;
+}
+
+.skeleton-content {
+        height: .37rem;
+        margin-top: .1rem;
+}
+
+.skeleton .skeleton-nav, .skeleton .skeleton-head, .skeleton .skeleton-title, .skeleton .skeleton-content {
+        background: #eee;
+        background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%);
+        background-size: 20rem 20rem;
+        animation: skeleton-stripes 1s linear infinite;
+}
+
+@keyframes skeleton-stripes {
+        from {
+                background-position: 0 0;
+        }
+        to {
+                background-position: 20rem 0;
         }
 }

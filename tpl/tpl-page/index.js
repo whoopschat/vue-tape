@@ -1,5 +1,5 @@
 import './index.css';
-import page from './index.vue';
-import { initPage } from '../../common';
+import view from './index.vue';
+import { init } from '../../common';
 
-initPage(page);
+init(view, '#vue-tape-page#');

@@ -5,6 +5,7 @@ import { _initConfig } from './_config';
 import { createErrorComponent } from './_page';
 import { showToast } from './_dialog';
 import { setDebug, isDebug } from './_debug';
+import { setPageName } from './_version';
 
 let __errors__ = [];
 
@@ -14,12 +15,13 @@ export function onError(error) {
     }
 }
 
-export function initPage({ el, page, state, config, width, stateKey, debug }) {
+export function initPage({ name, el, page, state, config, width, stateKey, debug }) {
     let _vue = getVue();
     setKey(stateKey || 'default');
     _initConfig(config);
     _pixelToRem(width);
     _initState(state);
+    setPageName(name || 'default');
     setDebug(debug);
     let _errHandler = (e, printLog = true) => {
         printLog && console.error(e);
@@ -35,6 +37,6 @@ export function initPage({ el, page, state, config, width, stateKey, debug }) {
     }
     new _vue({
         el: el || '#app',
-        render: h => h(page || createErrorComponent(' Invalid parameters [page] -> Tape.initPage({ ... })'))
+        render: h => h(page || createErrorComponent('Invalid parameters [page] -> Tape.initPage({ ... })'))
     })
 }

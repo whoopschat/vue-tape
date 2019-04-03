@@ -17,20 +17,20 @@ function _arg(index, def) {
 }
 
 let _cwd = process.cwd();
-let _cmd = _arg(0, 'default');
-let _page = _arg(1, 'default');
+let _type = _arg(0, 'default');
 
 let tpl = '';
-let dir = './test';
-if (_cmd == 'page') {
+let dir = './';
+if (_type == 'page') {
     tpl = 'page';
-    dir = `./src/pages/${_page}`
-} else if (_cmd == 'init') {
+    dir = `./src/pages/${_arg(1, 'home')}`
+} else if (_type == 'init') {
     tpl = 'default';
+    dir = `./${_arg(1, '')}`
 } else {
     console.log('Usage: vue-tape [options]');
     console.log("       init  -  create vue-tape template project");
-    console.log("       page  -  create page");
+    console.log("       page  -  create vue-tape template page");
     console.log('');
     return;
 }
@@ -38,12 +38,6 @@ if (_cmd == 'page') {
 let template = path.join(cwd, `./tpl/tpl-${tpl}`);
 if (!fst.existsSync(template)) {
     console.log(`Failure : template "${tpl}" not found`);
-    console.log('');
-    return;
-}
-
-if (tpl == 'page' && _page == 'default') {
-    console.log('Usage: vue-tape page [page_name]');
     console.log('');
     return;
 }
@@ -59,7 +53,7 @@ if (!fst.emptySync(output)) {
 let replaceOpts = {
     '#vue-tape-version#': version,
     '#vue-tape-name#': path.basename(_cwd) || 'vue-tape-project',
-    '#vue-tape-page#': _page,
+    '#vue-tape-page#': _arg(1, 'default'),
 }
 
 fst.copyDirSync(template, output, (item) => {
@@ -67,10 +61,8 @@ fst.copyDirSync(template, output, (item) => {
     return ext == '.vue' || ext == '.js' || ext == '.json' || ext == '.txt';
 }, replaceOpts);
 
-console.log(`Done : ${output}`);
+console.log(`Success : ${output}`);
 console.log('');
-
-
 
 
 

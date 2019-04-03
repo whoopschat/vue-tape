@@ -1,5 +1,7 @@
 # npm modules
 node_modules/
+test/
+dist/
 
 # vim temp file
 *.swp

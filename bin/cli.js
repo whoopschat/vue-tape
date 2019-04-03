@@ -21,7 +21,7 @@ let _cmd = _arg(0, 'default');
 let _page = _arg(1, 'default');
 
 let tpl = '';
-let dir = './';
+let dir = './test';
 if (_cmd == 'page') {
     tpl = 'page';
     dir = `./src/pages/${_page}`

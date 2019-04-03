@@ -2,6 +2,21 @@ const fs = require('fs');
 const path = require('path');
 const func = require('./func');
 
+function _folderSync(file) {
+    try {
+        var sep = path.sep
+        var folders = path.dirname(file).split(sep);
+        var p = '';
+        while (folders.length) {
+            p += folders.shift() + sep;
+            if (!fs.existsSync(p)) {
+                fs.mkdirSync(p);
+            }
+        }
+    } catch (error) {
+    }
+}
+
 function _mkdirsSync(dirname, mode) {
     if (fs.existsSync(dirname)) {
         return true;
@@ -37,8 +52,8 @@ function _listSync(src) {
     return entrysList;
 }
 
-
 function _copySync(src, dst, filter, options) {
+    _folderSync(dst);
     let content = fs.readFileSync(src, 'utf-8');
     if (filter && filter(src)) {
         Object.keys(options).forEach(key => {

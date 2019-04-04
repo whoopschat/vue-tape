@@ -19,7 +19,6 @@
     "@vue/cli-service": "3.2.0",
     "@vue/eslint-config-airbnb": "4.0.0",
     "babel-eslint": "10.0.1",
-    "babel-plugin-transform-vue-inline-template": "^1.0.6",
     "babel-polyfill": "6.26.0",
     "core-js": "2.6.1",
     "eslint": "5.8.0",

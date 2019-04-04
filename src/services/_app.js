@@ -5,9 +5,11 @@ import { _initConfig } from './_config';
 import { createErrorComponent } from './_page';
 import { showToast } from './_dialog';
 import { setDebug, isDebug } from './_debug';
-import { setPageName } from './_version';
+import { _initVisibility } from './_visibility';
 
 let __errors__ = [];
+let __app__ = null;
+let __app_name__ = '';
 
 export function onError(error) {
     if (error && typeof error == 'function' && __shows__.indexOf(error) < 0) {
@@ -15,14 +17,24 @@ export function onError(error) {
     }
 }
 
-export function initPage({ name, el, page, state, config, width, stateKey, debug }) {
+export function getApp() {
+    return __app__;
+}
+
+export function getAppName() {
+    return __app_name__;
+}
+
+export function initApp({ name, app, state, config, width, stateKey, debug, el }) {
+    __app_name__ = name || 'default';
+    __app__ = app;
     let _vue = getVue();
     setKey(stateKey || 'default');
-    _initConfig(config);
+    setDebug(debug);
     _pixelToRem(width);
     _initState(state);
-    setPageName(name || 'default');
-    setDebug(debug);
+    _initConfig(config);
+    _initVisibility();
     let _errHandler = (e, printLog = true) => {
         printLog && console.error(e);
         __errors__.forEach(error => {
@@ -37,6 +49,6 @@ export function initPage({ name, el, page, state, config, width, stateKey, debug
     }
     new _vue({
         el: el || '#app',
-        render: h => h(page || createErrorComponent('Invalid parameters [page] -> Tape.initPage({ ... })'))
+        render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))
     })
 }

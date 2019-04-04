@@ -3,9 +3,13 @@ import state from './state';
 import config from './config';
 import 'vue-tape';
 
-export function init(page, name) {
+export function init(app, name) {
     // install Tape to window
     TapeInstaller.install(vue);
-    // init page
-    Tape.initPage({ name, page, state, config, width: 750, stateKey: '#vue-tape-name#' });
+    // set report handler
+    Tape.setReportHandler((data) => {
+        // console.log(data);
+    });
+    // init app
+    Tape.initApp({ name, app, state, config, width: 750, el: '#app', stateKey: '#vue-tape-name#' });
 }

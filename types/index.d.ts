@@ -3,18 +3,29 @@
 declare var Tape: {
 
     /**
-     * 初始化页面
+     * 初始化APP
      * @param options 初始化选项
      */
-    initPage(options: {
-        el: ?string,
+    initApp(options: {
+        name: string,
         page: object,
         width: ?number,
         state: ?object,
         config: ?object,
         stateKey: ?string,
-        debug: ?boolean
+        debug: ?boolean,
+        el: ?string,
     }): void;
+
+    /**
+     * 获取APP实例
+     */
+    getApp(name: string): any;
+
+    /**
+     * 获取APP名称
+     */
+    getAppName(): string;
 
     /**
      * 获取URL中携带的参数
@@ -43,6 +54,29 @@ declare var Tape: {
      * @param def 默认值
      */
     getStorage(key: string, def: ?any): any;
+
+    /**
+     * 设置缓存数据
+     * @param key 配置项
+     * @param value 数据内容
+     */
+    setCache(key: string, value: ?any): any;
+
+    /**
+     * 添加HOOK钩子
+     * @param target 目标
+     * @param method 方法名
+     * @param hook 钩子函数
+     * @param upsert 是否注入方法
+     */
+    addHook(target: any, methodName: string, hook: (target: any, methodName: string, method: (...params: ?any) => any, ...params: ?any) => any, upsert: ?boolean): void;
+
+    /**
+     * 获取缓存数据
+     * @param key 配置项
+     * @param expires 有效时长，单位：ms
+     */
+    getCache(key: string, expires: ?number): Promise<any>;
 
     /**
      * 字符串BASE64编码
@@ -163,29 +197,11 @@ declare var Tape: {
     backListener(listener: () => boolean | any): void;
 
     /**
-     * 元素曝光监听
-     * @param options 曝光参数
-     */
-    exposureListener(options: {
-        selector: string,
-        exposureKey: ?string,
-        delayTime: ?number,
-        displayAll: ?boolean,
-        extraData: ?any,
-        handleExposure: (box: any, extraData: ?any) => void
-    }): void;
-
-    /**
      * 根据HTML创建VUE组件
      * @param html 模板
      * @param data 数据
      */
     createHtmlComponent(html: ?string, data: ?any): any;
-
-    /**
-     * 获取页面名称
-     */
-    getPageName(): string;
 
     /**
      * 获取VUE-TAPE版本号

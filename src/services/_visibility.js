@@ -2,6 +2,7 @@ import { reportEvent } from "./_report";
 
 let __shows__ = [];
 let __hides__ = [];
+let __time__ = 0;
 
 export function _initVisibility() {
     let hidden, visibilityChange;
@@ -19,17 +20,21 @@ export function _initVisibility() {
         visibilityChange = "webkitvisibilitychange";
     }
     reportEvent('onshow')
+    __time__ = Date.now();
     __shows__.forEach(show => {
         show && show();
     });
     document.addEventListener(visibilityChange, () => {
         if (!document[hidden]) {
             reportEvent('onshow')
+            __time__ = Date.now();
             __shows__.forEach(show => {
                 show && show();
             });
         } else {
-            reportEvent('onhide')
+            reportEvent('onhide', {
+                time: Date.now() - __time__
+            })
             __hides__.forEach(hide => {
                 hide && hide();
             });

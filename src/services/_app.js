@@ -25,12 +25,11 @@ export function getAppName() {
     return __app_name__;
 }
 
-export function initApp({ name, app, state, config, width, stateKey, debug, el }) {
+export function initApp({ name, app, state, config, width, stateKey, el }) {
     __app_name__ = name || 'default';
     __app__ = app;
     let _vue = getVue();
     setKey(stateKey || 'default');
-    setDebug(debug);
     _pixelToRem(width);
     _initState(state);
     _initConfig(config);

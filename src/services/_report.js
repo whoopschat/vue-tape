@@ -1,4 +1,5 @@
 import { getVue } from "./__vue";
+import { getAppName } from "./_app";
 
 let __handler__ = null;
 let __handles__ = {};
@@ -145,8 +146,8 @@ function _setBinding(el, binding) {
     }
 }
 
-function report(id, event, binding) {
-    reportEvent({ event, data: Object.assign({}, binding.value || {}) })
+function report(event, binding) {
+    reportEvent(event, Object.assign({}, binding.value || {}))
 }
 
 export function _initReport() {
@@ -156,12 +157,12 @@ export function _initReport() {
             let events = (el.getAttribute("report-events") || 'exposure,click').split(',');
             if (events.indexOf('exposure') >= 0) {
                 _addExposure(el, (el) => {
-                    report(_createId(el), 'exposure', _getBinding(el));
+                    report('exposure', _getBinding(el));
                 });
             }
             if (events.indexOf('click') >= 0) {
                 _addEvent(el, 'click', () => {
-                    report(_createId(el), 'click', _getBinding(el));
+                    report('click', _getBinding(el));
                 });
             }
         },
@@ -189,8 +190,12 @@ export function _initReport() {
     setInterval(_handleChanged, 50);
 }
 
-export function reportEvent(params) {
-    __handler__ && __handler__(params)
+export function reportEvent(event, data) {
+    __handler__ && __handler__({
+        event,
+        page: getAppName(),
+        data: Object.assign({}, data || {})
+    })
 }
 
 export function setReportHandler(handler) {

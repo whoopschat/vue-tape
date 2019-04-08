@@ -1,4 +1,5 @@
 import { isDebug } from "./_debug";
+import { setCache, getCache } from "./_cache";
 
 function _parseQuery(path) {
   let url = '';
@@ -41,6 +42,7 @@ const _xhrRequest = (options) => {
   var data = options['data'] || {};
   var json = options['json'] || false;
   var req = new XMLHttpRequest();
+  var requestId = Date.now().toString(36);
   req.timeout = Math.min(1000, options['timeout'] || 5000);
   if (method.toUpperCase() == 'GET') {
     url = _queryString(url, data);
@@ -67,9 +69,7 @@ const _xhrRequest = (options) => {
         });
       }
       if (req.status >= 200 && req.status < 300) {
-        var res = {
-          errMsg: 'request:ok'
-        }
+        var res = { errMsg: 'request:ok' }
         try {
           var data = JSON.parse(req.response);
           res.data = data;
@@ -78,12 +78,14 @@ const _xhrRequest = (options) => {
         }
         res.header = headers;
         res.statusCode = req.status;
+        res.requestId = requestId;
         options.success && options.success(res);
       } else {
         options.fail && options.fail({
           errMsg: 'request:fail',
           data: req.response,
           header: headers,
+          requestId,
         });
       }
     }
@@ -100,17 +102,34 @@ const _xhrRequest = (options) => {
   return req;
 }
 
-export function request(options) {
+function _realRequest(options, key) {
   return new Promise((resolve, reject) => {
     _xhrRequest(Object.assign({}, options, {
       success: resolve,
       fail: reject
     }));
-  }).catch(err => {
-    isDebug() && console.log("request:fail", err);
-    throw err;
+  }).catch(res => {
+    isDebug() && console.log(res.errMsg, res);
+    throw res;
   }).then(res => {
-    isDebug() && console.log("request:ok", res);
+    isDebug() && console.log(res.errMsg, res);
+    setCache(key, res);
     return res;
   });
+}
+
+export function request(options) {
+  let key = JSON.stringify(options);
+  let cache = +(options.cache);
+  if (cache > 0) {
+    return getCache(key, cache).then(res => {
+      Object.assign(res, { errMsg: 'request:cache' })
+      isDebug() && console.log(res.errMsg, res);
+      return res;
+    }).catch(() => {
+      return _realRequest(options, key);
+    })
+  } else {
+    return _realRequest(options, key)
+  }
 }

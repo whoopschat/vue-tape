@@ -13,14 +13,13 @@ declare var Tape: {
         state: ?object,
         config: ?object,
         stateKey: ?string,
-        debug: ?boolean,
         el: ?string,
     }): void;
 
     /**
      * 获取APP实例
      */
-    getApp(name: string): any;
+    getApp(): any;
 
     /**
      * 获取APP名称
@@ -61,15 +60,6 @@ declare var Tape: {
      * @param value 数据内容
      */
     setCache(key: string, value: ?any): any;
-
-    /**
-     * 添加HOOK钩子
-     * @param target 目标
-     * @param method 方法名
-     * @param hook 钩子函数
-     * @param upsert 是否注入方法
-     */
-    addHook(target: any, methodName: string, hook: (target: any, methodName: string, method: (...params: ?any) => any, ...params: ?any) => any, upsert: ?boolean): void;
 
     /**
      * 获取缓存数据
@@ -132,18 +122,6 @@ declare var Tape: {
     offHide(callback: () => void): string;
 
     /**
-     * 显示Loading弹窗
-     * @param msg 内容
-     * @param duration 时间
-     */
-    showLoading(msg: ?string, duration: ?number): void;
-
-    /**
-     * 隐藏Loading弹窗
-     */
-    hideLoading(): void;
-
-    /**
      * 显示骨架屏
      * @param html 模板
      * @param duration 时间
@@ -154,6 +132,18 @@ declare var Tape: {
      * 隐藏骨架屏
      */
     hideSkeleton(): void;
+
+    /**
+     * 显示Loading弹窗
+     * @param msg 内容
+     * @param duration 时间
+     */
+    showLoading(msg: ?string, duration: ?number): void;
+
+    /**
+     * 隐藏Loading弹窗
+     */
+    hideLoading(): void;
 
     /**
      * Toast消息弹窗
@@ -197,11 +187,17 @@ declare var Tape: {
     backListener(listener: () => boolean | any): void;
 
     /**
-     * 根据HTML创建VUE组件
-     * @param html 模板
+     * 事件上报
+     * @param event 事件
      * @param data 数据
      */
-    createHtmlComponent(html: ?string, data: ?any): any;
+    reportEvent(event: ?string, data: ?any): any;
+
+    /**
+     * 设置处理上报
+     * @param handler 上报事件处理回调
+     */
+    setReportHandler(handler: (eventData: object) => void): any;
 
     /**
      * 获取VUE-TAPE版本号

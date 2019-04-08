@@ -6,10 +6,12 @@ import 'vue-tape';
 export function init(app, name) {
     // install Tape to window
     TapeInstaller.install(vue);
+    // set debug mode
+    Tape.setDebug(process.env.CONF_ENV != 'prod');
     // set report handler
     Tape.setReportHandler((data) => {
-        // console.log(data);
+        Tape.isDebug() && console.log('report:', data);
     });
     // init app
-    Tape.initApp({ name, app, state, config, width: 750, el: '#app', stateKey: '#vue-tape-name#' });
+    Tape.initApp({ name, app, state, config, width: 750, el: '#app', stateKey: 'abc' });
 }

@@ -1,5 +1,4 @@
 import { reportEvent } from "./_report";
-import { getAppName } from "./_app";
 
 let __shows__ = [];
 let __hides__ = [];
@@ -19,27 +18,18 @@ export function _initVisibility() {
         hidden = "webkitHidden";
         visibilityChange = "webkitvisibilitychange";
     }
-    reportEvent({
-        event: 'onshow',
-        page: getAppName()
-    })
+    reportEvent('onshow')
     __shows__.forEach(show => {
         show && show();
     });
     document.addEventListener(visibilityChange, () => {
         if (!document[hidden]) {
-            reportEvent({
-                event: 'onshow',
-                page: getAppName()
-            })
+            reportEvent('onshow')
             __shows__.forEach(show => {
                 show && show();
             });
         } else {
-            reportEvent({
-                event: 'onhide',
-                page: getAppName()
-            })
+            reportEvent('onhide')
             __hides__.forEach(hide => {
                 hide && hide();
             });

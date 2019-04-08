@@ -168,7 +168,7 @@ export function _initReport() {
         },
         update: function (el, binding) {
             _resetExposure(el);
-            _setBinding(el, bindingv);
+            _setBinding(el, binding);
         },
         unbind: function (el) {
             _delExposure(el);

@@ -43,7 +43,7 @@ const _xhrRequest = (options) => {
   var json = options['json'] || false;
   var req = new XMLHttpRequest();
   var requestId = Date.now().toString(36);
-  req.timeout = Math.min(1000, options['timeout'] || 5000);
+  req.timeout = Math.max(1000, options['timeout'] || 5000);
   if (method.toUpperCase() == 'GET') {
     url = _queryString(url, data);
   }
@@ -109,10 +109,10 @@ function _realRequest(options, key) {
       fail: reject
     }));
   }).catch(res => {
-    isDebug() && console.log(res.errMsg, res);
+    isDebug() && console.log('request', res);
     throw res;
   }).then(res => {
-    isDebug() && console.log(res.errMsg, res);
+    isDebug() && console.log('request', res);
     setCache(key, res);
     return res;
   });
@@ -124,7 +124,7 @@ export function request(options) {
   if (cache > 0) {
     return getCache(key, cache).then(res => {
       Object.assign(res, { errMsg: 'request:cache' })
-      isDebug() && console.log(res.errMsg, res);
+      isDebug() && console.log('request', res);
       return res;
     }).catch(() => {
       return _realRequest(options, key);

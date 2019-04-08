@@ -9,9 +9,17 @@ export function init(app, name) {
     // set debug mode
     Tape.setDebug(process.env.CONF_ENV != 'prod');
     // set report handler
-    Tape.setReportHandler((data) => {
-        Tape.isDebug() && console.log('report:', data);
+    Tape.setReportHandler((eventData) => {
+        // handle your report
     });
     // init app
-    Tape.initApp({ name, app, state, config, width: 750, el: '#app', stateKey: 'abc' });
+    Tape.initApp({
+        name,
+        app,
+        state,
+        config,
+        width: 750,
+        el: '#app',
+        stateKey: 'abc'
+    });
 }

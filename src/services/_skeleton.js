@@ -1,4 +1,5 @@
 import { createHtmlComponent } from "./_page";
+import { stopScroll, startScroll } from "./_scroll";
 
 let _show_skeleton_fun = null;
 let _hide_skeleton_fun = null;
@@ -19,6 +20,7 @@ export function _initSkeleton() {
   document.body.appendChild(instance.$el);
   _hide_skeleton_fun = () => {
     instance.html = '';
+    startScroll();
     if (_timer) {
       clearTimeout(_timer);
     }
@@ -29,9 +31,10 @@ export function _initSkeleton() {
     }
     if (duration > 0) {
       _timer = setTimeout(() => {
-        instance.html = ''
+        hideSkeleton()
       }, duration)
     }
+    stopScroll();
     if (html) {
       instance.html = `<div class="vue-tape-skeleton">${html}</div>`
     } else {

@@ -3,8 +3,8 @@ import { _initState } from './_vuex';
 import { _pixelToRem } from './_rempixel';
 import { _initConfig } from './_config';
 import { createErrorComponent } from './_page';
-import { showToast } from './_dialog';
-import { setDebug, isDebug } from './_debug';
+import { showToast } from './_toast';
+import { isDebug } from './_debug';
 import { _initVisibility } from './_visibility';
 
 let __errors__ = [];

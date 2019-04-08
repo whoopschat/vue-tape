@@ -168,11 +168,13 @@ declare var Tape: {
      * @param options 请求参数
      */
     request(options: {
-        method: ?'GET' | 'POST' | 'PUT' | 'DELETE',
         url: string,
+        method: ?'GET' | 'POST' | 'PUT' | 'DELETE',
         json: ?boolean,
         data: ?object,
-        header: ?object
+        header: ?object,
+        cache: ?number,
+        timeout: ?number,
     }): Promise<any>;
 
     /**
@@ -209,13 +211,23 @@ declare var Tape: {
      */
     getVue(): any;
 
+    /**
+     * 禁止body滚动
+     */
+    stopScroll(): void;
+
+    /**
+     * 取消禁止body滚动
+     */
+    startScroll(): void;
+
 }
 
 declare var TapeInstaller: {
 
     /**
      * 安装Tape到全局
-     * @param vue Vue对象
+     * @param vue vue对象
      * @param alias 别名
      */
     install(vue: ?any, alias: ?string): void;

@@ -1,5 +1,6 @@
 import { getVue } from "./__vue";
 import { getAppName } from "./_app";
+import { isDebug } from "./_debug";
 
 let __handler__ = null;
 let __handles__ = {};
@@ -147,22 +148,21 @@ function _setBinding(el, binding) {
 }
 
 function report(event, binding) {
-    reportEvent(event, Object.assign({}, binding.value || {}))
+    reportEvent(event, binding.value)
 }
 
 export function _initReport() {
     getVue().directive('report', {
         bind: function (el, binding) {
             _setBinding(el, binding);
-            let events = (el.getAttribute("report-events") || 'exposure,click').split(',');
-            if (events.indexOf('exposure') >= 0) {
-                _addExposure(el, (el) => {
-                    report('exposure', _getBinding(el));
-                });
-            }
-            if (events.indexOf('click') >= 0) {
+            if (binding.rawName == 'v-report' || binding.rawName == 'v-report:click') {
                 _addEvent(el, 'click', () => {
                     report('click', _getBinding(el));
+                });
+            }
+            if (binding.rawName == 'v-report' || binding.rawName == 'v-report:exposure') {
+                _addExposure(el, (el) => {
+                    report('exposure', _getBinding(el));
                 });
             }
         },
@@ -191,11 +191,15 @@ export function _initReport() {
 }
 
 export function reportEvent(event, data) {
-    __handler__ && __handler__({
-        event,
-        page: getAppName(),
-        data: Object.assign({}, data || {})
-    })
+    let eventData = {
+        event: event,
+        page: getAppName()
+    }
+    if (data !== undefined) {
+        eventData.data = data;
+    }
+    __handler__ && __handler__(eventData)
+    isDebug() && console.log('report', eventData)
 }
 
 export function setReportHandler(handler) {

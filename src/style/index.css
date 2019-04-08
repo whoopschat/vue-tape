@@ -102,14 +102,18 @@ table {
         z-index: 999;
 }
 
-.vue-tape-loading .text {
+.vue-tape-loading .loading {
         position: fixed;
         text-align: center;
         width: 3rem;
         left: 50%;
         top: 50%;
         margin-left: -1.5rem;
-        margin-top: -0.5rem;
+        margin-top: -1rem;
+}
+
+.vue-tape-loading .loading .text {
+        width: 3rem;
         color: #fff;
         font-size: 0.28rem;
         line-height: 0.3rem;
@@ -118,42 +122,31 @@ table {
         word-break: break-all;
 }
 
-.vue-tape-loading .spinner {
-        position: fixed;
-        text-align: center;
-        height: 0.2rem;
-        width: 2rem;
-        left: 50%;
-        top: 50%;
-        margin-left: -1rem;
-        margin-top: -1rem;
-}
-
-.spinner>div {
+.vue-tape-loading .spinner>div {
         width: .2rem;
         height: .2rem;
         margin: 0rem 0.05rem;
         background-color: #ffffff;
         border-radius: 100%;
         display: inline-block;
-        -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
-        animation: bouncedelay 1.4s infinite ease-in-out;
+        -webkit-animation: vue-tape-bouncedelay 1.4s infinite ease-in-out;
+        animation: vue-tape-bouncedelay 1.4s infinite ease-in-out;
         /* Prevent first frame from flickering when animation starts */
         -webkit-animation-fill-mode: both;
         animation-fill-mode: both;
 }
 
-.spinner .bounce1 {
+.vue-tape-loading .spinner .bounce1 {
         -webkit-animation-delay: -0.32s;
         animation-delay: -0.32s;
 }
 
-.spinner .bounce2 {
+.vue-tape-loading .spinner .bounce2 {
         -webkit-animation-delay: -0.16s;
         animation-delay: -0.16s;
 }
 
-@-webkit-keyframes bouncedelay {
+@-webkit-keyframes vue-tape-bouncedelay {
         0%, 80%, 100% {
                 -webkit-transform: scale(0.0)
         }
@@ -162,7 +155,7 @@ table {
         }
 }
 
-@keyframes bouncedelay {
+@keyframes vue-tape-bouncedelay {
         0%, 80%, 100% {
                 transform: scale(0.0);
                 -webkit-transform: scale(0.0);
@@ -183,56 +176,56 @@ table {
         background: #fff;
 }
 
-.skeleton {
+.vue-tape-skeleton .skeleton {
         position: relative;
         height: 100%;
         overflow: hidden;
         box-sizing: border-box;
 }
 
-.skeleton-wrapper {
+.vue-tape-skeleton .skeleton-wrapper {
         display: flex;
         width: 95%;
         margin: 0 auto .2rem;
 }
 
-.skeleton .skeleton-head, .skeleton .skeleton-nav, .skeleton .skeleton-title, .skeleton .skeleton-content {
+.vue-tape-skeleton .skeleton .skeleton-head, .vue-tape-skeleton .skeleton .skeleton-nav, .vue-tape-skeleton .skeleton .skeleton-title, .vue-tape-skeleton .skeleton .skeleton-content {
         background: #eee;
 }
 
-.skeleton-nav {
+.vue-tape-skeleton .skeleton-nav {
         height: 150px;
         margin-bottom: 15px;
 }
 
-.skeleton-head {
+.vue-tape-skeleton .skeleton-head {
         width: 1.7rem;
         height: 1.7rem;
 }
 
-.skeleton-body {
+.vue-tape-skeleton .skeleton-body {
         width: 100%;
         margin-left: .2rem;
 }
 
-.skeleton-title {
+.vue-tape-skeleton .skeleton-title {
         width: 30%;
         height: .3rem;
 }
 
-.skeleton-content {
+.vue-tape-skeleton .skeleton-content {
         height: .37rem;
         margin-top: .1rem;
 }
 
-.skeleton .skeleton-nav, .skeleton .skeleton-head, .skeleton .skeleton-title, .skeleton .skeleton-content {
+.vue-tape-skeleton .skeleton .skeleton-nav, .vue-tape-skeleton .skeleton .skeleton-head, .vue-tape-skeleton .skeleton .skeleton-title, .vue-tape-skeleton .skeleton .skeleton-content {
         background: #eee;
         background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%);
         background-size: 20rem 20rem;
-        animation: skeleton-stripes 1s linear infinite;
+        animation: vue-tape-skeleton-stripes 1s linear infinite;
 }
 
-@keyframes skeleton-stripes {
+@keyframes vue-tape-skeleton-stripes {
         from {
                 background-position: 0 0;
         }

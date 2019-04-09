@@ -20,6 +20,6 @@ export function init(app, name) {
         config,
         width: 750,
         el: '#app',
-        stateKey: 'abc'
+        stateKey: '#vue-tape-name#'
     });
 }

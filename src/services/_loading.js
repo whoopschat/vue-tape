@@ -5,7 +5,7 @@ let _show_loading_fun = null;
 let _hide_loading_fun = null;
 let _timer = null;
 
-export function showLoading(msg, duration) {
+export function showLoading(msg = '', duration) {
     _show_loading_fun && _show_loading_fun(msg, duration);
 }
 

@@ -1,5 +1,6 @@
 import { isDebug } from "./_debug";
 import { setCache, getCache } from "./_cache";
+import { toAny } from 'jsutil-toany'
 
 function _parseQuery(path) {
   let url = '';
@@ -36,16 +37,20 @@ function _queryString(path, data) {
 }
 
 const _xhrRequest = (options) => {
-  var method = options['method'] || 'GET';
   var url = options['url'] || '';
-  var header = options['header'] || {};
+  var method = options['method'] || 'GET';
   var data = options['data'] || {};
+  var header = options['header'] || {};
   var json = options['json'] || false;
   var req = new XMLHttpRequest();
-  var requestId = Date.now().toString(36);
+  var id = Date.now().toString(36);
   req.timeout = Math.max(1000, options['timeout'] || 5000);
   if (method.toUpperCase() == 'GET') {
     url = _queryString(url, data);
+  } else if (json) {
+    header['Content-Type'] = 'application/json; charset=utf-8';
+  } else {
+    header['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
   }
   req.open(method.toUpperCase(), url, true);
   if (header) {
@@ -55,42 +60,41 @@ const _xhrRequest = (options) => {
   }
   req.onreadystatechange = function () {
     if (req.readyState == 4) {
-      var header = req.getAllResponseHeaders();
-      var headers = {};
-      if (header) {
-        var hs = header.split('\n');
+      var respHeaderText = req.getAllResponseHeaders();
+      var respHeaders = {};
+      if (respHeaderText) {
+        var hs = respHeaderText.split('\n');
         hs.forEach(element => {
           if (element) {
             var vs = element.split(': ');
             if (vs.length > 1) {
-              headers[vs[0]] = vs[1];
+              respHeaders[vs[0]] = vs[1];
             }
           }
         });
       }
       if (req.status >= 200 && req.status < 300) {
-        var res = { errMsg: 'request:ok' }
-        try {
-          var data = JSON.parse(req.response);
-          res.data = data;
-        } catch (error) {
-          res.data = req.response;
-        }
-        res.header = headers;
-        res.statusCode = req.status;
-        res.requestId = requestId;
-        options.success && options.success(res);
+        options.success && options.success({
+          errMsg: 'request:ok',
+          data: toAny(req.response),
+          header: respHeaders,
+          config: { id, method, url, data, json, header, timeout: req.timeout },
+          statusCode: req.status,
+        });
       } else {
         options.fail && options.fail({
           errMsg: 'request:fail',
-          data: req.response,
-          header: headers,
-          requestId,
+          data: toAny(req.response),
+          header: respHeaders,
+          config: { id, method, url, data, json, header, timeout: req.timeout },
+          statusCode: req.status,
         });
       }
     }
   }
-  if (json) {
+  if (method.toUpperCase() == 'GET') {
+    req.send();
+  } else if (json) {
     req.send(JSON.stringify(data));
   } else {
     var formData = new FormData();

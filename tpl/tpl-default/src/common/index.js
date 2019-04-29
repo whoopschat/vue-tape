@@ -1,5 +1,4 @@
 import vue from 'vue';
-import state from './state';
 import config from './config';
 import 'vue-tape';
 
@@ -16,10 +15,8 @@ export function init(app, name) {
     Tape.initApp({
         name,
         app,
-        state,
         config,
         width: 750,
-        el: '#app',
-        stateKey: '#vue-tape-name#'
+        el: '#app'
     });
 }

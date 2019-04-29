@@ -10,11 +10,30 @@ declare var Tape: {
         name: string,
         page: object,
         width: ?number,
-        state: ?object,
         config: ?object,
-        stateKey: ?string,
         el: ?string,
     }): void;
+
+    /**
+     * 是否为DEBUG模式
+     */
+    isDebug(): boolean;
+
+    /**
+     * 设置DEBUG模式
+     * @param debug 开关
+     */
+    setDebug(debug: boolean): void;
+
+    /**
+     * 获取VUE-TAPE版本号
+     */
+    getVersion(): string;
+
+    /**
+     * 获取Vue对象
+     */
+    getVue(): any;
 
     /**
      * 获取APP实例
@@ -55,20 +74,6 @@ declare var Tape: {
     getStorage(key: string, def: ?any): any;
 
     /**
-     * 设置缓存数据
-     * @param key 配置项
-     * @param value 数据内容
-     */
-    setCache(key: string, value: ?any): any;
-
-    /**
-     * 获取缓存数据
-     * @param key 配置项
-     * @param expires 有效时长，单位：ms
-     */
-    getCache(key: string, expires: ?number): Promise<any>;
-
-    /**
      * 字符串BASE64编码
      * @param str 原始字符串
      */
@@ -79,17 +84,6 @@ declare var Tape: {
      * @param str BASE64字符串
      */
     decodeBase64(str: string): string;
-
-    /**
-     * 设置DEBUG模式
-     * @param debug 开关
-     */
-    setDebug(debug: boolean): void;
-
-    /**
-     * 是否为DEBUG模式
-     */
-    isDebug(): boolean;
 
     /**
      * 监听错误信息
@@ -153,31 +147,6 @@ declare var Tape: {
     showToast(msg: string, duration: ?number): void;
 
     /**
-     * 设置页面标题
-     * @param title 标题
-     */
-    setTitle(title: string): void;
-
-    /**
-     * 获取页面标题
-     */
-    getTitle(): string;
-
-    /**
-     * 发起网络请求
-     * @param options 请求参数
-     */
-    request(options: {
-        url: string,
-        method: ?'GET' | 'POST' | 'PUT' | 'DELETE',
-        json: ?boolean,
-        data: ?object,
-        header: ?object,
-        cache: ?number,
-        timeout: ?number,
-    }): Promise<any>;
-
-    /**
      * 返回到上级页面
      */
     back(): void;
@@ -200,26 +169,6 @@ declare var Tape: {
      * @param handler 上报事件处理回调
      */
     setReportHandler(handler: (eventData: object) => void): any;
-
-    /**
-     * 获取VUE-TAPE版本号
-     */
-    getVersion(): string;
-
-    /**
-     * 获取Vue对象
-     */
-    getVue(): any;
-
-    /**
-     * 禁止body滚动
-     */
-    stopScroll(): void;
-
-    /**
-     * 取消禁止body滚动
-     */
-    startScroll(): void;
 
 }
 

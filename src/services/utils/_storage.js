@@ -14,12 +14,3 @@ export function getStorage(key, value) {
     }
     return value;
 }
-
-export function checkStorage(key, value) {
-    let data = localStorage.getItem(`storage_data_${key}`);
-    if (value) {
-        return data && data == encodeBase64(JSON.stringify(value));
-    } else {
-        return !!data;
-    }
-}

@@ -1,6 +1,6 @@
-import { getVue } from "./__vue";
-import { getAppName } from "./_app";
-import { isDebug } from "./_debug";
+import { getVue } from "../__vue";
+import { getAppName } from "../_app";
+import { isDebug } from "../utils/_debug";
 
 let __handler__ = null;
 let __handles__ = {};

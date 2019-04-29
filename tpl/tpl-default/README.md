@@ -1,4 +1,5 @@
-# ${package-name}
+# #vue-tape-name#
+> Be based on vue-tape #vue-tape-version#
 
 ## Project setup
 ```

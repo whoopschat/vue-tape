@@ -1,4 +1,4 @@
-import { encodeBase64, decodeBase64 } from "./_base64";
+import { encodeBase64, decodeBase64 } from "../utils/_base64";
 
 let _listeners = {}
 let _hrefs = {};

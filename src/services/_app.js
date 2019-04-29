@@ -1,11 +1,10 @@
-import { getVue, setKey } from './__vue';
-import { _initState } from './_vuex';
-import { _pixelToRem } from './_rempixel';
-import { _initConfig } from './_config';
-import { createErrorComponent } from './_page';
-import { showToast } from './_toast';
-import { isDebug } from './_debug';
-import { _initVisibility } from './_visibility';
+import { getVue } from './__vue';
+import { _initVisibility } from './handlers/_visibility';
+import { _pixelToRem } from './utils/_rempixel';
+import { _initConfig } from './utils/_config';
+import { createErrorComponent } from './comps/_page';
+import { showToast } from './comps/_toast';
+import { isDebug } from './utils/_debug';
 
 let __errors__ = [];
 let __app__ = null;
@@ -25,13 +24,11 @@ export function getAppName() {
     return __app_name__;
 }
 
-export function initApp({ name, app, state, config, width, stateKey, el }) {
+export function initApp({ name, app, config, width, el }) {
     __app_name__ = name || 'default';
     __app__ = app;
     let _vue = getVue();
-    setKey(stateKey || 'default');
     _pixelToRem(width);
-    _initState(state);
     _initConfig(config);
     _initVisibility();
     let _errHandler = (e, printLog = true) => {

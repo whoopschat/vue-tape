@@ -1,5 +1,5 @@
 import { createHtmlComponent } from "./_page";
-import { stopScroll, startScroll } from "./_scroll";
+import { stopScroll, startScroll } from "../utils/_scroll";
 
 let _show_skeleton_fun = null;
 let _hide_skeleton_fun = null;

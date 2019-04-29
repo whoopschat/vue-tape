@@ -1,10 +1,7 @@
 <template>
   <div>
-    <div @click="click">
-      <h1>#vue-tape-name# - home</h1>
-      <hr>
-      {{ Tape.state.hello }}
-    </div>
+    <h1>#vue-tape-name# - home</h1>
+    <hr>Hello
   </div>
 </template>
 
@@ -13,11 +10,11 @@ export default {
   data() {
     return {};
   },
-  methods: {
-    click() {
-      Tape.state.hello = "Ni Hao";
-    }
-  },
-  created() {}
+  methods: {},
+  created() {
+    Tape.onShow(() => {
+      // page on show
+    });
+  }
 };
 </script>

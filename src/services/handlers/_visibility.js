@@ -21,9 +21,6 @@ export function _initVisibility() {
     }
     reportEvent('onshow')
     __time__ = Date.now();
-    __shows__.forEach(show => {
-        show && show();
-    });
     document.addEventListener(visibilityChange, () => {
         if (!document[hidden]) {
             reportEvent('onshow')
@@ -44,6 +41,7 @@ export function _initVisibility() {
 
 export function onShow(show) {
     if (show && typeof show == 'function' && __shows__.indexOf(show) < 0) {
+        show && show();
         __shows__.push(show);
     }
 }

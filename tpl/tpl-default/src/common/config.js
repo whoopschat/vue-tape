@@ -1,16 +1,16 @@
-const Confs = {
+const Conf = {
   qa: {
     PROD: false,
-    API_SERVER: 'http://xxx.com',
+    XXX: 'QA XXX',
   },
   pre: {
     PROD: false,
-    API_SERVER: 'https://xxx.com',
+    XXX: 'PRE XXX',
   },
   prod: {
     PROD: true,
-    API_SERVER: 'https://xxx.com',
+    XXX: 'PROD XXX',
   },
 }
 
-export default Confs[process.env.CONF_ENV || 'qa'] || {}
+export default Conf[process.env.VUE_APP_CURRENTMODE || 'qa'] || {}

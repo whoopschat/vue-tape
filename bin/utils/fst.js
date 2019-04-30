@@ -52,7 +52,7 @@ function _listSync(src) {
     return entrysList;
 }
 
-function _copySync(src, dst, filter, options) {
+function _copySync(src, dst, filter, map, options) {
     _folderSync(dst);
     let content = fs.readFileSync(src, 'utf-8');
     if (filter && filter(src)) {
@@ -62,16 +62,19 @@ function _copySync(src, dst, filter, options) {
             }
         });
     }
+    if (map) {
+        dst = map(dst);
+    }
     fs.writeFileSync(dst, content);
 }
 
-function copyDirSync(src, dst, filter, options) {
+function copyDirSync(src, dst, filter, map, options) {
     if (emptySync(src)) {
         return;
     }
     _mkdirsSync(dst);
     _listSync(src).forEach(file => {
-        _copySync(path.join(src, file), path.join(dst, file), filter, options);
+        _copySync(path.join(src, file), path.join(dst, file), filter, map, options);
     })
 }
 

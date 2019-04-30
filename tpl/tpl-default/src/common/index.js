@@ -6,7 +6,7 @@ export function init(app, name) {
     // install Tape to window
     TapeInstaller.install(vue);
     // set debug mode
-    Tape.setDebug(process.env.CONF_ENV != 'prod');
+    Tape.setDebug(!config.PROD);
     // set report handler
     Tape.setReportHandler((eventData) => {
         // handle your report

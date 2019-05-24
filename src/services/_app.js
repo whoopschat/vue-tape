@@ -5,46 +5,50 @@ import { _initConfig } from './utils/_config';
 import { createErrorComponent } from './comps/_page';
 import { showToast } from './comps/_toast';
 import { isDebug } from './utils/_debug';
+import { load } from './_load';
 
-let __errors__ = [];
-let __app__ = null;
-let __app_name__ = '';
+let _errors_ = [];
+let _app_ = null;
+let _app_name_ = '';
 
 export function onError(error) {
     if (error && typeof error == 'function' && __shows__.indexOf(error) < 0) {
-        __errors__.push(error);
+        _errors_.push(error);
     }
 }
 
 export function getApp() {
-    return __app__;
+    return _app_;
 }
 
 export function getAppName() {
-    return __app_name__;
+    return _app_name_;
 }
 
-export function initApp({ name, app, config, width, el }) {
-    __app_name__ = name || 'default';
-    __app__ = app;
-    let _vue = getVue();
-    _pixelToRem(width);
-    _initConfig(config);
-    _initVisibility();
-    let _errHandler = (e, printLog = true) => {
-        printLog && console.error(e);
-        __errors__.forEach(error => {
-            error && error(e);
-        });
-        isDebug() && showToast(e);
+export function initApp({ name, app, loadjs, config, width, unit, el }) {
+    let _init = () => {
+        _app_ = app;
+        _app_name_ = name || 'default';
+        _pixelToRem(width, unit);
+        _initConfig(config);
+        _initVisibility();
+        let _errHandler = (e, printLog = true) => {
+            printLog && console.error(e);
+            _errors_.forEach(error => {
+                error && error(e);
+            });
+            isDebug() && showToast(e);
+        }
+        let _vue = getVue();
+        _vue.config.productionTip = false;
+        _vue.config.errorHandler = _errHandler;
+        window.onerror = (e) => {
+            _errHandler(e, false)
+        }
+        new _vue({
+            el: el || '#app',
+            render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))
+        })
     }
-    _vue.config.productionTip = false;
-    _vue.config.errorHandler = _errHandler;
-    window.onerror = (e) => {
-        _errHandler(e, false)
-    }
-    new _vue({
-        el: el || '#app',
-        render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))
-    })
+    load(loadjs, _init)
 }

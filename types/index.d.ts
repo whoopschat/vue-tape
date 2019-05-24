@@ -9,15 +9,22 @@ declare var Tape: {
     initApp(options: {
         name: string,
         page: object,
-        width: ?number,
+        loadjs: ?string,
         config: ?object,
+        width: ?number,
+        unit: ?number,
         el: ?string,
     }): void;
 
     /**
-     * 是否为DEBUG模式
+     * 获取Vue对象
      */
-    isDebug(): boolean;
+    getVue(): any;
+
+    /**
+     * 获取APP对象
+     */
+    getApp(): any;
 
     /**
      * 设置DEBUG模式
@@ -26,31 +33,11 @@ declare var Tape: {
     setDebug(debug: boolean): void;
 
     /**
-     * 获取VUE-TAPE版本号
-     */
-    getVersion(): string;
-
-    /**
-     * 获取Vue对象
-     */
-    getVue(): any;
-
-    /**
-     * 获取APP实例
-     */
-    getApp(): any;
-
-    /**
-     * 获取APP名称
-     */
-    getAppName(): string;
-
-    /**
      * 获取URL中携带的参数
      * @param key 参数名称
      * @param def 默认值
      */
-    getQueryString(key: string, def: ?any): string;
+    getQuery(key: string, def: ?any): string;
 
     /**
      * 获取配置项
@@ -58,6 +45,11 @@ declare var Tape: {
      * @param def 默认值
      */
     getConfig(key: string, def: ?any): any;
+
+    /**
+     * 获取VUE-TAPE版本号
+     */
+    getVersion(): string;
 
     /**
      * 设置storage数据
@@ -89,7 +81,7 @@ declare var Tape: {
      * 监听错误信息
      * @param callback 回调
      */
-    onError(callback: (e: any) => void): string;
+    onError(callback: (error: any) => void): string;
 
     /**
      * 监听界面回到前台
@@ -114,18 +106,6 @@ declare var Tape: {
      * @param callback 回调
      */
     offHide(callback: () => void): string;
-
-    /**
-     * 显示骨架屏
-     * @param html 模板
-     * @param duration 时间
-     */
-    showSkeleton(html: ?string, duration: ?number): void;
-
-    /**
-     * 隐藏骨架屏
-     */
-    hideSkeleton(): void;
 
     /**
      * 显示Loading弹窗
@@ -179,6 +159,6 @@ declare var TapeInstaller: {
      * @param vue vue对象
      * @param alias 别名
      */
-    install(vue: ?any, alias: ?string): void;
+    install(vue: any, alias: ?string): void;
 
 }

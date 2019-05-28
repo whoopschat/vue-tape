@@ -44,12 +44,15 @@ function _lenHref() {
 }
 
 function _pushState() {
-    let state = {
-        title: _lenHref(),
-        url: window.location.href
+    try {
+        let state = {
+            title: _lenHref(),
+            url: window.location.href
+        }
+        _pushHref();
+        window.history.pushState(state, state.title, state.url);
+    } catch (error) {
     }
-    _pushHref();
-    window.history.pushState(state, state.title, state.url);
 }
 
 export function back() {

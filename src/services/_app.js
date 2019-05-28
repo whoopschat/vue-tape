@@ -7,13 +7,13 @@ import { showToast } from './comps/_toast';
 import { isDebug } from './utils/_debug';
 import { load } from './_load';
 
-let _errors_ = [];
 let _app_ = null;
 let _app_name_ = '';
+let _err_cbs_ = [];
 
 export function onError(error) {
-    if (error && typeof error == 'function' && __shows__.indexOf(error) < 0) {
-        _errors_.push(error);
+    if (error && typeof error == 'function' && _err_cbs_.indexOf(error) < 0) {
+        _err_cbs_.push(error);
     }
 }
 
@@ -34,7 +34,7 @@ export function initApp({ name, app, loadjs, config, width, unit, el }) {
         _initVisibility();
         let _errHandler = (e, printLog = true) => {
             printLog && console.error(e);
-            _errors_.forEach(error => {
+            _err_cbs_.forEach(error => {
                 error && error(e);
             });
             isDebug() && showToast(e);

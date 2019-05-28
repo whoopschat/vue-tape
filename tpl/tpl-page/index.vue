@@ -5,6 +5,10 @@
   </div>
 </template>
 
+<style lang="less" scoped>
+@import url("./index.less");
+</style>
+
 <script>
 export default {
   data() {

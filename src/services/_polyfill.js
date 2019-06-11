@@ -1,45 +1,75 @@
-function polyfill() {
-    Array.prototype.remove = function (dx) {
-        if (isNaN(dx) || dx > this.length) {
-            return false
-        }
-        this.splice(dx, 1)
-    }
-    Array.prototype.removeWhere = function (where) {
-        if (typeof where === 'function') {
-            let removeIndexArray = []
-            this.forEach((value, index) => {
-                if (where(value)) {
-                    removeIndexArray.push(index)
-                }
-            })
-            removeIndexArray.reverse()
-            removeIndexArray.forEach(value => {
-                this.remove(value)
-            })
-        }
-    }
-    Date.prototype.format = function (format) {
-        var date = {
-            'M+': this.getMonth() + 1,
-            'd+': this.getDate(),
-            'h+': this.getHours(),
-            'm+': this.getMinutes(),
-            's+': this.getSeconds(),
-            'q+': Math.floor((this.getMonth() + 3) / 3),
-            'S+': this.getMilliseconds()
-        }
-        if (/(y+)/i.test(format)) {
-            format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
-        }
-        for (var k in date) {
-            if (new RegExp('(' + k + ')').test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length === 1
-                    ? date[k] : ('00' + date[k]).substr(('' + date[k]).length))
-            }
-        }
-        return format
-    }
+if (typeof window === 'undefined') {
+    window = {};
+    window.self = window;
+    window.parent = window;
+    window.window = window;
+    window.global = window;
 }
 
-polyfill();
+// Object.assign
+if (typeof Object.assign != 'function') {
+    // Must be writable: true, enumerable: false, configurable: true
+    Object.defineProperty(Object, "assign", {
+        value: function assign(target, varArgs) { // .length of function is 2
+            if (target == null) { // TypeError if undefined or null
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+            var to = Object(target);
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+                if (nextSource != null) { // Skip over if undefined or null
+                    for (var nextKey in nextSource) {
+                        // Avoid bugs when hasOwnProperty is shadowed
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        writable: true,
+        configurable: true
+    });
+}
+
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+if (!Object.keys) {
+    Object.keys = (function () {
+        var hasOwnProperty = Object.prototype.hasOwnProperty,
+            hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+            dontEnums = [
+                'toString',
+                'toLocaleString',
+                'valueOf',
+                'hasOwnProperty',
+                'isPrototypeOf',
+                'propertyIsEnumerable',
+                'constructor'
+            ],
+            dontEnumsLength = dontEnums.length;
+
+        return function (obj) {
+            if (typeof obj !== 'function' && (typeof obj !== 'object' || obj === null)) {
+                throw new TypeError('Object.keys called on non-object');
+            }
+
+            var result = [], prop, i;
+
+            for (prop in obj) {
+                if (hasOwnProperty.call(obj, prop)) {
+                    result.push(prop);
+                }
+            }
+
+            if (hasDontEnumBug) {
+                for (i = 0; i < dontEnumsLength; i++) {
+                    if (hasOwnProperty.call(obj, dontEnums[i])) {
+                        result.push(dontEnums[i]);
+                    }
+                }
+            }
+            return result;
+        };
+    }());
+}

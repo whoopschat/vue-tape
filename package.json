@@ -1,19 +1,16 @@
 {
   "name": "vue-tape",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "a vue library",
   "main": "lib/index.js",
-  "typings": "types/index.d.ts",
   "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "liangmayong",
   "license": "UNLICENSED",
-  "engines": {
-    "node": ">= 0.10"
-  },
   "files": [
     "bin",
     "lib",

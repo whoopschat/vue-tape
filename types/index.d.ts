@@ -1,6 +1,6 @@
 /// <reference no-default-lib="true"/>
 
-declare var Tape: {
+declare interface Tape {
 
     /**
      * 初始化APP
@@ -78,6 +78,13 @@ declare var Tape: {
     decodeBase64(str: string): string;
 
     /**
+     * 格式化日期
+     * @param date 日期
+     * @param format 格式,默认yyyy-MM-dd
+     */
+    formatDate(date: Date, format: string)
+
+    /**
      * 监听错误信息
      * @param callback 回调
      */
@@ -152,6 +159,14 @@ declare var Tape: {
 
 }
 
+/**
+ * Tape
+ */
+declare var Tape: Tape;
+
+/**
+ * TapeInstaller
+ */
 declare var TapeInstaller: {
 
     /**

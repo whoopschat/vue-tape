@@ -7,6 +7,7 @@ import { getConfig } from "./utils/_config";
 import { getVersion } from "./utils/_version";
 import { setStorage, getStorage } from "./utils/_storage";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
+import { formatDate } from "./utils/_date";
 import { onError } from "./_app";
 import { onShow, onHide, offShow, offHide } from "./handlers/_visibility";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
@@ -34,6 +35,7 @@ export function create(vue) {
         getStorage,
         encodeBase64,
         decodeBase64,
+        formatDate,
         onError,
         onShow,
         onHide,

@@ -3,7 +3,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = Object.assign({}, baseConfig, {
     plugins: [
-        new UglifyJsPlugin(),
+        // new UglifyJsPlugin(),
         ...baseConfig.plugins
     ],
     mode: 'production',

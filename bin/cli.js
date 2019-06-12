@@ -58,7 +58,7 @@ let replaceOpts = {
 
 fst.copyDirSync(template, output, (item) => {
     let ext = path.extname(item);
-    return ext == '.vue' || ext == '.js' || ext == '.json' || ext == '.txt' || ext == '.md';
+    return ext == '.vue' || ext == '.js' || ext == '.json' || ext == '.txt' || ext == '.md' || ext == '.less';
 }, (dst) => dst.replace('npmignore', 'gitignore'), replaceOpts);
 
 console.log(`Success : ${output}`);

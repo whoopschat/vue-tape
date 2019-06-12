@@ -1,3 +1,4 @@
+import './style.less';
 import vue from 'vue';
 import config from './config';
 import 'vue-tape';
@@ -13,8 +14,8 @@ export function init(app, name) {
     });
     // init app
     Tape.initApp({
-        name,
         app,
+        name,
         config,
         width: 750,
         unit: 100,

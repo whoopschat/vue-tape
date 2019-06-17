@@ -13,6 +13,7 @@ declare interface Tape {
         config: ?object,
         width: ?number,
         unit: ?number,
+        lazy: ?object,
         el: ?string,
     }): void;
 

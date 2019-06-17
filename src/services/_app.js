@@ -1,3 +1,4 @@
+import lazyload from 'vue-lazyload';
 import { getVue } from './__vue';
 import { _initVisibility } from './handlers/_visibility';
 import { _pixelToRem } from './utils/_rempixel';
@@ -25,21 +26,22 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, loadjs, config, width, unit, el }) {
+export function initApp({ name, app, loadjs, config, width, unit, lazy, el }) {
     let _init = () => {
         _app_ = app;
         _app_name_ = name || 'default';
         _pixelToRem(width, unit);
         _initConfig(config);
         _initVisibility();
-        let _errHandler = (e, printLog = true) => {
-            printLog && console.error(e);
+        let _errHandler = (e, print = true) => {
             _err_cbs_.forEach(error => {
                 error && error(e);
             });
+            print && console.error(e);
             isDebug() && showToast(e);
         }
         let _vue = getVue();
+        _vue.use(lazyload, lazy || {});
         _vue.config.productionTip = false;
         _vue.config.errorHandler = _errHandler;
         window.onerror = (e) => {

@@ -22,7 +22,7 @@ export function _initToast() {
         if (_timer) {
             clearTimeout(_timer);
         }
-        instance.html = `<div class="vue-tape-toast">${msg}</div>`
+        instance.html = `<div class="--vue-tape-toast">${msg}</div>`
         _timer = setTimeout(() => {
             instance.html = ''
         }, duration)

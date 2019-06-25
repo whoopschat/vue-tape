@@ -19,7 +19,7 @@ export function _initLoading() {
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el);
     _show_loading_fun = (msg = '', duration) => {
-        instance.html = `<div class="vue-tape-loading">
+        instance.html = `<div class="--vue-tape-loading">
             <div class="loading">
                 <div class="spinner">
                     <div class="bounce1"></div>

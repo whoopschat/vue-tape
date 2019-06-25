@@ -1,9 +1,11 @@
 import lazyload from 'vue-lazyload';
 import { getVue } from './__vue';
+import { reportEvent } from './handlers/_report';
 import { _initVisibility } from './handlers/_visibility';
 import { _pixelToRem } from './utils/_rempixel';
 import { _initConfig } from './utils/_config';
 import { createErrorComponent } from './comps/_page';
+import { checkOnload } from "./utils/_onload";
 import { showToast } from './comps/_toast';
 import { isDebug } from './utils/_debug';
 import { load } from './_load';
@@ -33,6 +35,13 @@ export function initApp({ name, app, loadjs, config, width, unit, lazy, el }) {
         _pixelToRem(width, unit);
         _initConfig(config);
         _initVisibility();
+        checkOnload(() => {
+            try {
+                let time = Date.now() - window.performance.timing.navigationStart;
+                reportEvent('onload', { time });
+            } catch (error) {
+            }
+        });
         let _errHandler = (e, print = true) => {
             _err_cbs_.forEach(error => {
                 error && error(e);

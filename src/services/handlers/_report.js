@@ -1,193 +1,84 @@
-import { getVue } from "../__vue";
 import { getAppName } from "../_app";
+import { attachEvent } from "../utils/_event";
+import { checkInView, onInViewChanged, offInViewChanged } from "../utils/_inview";
+import { createBindingId, setBinding, removeBinding, getBinding } from "../utils/_bind";
 import { isDebug } from "../utils/_debug";
+import { getVue } from "../__vue";
 
-let __handler__ = null;
-let __handles__ = {};
-let __bindings__ = {};
-let __reports__ = [];
+let _handler = null;
 
-
-function _randomGUID() {
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (e) => {
-        const t = 16 * Math.random() | 0;
-        return (e === "x" ? t : 3 & t | 8).toString(16);
-    });
-}
-
-function _offChanged(key) {
-    if (key) {
-        delete __handles__[key];
-    }
-}
-
-function _onChanged(key, handle) {
-    if (key && handle && typeof handle == 'function') {
-        __handles__[key] = handle;
-    }
-}
-
-function _getViewportSize() {
-    return {
-        w: screen.width || window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
-        h: screen.height || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    }
-}
-
-function _getPositionSize(element) {
-    let top, left, width, height;
-    while (element.offsetLeft === void 0) {
-        element = element.parentElement;
-    }
-    width = element.clientWidth;
-    height = element.clientHeight;
-    top = element.offsetTop;
-    left = element.offsetLeft;
-    while (element = element.parentElement) {
-        top += -(element.scrollTop || 0);
-        left += - (element.scrollLeft || 0);
-    }
-    return { top, left, width, height };
-}
-
-function _checkVisible(div) {
+function _canExposure(el) {
     try {
-        let { w, h } = _getViewportSize();
-        let { top, left, width, height } = _getPositionSize(div);
-        if (div.getAttribute("report-exposure-all")) {
-            return width > 0 && height > 0 && top >= 0 && top + height < h && left >= 0 && left + width < w;
+        let key = el.getAttribute("exposure-key");
+        if (!key) {
+            return true;
         }
-        return width > 0 && height > 0 && top + height >= 0 && top < h && left + width >= 0 && left < w;
-    } catch (error) {
-    }
-    return false;
-}
-
-function _addEvent(elem, event, fn) {
-    if (elem.addEventListener != null) {
-        return elem.addEventListener(event, fn, false);
-    } else if (elem.attachEvent != null) {
-        return elem.attachEvent("on" + event, fn);
-    } else {
-        return elem[event] = fn;
-    }
-}
-
-function _createId(el) {
-    try {
-        if (el) {
-            let id = el.getAttribute("report-id");
-            if (!id) {
-                id = _randomGUID();
-                el.setAttribute("report-id", id);
-            }
-            return id;
+        if (!key || __reports__.indexOf(key) < 0) {
+            __reports__.push(key);
+            return true;
         }
     } catch (error) {
     }
-}
-
-function _canReport(el) {
-    let key = el.getAttribute("report-key");
-    if (!key) {
-        return true;
-    }
-    if (!key || __reports__.indexOf(key) < 0) {
-        __reports__.push(key);
-        return true;
-    }
     return false;
-}
-
-function _resetExposure(el) {
-    try {
-        el.setAttribute("report-time", "");
-    } catch (error) {
-    }
 }
 
 function _addExposure(el, handler) {
-    let _checkExposure = () => {
+    let checkExposure = () => {
         try {
-            let show = _checkVisible(el, false);
-            let reported = el.getAttribute("report-time");
-            if (show && !reported && _canReport(el)) {
-                el.setAttribute("report-time", Date.now());
+            let show = checkInView(el);
+            let time = el.getAttribute("exposure-time");
+            if (show && !time && _canExposure(el)) {
+                el.setAttribute("exposure-time", Date.now());
                 handler && handler(el);
             }
         } catch (error) {
         }
     }
-    _onChanged(_createId(el), _checkExposure);
-    _checkExposure();
+    onInViewChanged(createBindingId('exposure', el), checkExposure);
+    checkExposure();
 }
 
-function _delExposure(el) {
-    _offChanged(_createId(el));
+function _removeExposure(el) {
+    offInViewChanged(createBindingId('exposure', el));
 }
 
-function _removeBinding(el) {
-    let id = _createId(el);
-    if (id) {
-        delete __bindings__[id];
+function _resetExposure(el) {
+    try {
+        el.setAttribute("exposure-time", "");
+    } catch (error) {
     }
-}
-
-function _getBinding(el) {
-    let id = _createId(el);
-    if (id) {
-        return __bindings__[id];
-    }
-}
-
-function _setBinding(el, binding) {
-    let id = _createId(el);
-    if (id) {
-        __bindings__[id] = binding;
-    }
-}
-
-function report(event, binding) {
-    reportEvent(event, binding.value)
 }
 
 export function _initReport() {
     getVue().directive('report', {
         bind: function (el, binding) {
-            _setBinding(el, binding);
+            setBinding('exposure', el, binding);
             if (binding.rawName == 'v-report' || binding.rawName == 'v-report:click') {
-                _addEvent(el, 'click', () => {
-                    report('click', _getBinding(el));
+                attachEvent(el, 'click', () => {
+                    reportEvent('click', getBinding(el));
                 });
             }
             if (binding.rawName == 'v-report' || binding.rawName == 'v-report:exposure') {
                 _addExposure(el, (el) => {
-                    report('exposure', _getBinding(el));
+                    report('exposure', getBinding(el));
                 });
             }
         },
         update: function (el, binding) {
+            setBinding('exposure', el, binding);
             _resetExposure(el);
-            _setBinding(el, binding);
         },
         unbind: function (el) {
-            _delExposure(el);
-            _removeBinding(el);
+            removeBinding('exposure', el);
+            _removeExposure(el);
         },
     })
-    let _handleChanged = () => {
-        Object.keys(__handles__).forEach(key => {
-            let handle = __handles__[key];
-            if (handle && typeof handle == 'function') {
-                handle();
-            }
-        });
+}
+
+export function setReportHandler(handler) {
+    if (handler && typeof handler == 'function') {
+        _handler = handler;
     }
-    _addEvent(window, 'touchmove', _handleChanged);
-    _addEvent(window, 'scroll', _handleChanged);
-    _addEvent(window, 'resize', _handleChanged);
-    _addEvent(document, 'DOMContentLoaded', _handleChanged);
-    setInterval(_handleChanged, 50);
 }
 
 export function reportEvent(event, data) {
@@ -198,12 +89,6 @@ export function reportEvent(event, data) {
     if (data !== undefined) {
         eventData.data = data;
     }
-    __handler__ && __handler__(eventData)
+    _handler && _handler(eventData);
     isDebug() && console.log('report', eventData)
-}
-
-export function setReportHandler(handler) {
-    if (handler && typeof handler == 'function') {
-        __handler__ = handler;
-    }
 }

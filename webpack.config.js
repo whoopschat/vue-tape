@@ -22,7 +22,8 @@ const config = {
     },
     plugins: [
         replace_file_plugin(entry, outputPath)
-    ]
+    ],
+    mode: 'development',
 };
 
 module.exports = config;

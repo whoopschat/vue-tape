@@ -1,7 +1,7 @@
 import { getVue } from "../__vue";
 
 export function createErrorComponent(error) {
-    return createHtmlComponent(`<div class="vue-tape-error"><h1 style="color:#333333">VUE-TAPE</h1><hr/>ERROR: ${error}</div>`)
+    return createHtmlComponent(`<div class="--vue-tape-error"><h1 style="color:#333333">VUE-TAPE</h1><hr/>ERROR: ${error}</div>`)
 }
 
 export function createHtmlComponent(html, data) {

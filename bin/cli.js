@@ -50,10 +50,13 @@ if (!fst.emptySync(output)) {
     return;
 }
 
+let page_path = _arg(1, 'default').split('/').filter((_, i) => i > 0).map(() => "../");
+
 let replaceOpts = {
     '#vue-tape-version#': version,
     '#vue-tape-name#': path.basename(_cwd) || 'vue-tape-project',
     '#vue-tape-page#': _arg(1, 'default'),
+    '#vue-tape-page-path#': page_path.join(''),
 }
 
 fst.copyDirSync(template, output, (item) => {

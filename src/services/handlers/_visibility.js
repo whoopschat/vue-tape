@@ -19,11 +19,11 @@ export function _initVisibility() {
         hidden = "webkitHidden";
         visibilityChange = "webkitvisibilitychange";
     }
-    reportEvent('onshow')
     __time__ = Date.now();
+    reportEvent('onshow');
     document.addEventListener(visibilityChange, () => {
         if (!document[hidden]) {
-            reportEvent('onshow')
+            reportEvent('onshow');
             __time__ = Date.now();
             __shows__.forEach(show => {
                 show && show();

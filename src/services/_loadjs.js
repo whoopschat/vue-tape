@@ -13,7 +13,7 @@ function _loadJS(js, cb) {
     }
 }
 
-export function load(js, cb) {
+export function loadJs(js, cb) {
     if (!js) {
         return cb && cb();
     }

@@ -7,9 +7,9 @@ import { getConfig } from "./utils/_config";
 import { getVersion } from "./utils/_version";
 import { setStorage, getStorage } from "./utils/_storage";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
+import { frameLoop } from "./utils/_loop";
 import { formatDate } from "./utils/_date";
-import { onError } from "./_app";
-import { onShow, onHide, offShow, offHide } from "./handlers/_visibility";
+import { onLoad, onShow, onHide, offShow, offHide, onError } from "./handlers/_lifecycle";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
 import { _initToast, showToast } from "./comps/_toast";
 import { _initBack, back, backListener } from "./handlers/_back";
@@ -35,12 +35,14 @@ export function create(vue) {
         getStorage,
         encodeBase64,
         decodeBase64,
+        frameLoop,
         formatDate,
-        onError,
+        onLoad,
         onShow,
         onHide,
         offShow,
         offHide,
+        onError,
         showLoading,
         hideLoading,
         showToast,

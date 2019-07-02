@@ -83,37 +83,51 @@ declare interface Tape {
      * @param date 日期
      * @param format 格式,默认yyyy-MM-dd
      */
-    formatDate(date: Date, format: string)
+    formatDate(date: Date, format: string): void;
 
     /**
-     * 监听错误信息
+     * 创建帧循环
+     * @param callback　循环函数 
+     * @param delay 延时帧数
+     * @param count 执行次数
+     */
+    frameLoop(callback: (time: number) => void, delay: ?number, count: ?number): { clearLoop: () => void };
+
+    /**
+     * 页面加载完成
      * @param callback 回调
      */
-    onError(callback: (error: any) => void): string;
+    onLoad(callback: (info: any) => void): void;
 
     /**
      * 监听界面回到前台
      * @param callback 回调
      */
-    onShow(callback: () => void): string;
+    onShow(callback: () => void): void;
 
     /**
      * 监听界面退至后台
      * @param callback 回调
      */
-    onHide(callback: () => void): string;
+    onHide(callback: () => void): void;
 
     /**
      * 取消监听界面回到前台
      * @param callback 回调
      */
-    offShow(callback: () => void): string;
+    offShow(callback: () => void): void;
 
     /**
      * 取消监听界面退至后台
      * @param callback 回调
      */
-    offHide(callback: () => void): string;
+    offHide(callback: () => void): void;
+
+    /**
+     * 监听错误信息
+     * @param callback 回调
+     */
+    onError(callback: (error: any) => void): void;
 
     /**
      * 显示Loading弹窗

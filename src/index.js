@@ -1,7 +1,7 @@
 import './style'
 import { create } from './services'
 
-const _tape = {};
+const _instance = {};
 
 let _installed = false;
 
@@ -16,7 +16,7 @@ function setGlobal(key, value, vue) {
     }
 }
 
-_tape.install = function (vue, alias = 'Tape') {
+_instance.install = function (vue, alias = 'Tape') {
     if (_installed || !vue) {
         return;
     }
@@ -29,7 +29,7 @@ _tape.install = function (vue, alias = 'Tape') {
 }
 
 if (typeof window !== 'undefined') {
-    window['TapeInstaller'] = _tape;
+    window['TapeInstaller'] = _instance;
 }
 
-module.exports = _tape;
+module.exports = _instance;

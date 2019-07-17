@@ -1,16 +1,15 @@
-import { createHtmlComponent } from "./_page";
-import { stopScroll, startScroll } from "../utils/_scroll";
+import { createHtmlComponent } from "./_component";
 
-let _show_loading_fun = null;
-let _hide_loading_fun = null;
 let _timer = null;
+let _showLoading = null;
+let _hideLoading = null;
 
 export function showLoading(msg = '', duration) {
-    _show_loading_fun && _show_loading_fun(msg, duration);
+    _showLoading && _showLoading(msg, duration);
 }
 
 export function hideLoading() {
-    _hide_loading_fun && _hide_loading_fun();
+    _hideLoading && _hideLoading();
 }
 
 export function _initLoading() {
@@ -18,7 +17,8 @@ export function _initLoading() {
     const instance = new comp();
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el);
-    _show_loading_fun = (msg = '', duration) => {
+    _showLoading = (msg = '', duration) => {
+        _timer && clearTimeout(_timer);
         instance.html = `<div class="--vue-tape-loading">
             <div class="loading">
                 <div class="spinner">
@@ -29,21 +29,12 @@ export function _initLoading() {
                 <div class="text">${msg}</div>
             </div>
         </div>`;
-        stopScroll();
-        if (_timer) {
-            clearTimeout(_timer);
-        }
         if (duration > 0) {
-            _timer = setTimeout(() => {
-                hideLoading()
-            }, duration)
+            _timer = setTimeout(() => { hideLoading() }, duration);
         }
     }
-    _hide_loading_fun = () => {
+    _hideLoading = () => {
         instance.html = '';
-        startScroll();
-        if (_timer) {
-            clearTimeout(_timer);
-        }
+        _timer && clearTimeout(_timer);
     }
 }

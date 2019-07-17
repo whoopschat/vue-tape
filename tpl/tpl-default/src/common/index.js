@@ -8,10 +8,6 @@ export function init(app, name) {
     TapeInstaller.install(vue);
     // set debug mode
     Tape.setDebug(!config.PROD);
-    // set report handler
-    Tape.setReportHandler((eventData) => {
-        // handle your report
-    });
     // init app
     Tape.initApp({
         app,

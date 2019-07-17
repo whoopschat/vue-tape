@@ -152,15 +152,14 @@ table {
 }
 
 .--vue-tape-loading .spinner>div {
-        width            : .2rem;
-        height           : .2rem;
-        margin           : 0rem 0.05rem;
-        background-color : #ffffff;
-        border-radius    : 100%;
-        display          : inline-block;
-        -webkit-animation: --vue-tape-bouncedelay 1.4s infinite ease-in-out;
-        animation        : --vue-tape-bouncedelay 1.4s infinite ease-in-out;
-        /* Prevent first frame from flickering when animation starts */
+        width                      : .2rem;
+        height                     : .2rem;
+        margin                     : 0rem 0.05rem;
+        background-color           : #ffffff;
+        border-radius              : 100%;
+        display                    : inline-block;
+        -webkit-animation          : --vue-tape-bouncedelay 1.4s infinite ease-in-out;
+        animation                  : --vue-tape-bouncedelay 1.4s infinite ease-in-out;
         -webkit-animation-fill-mode: both;
         animation-fill-mode        : both;
 }

@@ -148,30 +148,6 @@ declare interface Tape {
      */
     showToast(msg: string, duration: ?number): void;
 
-    /**
-     * 返回到上级页面
-     */
-    back(): void;
-
-    /**
-     * 返回劫持监听
-     * @param listener 返回劫持监听器
-     */
-    backListener(listener: () => boolean | any): void;
-
-    /**
-     * 事件上报
-     * @param event 事件
-     * @param data 数据
-     */
-    reportEvent(event: ?string, data: ?any): any;
-
-    /**
-     * 设置处理上报
-     * @param handler 上报事件处理回调
-     */
-    setReportHandler(handler: (eventData: object) => void): any;
-
 }
 
 /**

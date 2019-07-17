@@ -9,18 +9,14 @@ import { setStorage, getStorage } from "./utils/_storage";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
 import { frameLoop } from "./utils/_loop";
 import { formatDate } from "./utils/_date";
-import { onLoad, onShow, onHide, offShow, offHide, onError } from "./handlers/_lifecycle";
+import { onLoad, onShow, onHide, offShow, offHide, onError } from "./_cycle";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
 import { _initToast, showToast } from "./comps/_toast";
-import { _initBack, back, backListener } from "./handlers/_back";
-import { _initReport, setReportHandler, reportEvent } from "./handlers/_report";
 
 export function create(vue) {
     setVue(vue);
-    _initLoading();
     _initToast();
-    _initBack();
-    _initReport();
+    _initLoading();
     console.log("VUE-TAPE: version " + getVersion())
     console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
     return {
@@ -45,10 +41,6 @@ export function create(vue) {
         onError,
         showLoading,
         hideLoading,
-        showToast,
-        back,
-        backListener,
-        reportEvent,
-        setReportHandler,
+        showToast
     }
 }

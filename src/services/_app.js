@@ -1,9 +1,9 @@
 import lazyload from 'vue-lazyload';
 import { getVue } from './__vue';
-import { _initLifeCycle, _handleError } from './handlers/_lifecycle';
+import { createErrorComponent } from './comps/_component';
+import { _initLifeCycle, _handleError } from './_cycle';
 import { _pixelToRem } from './utils/_rempixel';
 import { _initConfig } from './utils/_config';
-import { createErrorComponent } from './comps/_page';
 import { loadJs } from './_loadjs';
 
 let _app_ = null;

@@ -18,17 +18,17 @@ declare interface Tape {
     }): void;
 
     /**
-     * 获取Vue对象
+     * 获取vue实例
      */
     getVue(): any;
 
     /**
-     * 获取APP对象
+     * 获取app实例
      */
     getApp(): any;
 
     /**
-     * 设置DEBUG模式
+     * 设置debug模式
      * @param debug 开关
      */
     setDebug(debug: boolean): void;
@@ -51,6 +51,17 @@ declare interface Tape {
      * 获取VUE-TAPE版本号
      */
     getVersion(): string;
+
+    /**
+     * 获取页面中元素的位置
+     * @param el 元素
+     */
+    getPosition(el: ?any): {
+        left: number,
+        top: number,
+        height: number,
+        width: number
+    };
 
     /**
      * 设置storage数据

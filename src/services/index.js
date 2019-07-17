@@ -5,6 +5,7 @@ import { setDebug } from "./utils/_debug";
 import { getQuery } from "./utils/_query";
 import { getConfig } from "./utils/_config";
 import { getVersion } from "./utils/_version";
+import { getPosition } from "./utils/_position";
 import { setStorage, getStorage } from "./utils/_storage";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
 import { frameLoop } from "./utils/_loop";
@@ -27,6 +28,7 @@ export function create(vue) {
         getQuery,
         getConfig,
         getVersion,
+        getPosition,
         setStorage,
         getStorage,
         encodeBase64,

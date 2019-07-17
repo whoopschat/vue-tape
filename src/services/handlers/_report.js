@@ -60,7 +60,7 @@ export function _initReport() {
             }
             if (binding.rawName == 'v-report' || binding.rawName == 'v-report:exposure') {
                 _addExposure(el, (el) => {
-                    report('exposure', getBinding(el));
+                    reportEvent('exposure', getBinding(el));
                 });
             }
         },

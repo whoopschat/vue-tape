@@ -43,9 +43,6 @@
     "replace-in-file": "3.4.0",
     "vue-lazyload": "1.2.6"
   },
-  "dependencies": {
-    "vue-lazyload": "1.2.6"
-  },
   "keywords": [
     "vue-tape"
   ]

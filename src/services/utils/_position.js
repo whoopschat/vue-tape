@@ -1,17 +1,27 @@
+function _getStyle(el, attr) {
+    try {
+        return el.currentStyle ? el.currentStyle[attr] : getComputedStyle(el, false)[attr];
+    } catch (error) {
+    }
+}
+
 function _getScroll(element) {
     let scrollTop = 0;
     let scrollLeft = 0;
     try {
-        while (element = element.parentElement) {
-            scrollTop += -(element.scrollTop || 0);
-            scrollLeft += - (element.scrollLeft || 0);
+        if (element && _getStyle(element, 'position') != 'fixed') {
+            let next = () => {
+                element = element.parentElement || element.offsetParent;
+                return element && _getStyle(element, 'position') != 'fixed';
+            }
+            while (next()) {
+                scrollTop += -(element.scrollTop || 0);
+                scrollLeft += - (element.scrollLeft || 0);
+            }
         }
     } catch (error) {
     }
-    return {
-        scrollTop,
-        scrollLeft
-    };
+    return { scrollTop, scrollLeft };
 }
 
 function _getElement(el) {
@@ -41,9 +51,9 @@ export function getPosition(el) {
         scrollLeft = scroll.scrollLeft || 0;
         offsetTop = element.offsetTop || 0;
         offsetLeft = element.offsetLeft || 0;
-        offsetWidth = element.offsetWidth || 0;
-        offsetHeight = element.offsetHeight || 0;
-        while (element = element.offsetParent) {
+        offsetWidth = element.offsetWidth || element.clientWidth || 0;
+        offsetHeight = element.offsetHeight || element.clientHeight || 0;
+        while (element = element.offsetParent || element.parentNote || element.parentElement) {
             offsetTop += element.offsetTop;
             offsetLeft += element.offsetLeft;
         }

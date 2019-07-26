@@ -90,6 +90,19 @@ declare interface Tape {
     decodeBase64(str: string): string;
 
     /**
+     * 添加返回劫持
+     * @param key 劫持类型
+     * @param listener 处理劫持回调
+     */
+    addHijack(key: string, listener: () => any): void;
+
+    /**
+     * 移除返回劫持
+     * @param key 劫持类型
+     */
+    removeHijack(key: string): void;
+
+    /**
      * 格式化日期
      * @param date 日期
      * @param format 格式,默认yyyy-MM-dd

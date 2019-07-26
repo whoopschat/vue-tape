@@ -1,14 +1,18 @@
 function _loadJS(js, cb) {
-    var _script = document.createElement("script");
-    _script.type = "text/javascript";
-    var rev = Math.floor(Date.now() / (60 * 1000)).toString(36);
-    if (js.indexOf("?") >= 0) {
-        _script.src = `${js}&x_rev=${rev}`;
-    } else {
-        _script.src = `${js}?x_rev=${rev}`;
-    }
-    document.body.appendChild(_script);
-    _script.onload = function () {
+    try {
+        var _protocol = location.protocol != 'file:' ? location.protocol : 'http:';
+        var _script = document.createElement("script");
+        _script.type = "text/javascript";
+        if (js.indexOf('//') == 0) {
+            _script.src = _protocol + js;
+        } else {
+            _script.src = js;
+        }
+        document.body.appendChild(_script);
+        _script.onload = function () {
+            cb && cb();
+        }
+    } catch (error) {
         cb && cb();
     }
 }

@@ -8,8 +8,9 @@ import { getVersion } from "./utils/_version";
 import { getPosition } from "./utils/_position";
 import { setStorage, getStorage } from "./utils/_storage";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
-import { frameLoop } from "./utils/_loop";
+import { addHijack, removeHijack } from "./utils/_hijack";
 import { formatDate } from "./utils/_date";
+import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide, onError } from "./_cycle";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
 import { _initToast, showToast } from "./comps/_toast";
@@ -33,8 +34,10 @@ export function create(vue) {
         getStorage,
         encodeBase64,
         decodeBase64,
-        frameLoop,
+        addHijack,
+        removeHijack,
         formatDate,
+        frameLoop,
         onLoad,
         onShow,
         onHide,

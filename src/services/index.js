@@ -14,6 +14,7 @@ import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
 import { _initToast, showToast } from "./comps/_toast";
+import { setUserId, getUserId } from "./_user";
 
 export function create(vue) {
     setVue(vue);
@@ -26,6 +27,8 @@ export function create(vue) {
         getVue,
         getApp,
         setDebug,
+        setUserId,
+        getUserId,
         getQuery,
         getConfig,
         getVersion,

@@ -34,6 +34,17 @@ declare interface Tape {
     setDebug(debug: boolean): void;
 
     /**
+     * 设置userId，storage数据会根据userId区分存储
+     * @param userId 用户ID
+     */
+    setUserId(userId: string): void;
+
+    /**
+     * 获取用户ID
+     */
+    getUserId(): string;
+
+    /**
      * 获取URL中携带的参数
      * @param key 参数名称
      * @param def 默认值
@@ -66,7 +77,7 @@ declare interface Tape {
     /**
      * 设置storage数据
      * @param key 配置项
-     * @param def 默认值
+     * @param value 数据值
      */
     setStorage(key: string, value: ?any): void;
 

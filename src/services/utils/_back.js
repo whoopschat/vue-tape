@@ -1,6 +1,6 @@
 let _listeners = {};
 let _inited = false;
-let _type = `hijack-session-${Date.now().toString(36)}`;
+let _type = `back-session-${Date.now().toString(36)}`;
 
 function _push(key, len = 1) {
     for (let index = 0; index < len; index++) {
@@ -23,8 +23,8 @@ function _init() {
                     if (flag) {
                         _push(key, 1);
                     } else {
+                        delete _listeners[key];
                         window.history.go(-1);
-                        removeBackListener(key);
                     }
                 } else {
                     window.history.go(-1);
@@ -35,19 +35,10 @@ function _init() {
     });
 }
 
-export function addHijack(key, listener) {
+export function backListener(key, listener) {
     _init();
     if (key && listener && typeof listener == 'function') {
         _listeners[key] = listener;
         _push(key, 2);
-    }
-}
-
-export function removeHijack(key) {
-    try {
-        if (_listeners[key]) {
-            delete _listeners[key];
-        }
-    } catch (error) {
     }
 }

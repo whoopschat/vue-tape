@@ -1,10 +1,7 @@
-import { showToast } from "./comps/_toast";
-import { isDebug } from "./utils/_debug";
-
+let _isshow = true;
 let _time = 0;
 let _shows = [];
 let _hides = [];
-let _errors = [];
 
 function _getSSLTime(connectEnd, secureConnectionStart) {
     let ssl_time = 0;
@@ -60,24 +57,18 @@ function _visibilityChangeInfo() {
     return { hidden, visibilityChange }
 }
 
-export function _handleError(e, print = true) {
-    print && console.error(e);
-    isDebug() && showToast(e);
-    _errors.forEach(error => {
-        error && error(e);
-    });
-}
-
 export function _initLifeCycle() {
     _time = performance.now();
     let { hidden, visibilityChange } = _visibilityChangeInfo();
     document.addEventListener(visibilityChange, () => {
         if (!document[hidden]) {
+            _isshow = true;
             _time = performance.now();
             _shows.forEach(show => {
                 show && show();
             });
         } else {
+            _isshow = false;
             _hides.forEach(hide => {
                 hide && hide({
                     time: performance.now() - _time
@@ -97,19 +88,13 @@ export function onLoad(callback) {
         } else {
             setTimeout(_pollingDocument, 16);
         }
-    };
+    }
     setTimeout(_pollingDocument, 16);
 }
 
 export function onShow(show) {
     if (show && typeof show == 'function' && _shows.indexOf(show) < 0) {
-        try {
-            let { hidden } = _visibilityChangeInfo();
-            if (!document[hidden]) {
-                show && show()
-            }
-        } catch (error) {
-        }
+        _isshow && show();
         _shows.push(show);
     }
 }
@@ -131,11 +116,5 @@ export function offHide(hide) {
     let index = _hides.indexOf(hide);
     if (index >= 0) {
         _hides.splice(index, 1);
-    }
-}
-
-export function onError(error) {
-    if (error && typeof error == 'function' && _errors.indexOf(error) < 0) {
-        _errors.push(error);
     }
 }

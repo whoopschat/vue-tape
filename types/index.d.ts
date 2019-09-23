@@ -94,13 +94,7 @@ declare interface Tape {
      * @param key 劫持类型
      * @param listener 处理劫持回调
      */
-    addHijack(key: string, listener: () => any): void;
-
-    /**
-     * 移除返回劫持
-     * @param key 劫持类型
-     */
-    removeHijack(key: string): void;
+    backListener(key: string, listener: () => any): void;
 
     /**
      * 格式化日期
@@ -146,12 +140,6 @@ declare interface Tape {
      * @param callback 回调
      */
     offHide(callback: () => void): void;
-
-    /**
-     * 监听错误信息
-     * @param callback 回调
-     */
-    onError(callback: (error: any) => void): void;
 
     /**
      * 显示Loading弹窗

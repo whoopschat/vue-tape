@@ -67,12 +67,7 @@ declare interface Tape {
      * 获取页面中元素的位置
      * @param el 元素
      */
-    getPosition(el: ?any): {
-        left: number,
-        top: number,
-        height: number,
-        width: number
-    };
+    getPosition(el: ?any): { left: number, top: number, height: number, width: number };
 
     /**
      * 设置storage数据

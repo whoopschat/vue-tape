@@ -1,6 +1,7 @@
 import "./_polyfill";
 import { setVue, getVue } from "./__vue";
 import { initApp, getApp } from "./_app";
+import { setUserId, getUserId } from "./_user";
 import { setDebug } from "./utils/_debug";
 import { getQuery } from "./utils/_query";
 import { getConfig } from "./utils/_config";
@@ -14,7 +15,6 @@ import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
 import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
 import { _initToast, showToast } from "./comps/_toast";
-import { setUserId, getUserId } from "./_user";
 
 export function create(vue) {
     setVue(vue);

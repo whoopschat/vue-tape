@@ -17,7 +17,7 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, loadjs, config, width, unit, lazy, el }) {
+export function initApp({ name, app, loadjs, config, width, unit, lazy, el }, handler) {
     let _init = () => {
         _app_ = app;
         _app_name_ = name || 'default';
@@ -27,6 +27,7 @@ export function initApp({ name, app, loadjs, config, width, unit, lazy, el }) {
         let _vue = getVue();
         _vue.use(lazyload, lazy || {});
         _vue.config.productionTip = false;
+        handler && handler(_vue);
         new _vue({
             el: el || '#app',
             render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))

@@ -1,18 +1,15 @@
 import { createHtmlComponent } from "./_component";
 
+let _inited = false;
 let _timer = null;
 let _showLoading = null;
 let _hideLoading = null;
 
-export function showLoading(msg = '', duration) {
-    _showLoading && _showLoading(msg, duration);
-}
-
-export function hideLoading() {
-    _hideLoading && _hideLoading();
-}
-
-export function _initLoading() {
+function _initLoading() {
+    if (_inited) {
+        return;
+    }
+    _inited = true;
     const comp = createHtmlComponent('', { num: 0 });
     const instance = new comp();
     instance.$mount(document.createElement('div'))
@@ -37,4 +34,13 @@ export function _initLoading() {
         instance.html = '';
         _timer && clearTimeout(_timer);
     }
+}
+
+export function showLoading(msg = '', duration) {
+    _initLoading();
+    _showLoading && _showLoading(msg, duration);
+}
+
+export function hideLoading() {
+    _hideLoading && _hideLoading();
 }

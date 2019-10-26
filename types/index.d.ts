@@ -15,7 +15,7 @@ declare interface Tape {
         unit: ?number,
         lazy: ?object,
         el: ?string,
-    }): void;
+    }, handler: ?(vue: ?object) => void): void;
 
     /**
      * 获取vue实例

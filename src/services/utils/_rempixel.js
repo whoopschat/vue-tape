@@ -14,7 +14,9 @@ export function _pixelToRem(maxWidth = 750, remUnit = 100) {
     // set 1rem = viewWidth / 10
     function setRemUnit() {
         let clientWidth = docEl.clientWidth;
-        const rem = Math.min(maxWidth, clientWidth) / (maxWidth / remUnit);
+        let clientHeight = docEl.clientHeight;
+        let horizontalWidth = maxWidth * clientHeight / clientWidth;
+        let rem = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
         docEl.style.fontSize = rem + 'px';
         const defaultFontSize = parseFloat(window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
         if (defaultFontSize !== rem) {

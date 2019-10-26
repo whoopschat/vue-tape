@@ -1,13 +1,14 @@
 import { createHtmlComponent } from "./_component";
 
+let _inited = false;
 let _timer = null;
 let _showToast = null;
 
-export function showToast(msg, duration) {
-    _showToast && _showToast(msg, duration);
-}
-
-export function _initToast() {
+function _initToast() {
+    if (_inited) {
+        return;
+    }
+    _inited = true;
     const comp = createHtmlComponent('', { num: 0 });
     const instance = new comp();
     instance.$mount(document.createElement('div'))
@@ -26,4 +27,9 @@ export function _initToast() {
             _timer = null;
         }, duration);
     }
+}
+
+export function showToast(msg, duration) {
+    _initToast();
+    _showToast && _showToast(msg, duration);
 }

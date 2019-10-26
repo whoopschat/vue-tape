@@ -13,13 +13,11 @@ import { backListener } from "./utils/_back";
 import { formatDate } from "./utils/_date";
 import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
-import { _initLoading, showLoading, hideLoading } from "./comps/_loading";
-import { _initToast, showToast } from "./comps/_toast";
+import { showLoading, hideLoading } from "./comps/_loading";
+import { showToast } from "./comps/_toast";
 
 export function create(vue) {
     setVue(vue);
-    _initToast();
-    _initLoading();
     console.log("VUE-TAPE: version " + getVersion())
     console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
     return {

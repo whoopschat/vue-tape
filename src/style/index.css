@@ -89,6 +89,18 @@ table {
         border-spacing : 0;
 }
 
+.--vue-tape-iframe {
+        position  : fixed;
+        left      : 0;
+        top       : 0;
+        right     : 0;
+        bottom    : 0;
+        border    : 0;
+        background: #fff;
+        *width    : 100%;
+        z-index   : 970;
+}
+
 .--vue-tape-error {
         color      : #ff0000;
         font-size  : 0.16rem;
@@ -113,7 +125,7 @@ table {
         box-sizing       : border-box;
         background-color : rgba(0, 0, 0, .7);
         padding          : 0.2rem 0.2rem;
-        z-index          : 999;
+        z-index          : 980;
         text-align       : center;
         white-space      : normal;
         word-break       : break-all;
@@ -128,7 +140,7 @@ table {
         right           : 0;
         bottom          : 0;
         background-color: rgba(0, 0, 0, 0.3);
-        z-index         : 999;
+        z-index         : 990;
 }
 
 .--vue-tape-loading .loading {

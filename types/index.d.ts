@@ -34,17 +34,6 @@ declare interface Tape {
     setDebug(debug: boolean): void;
 
     /**
-     * 设置userId，storage数据会根据userId区分存储
-     * @param userId 用户ID
-     */
-    setUserId(userId: string): void;
-
-    /**
-     * 获取用户ID
-     */
-    getUserId(): string;
-
-    /**
      * 获取URL中携带的参数
      * @param key 参数名称
      * @param def 默认值
@@ -74,14 +63,20 @@ declare interface Tape {
      * @param key 配置项
      * @param value 数据值
      */
-    setStorage(key: string, value: ?any): void;
+    setStorage(key: string, value: ?any): Promise<any>;
 
     /**
      * 获取storage数据
+     * @param def 默认值
+     */
+    getStorage(key: string): Promise<any>;
+
+    /**
+     * 移除storage数据
      * @param key 配置项
      * @param def 默认值
      */
-    getStorage(key: string, def: ?any): any;
+    removeStorage(key: string, def: ?any): Promise<any>;
 
     /**
      * 字符串BASE64编码
@@ -146,6 +141,18 @@ declare interface Tape {
      * @param callback 回调
      */
     offHide(callback: () => void): void;
+
+    /**
+     * 显示Iframe弹窗
+     * @param url 链接
+     * @param sandbox 沙箱选项，默认：allow-same-origin allow-scripts
+     */
+    showIframe(url: string, sandbox: ?string): void;
+
+    /**
+     * 隐藏Iframe弹窗
+     */
+    hideIframe(): void;
 
     /**
      * 显示Loading弹窗

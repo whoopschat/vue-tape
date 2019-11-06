@@ -1,16 +1,13 @@
-import { getUserId } from '../_user';
+import localForage from "localforage";
 
 export function setStorage(key, value) {
-    localStorage.setItem(`storage_data_${getUserId()}${key}`, JSON.stringify(value));
+    return localForage.setItem(`tape_data_${key}`, value);
 }
 
-export function getStorage(key, value) {
-    let data = localStorage.getItem(`storage_data_${getUserId()}${key}`);
-    if (data) {
-        try {
-            return JSON.parse(data);
-        } catch (error) {
-        }
-    }
-    return value;
+export function getStorage(key) {
+    return localForage.getItem(`tape_data_${key}`);
+}
+
+export function removeStorage(key) {
+    return localForage.removeItem(`tape_data_${key}`);
 }

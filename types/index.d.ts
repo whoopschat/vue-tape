@@ -3,6 +3,11 @@
 declare interface Tape {
 
     /**
+     * Tape state
+     */
+    state: object;
+
+    /**
      * 初始化APP
      * @param options 初始化选项
      */
@@ -11,6 +16,7 @@ declare interface Tape {
         page: object,
         loadjs: ?string,
         config: ?object,
+        state: ?{ key: string, state: object },
         width: ?number,
         unit: ?number,
         lazy: ?object,
@@ -67,16 +73,16 @@ declare interface Tape {
 
     /**
      * 获取storage数据
+     * @param key 配置项
      * @param def 默认值
      */
-    getStorage(key: string): Promise<any>;
+    getStorage(key: string, def: ?any): Promise<any>;
 
     /**
      * 移除storage数据
      * @param key 配置项
-     * @param def 默认值
      */
-    removeStorage(key: string, def: ?any): Promise<any>;
+    removeStorage(key: string): Promise<any>;
 
     /**
      * 字符串BASE64编码

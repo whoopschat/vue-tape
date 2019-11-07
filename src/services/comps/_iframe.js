@@ -14,12 +14,12 @@ function _initIframe() {
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el);
     _showIframe = (url = '', sandbox = '') => {
-        instance.html = `<iframe src="${url}" 
-        sandbox="${sandbox}" 
-        frameborder="0" 
-        width="100%" 
-        height="100%" 
-        scrolling="no" 
+        instance.html = `<iframe src="${url}"
+        sandbox="${sandbox}"
+        frameborder="0"
+        width="100%"
+        height="100%"
+        scrolling="no"
         class="--vue-tape-iframe"/>`;
     }
     _hideIframe = () => {

@@ -4,6 +4,7 @@ import { createErrorComponent } from './comps/_component';
 import { _initLifeCycle } from './_cycle';
 import { _pixelToRem } from './utils/_rempixel';
 import { _initConfig } from './utils/_config';
+import { _initState } from './_state';
 import { loadJs } from './_loadjs';
 
 let _app_ = null;
@@ -17,12 +18,13 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, loadjs, config, width, unit, lazy, el }, handler) {
+export function initApp({ name, app, loadjs, config, state, width, unit, lazy, el }, handler) {
     let _init = () => {
         _app_ = app;
         _app_name_ = name || 'default';
         _pixelToRem(width, unit);
         _initConfig(config);
+        _initState(state);
         _initLifeCycle();
         let _vue = getVue();
         _vue.use(lazyload, lazy || {});

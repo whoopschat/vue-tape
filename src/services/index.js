@@ -1,4 +1,5 @@
 import "./_polyfill";
+import _state from "./_state";
 import { setVue, getVue } from "./__vue";
 import { initApp, getApp } from "./_app";
 import { setDebug } from "./utils/_debug";
@@ -20,7 +21,7 @@ export function create(vue) {
     setVue(vue);
     console.log("VUE-TAPE: version " + getVersion())
     console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
-    return {
+    return Object.assign(_state, {
         initApp,
         getVue,
         getApp,
@@ -47,5 +48,5 @@ export function create(vue) {
         showLoading,
         hideLoading,
         showToast
-    }
+    });
 }

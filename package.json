@@ -1,6 +1,6 @@
 {
   "name": "vue-tape",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "a vue library",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -39,11 +39,9 @@
     "uglifyjs-webpack-plugin": "^1.2.2",
     "url-loader": "^0.5.9",
     "webpack": "^4.12.0",
-    "vuex": "3.0.1",
     "webpack-cli": "^3.0.6",
     "replace-in-file": "3.4.0",
-    "vue-lazyload": "1.2.6",
-    "localforage": "1.7.3"
+    "vue-lazyload": "1.2.6"
   },
   "keywords": [
     "vue-tape"

@@ -89,18 +89,6 @@ table {
         border-spacing : 0;
 }
 
-.--vue-tape-iframe {
-        position  : fixed;
-        left      : 0;
-        top       : 0;
-        right     : 0;
-        bottom    : 0;
-        border    : 0;
-        background: #fff;
-        *width    : 100%;
-        z-index   : 970;
-}
-
 .--vue-tape-error {
         color      : #ff0000;
         font-size  : 0.16rem;

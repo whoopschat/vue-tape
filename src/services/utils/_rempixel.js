@@ -1,7 +1,13 @@
-let _remUnit = 12;
+let remSize = 14;
+
+function _setFontSize(size) {
+    const docEl = document.documentElement;
+    docEl.style.fontSize = size + 'px';
+    remSize = size;
+}
 
 export function remToPixel(rem) {
-    return rem * _remUnit;
+    return remSize * rem;
 }
 
 export function _pixelToRem(maxWidth = 750, remUnit = 100) {
@@ -22,16 +28,15 @@ export function _pixelToRem(maxWidth = 750, remUnit = 100) {
         let clientWidth = docEl.clientWidth;
         let clientHeight = docEl.clientHeight;
         let horizontalWidth = maxWidth * clientHeight / clientWidth;
-        _remUnit = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
-        docEl.style.fontSize = _remUnit + 'px';
+        let rem = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
+        _setFontSize(rem);
         const defaultFontSize = parseFloat(window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
         if (defaultFontSize !== rem) {
             if (defaultFontSize < rem) {
-                _remUnit =  (rem + (rem - defaultFontSize));
-                docEl.style.fontSize = _remUnit + 'px';
-            } else {
-                _remUnit =  (rem - (defaultFontSize - rem));
-                docEl.style.fontSize = _remUnit + 'px';
+                _setFontSize((rem + (rem - defaultFontSize)))
+            }
+            else {
+                _setFontSize((rem - (defaultFontSize - rem)))
             }
         }
     }

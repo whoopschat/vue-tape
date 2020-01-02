@@ -167,6 +167,11 @@ declare interface Tape {
      */
     showToast(msg: string, duration: ?number): void;
 
+    /**
+     * 将rem单位转为pixel单位
+     * @param rem 数值
+     */
+    remToPixel(rem: number): number;
 }
 
 /**

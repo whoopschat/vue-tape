@@ -1,4 +1,3 @@
-import './index.less';
 import app from './index.vue';
 import { init } from '#vue-tape-page-path#../../common';
 

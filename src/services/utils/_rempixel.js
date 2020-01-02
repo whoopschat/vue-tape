@@ -1,3 +1,9 @@
+let _remUnit = 12;
+
+export function remToPixel(rem) {
+    return rem * _remUnit;
+}
+
 export function _pixelToRem(maxWidth = 750, remUnit = 100) {
     const docEl = document.documentElement;
     const dpr = window.devicePixelRatio || 1;
@@ -16,15 +22,16 @@ export function _pixelToRem(maxWidth = 750, remUnit = 100) {
         let clientWidth = docEl.clientWidth;
         let clientHeight = docEl.clientHeight;
         let horizontalWidth = maxWidth * clientHeight / clientWidth;
-        let rem = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
-        docEl.style.fontSize = rem + 'px';
+        _remUnit = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
+        docEl.style.fontSize = _remUnit + 'px';
         const defaultFontSize = parseFloat(window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
         if (defaultFontSize !== rem) {
             if (defaultFontSize < rem) {
-                docEl.style.fontSize = (rem + (rem - defaultFontSize)) + 'px';
-            }
-            else {
-                docEl.style.fontSize = (rem - (defaultFontSize - rem)) + 'px';
+                _remUnit =  (rem + (rem - defaultFontSize));
+                docEl.style.fontSize = _remUnit + 'px';
+            } else {
+                _remUnit =  (rem - (defaultFontSize - rem));
+                docEl.style.fontSize = _remUnit + 'px';
             }
         }
     }

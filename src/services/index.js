@@ -14,6 +14,7 @@ import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
 import { showLoading, hideLoading } from "./comps/_loading";
 import { showToast } from "./comps/_toast";
+import { remToPixel } from "./utils/_rempixel";
 
 export function create(vue) {
     setVue(vue);
@@ -42,6 +43,7 @@ export function create(vue) {
         offHide,
         showLoading,
         hideLoading,
-        showToast
+        showToast,
+        remToPixel,
     };
 }

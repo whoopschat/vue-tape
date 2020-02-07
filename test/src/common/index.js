@@ -1,7 +1,7 @@
 import './style.less';
 import vue from 'vue';
 import config from './config';
-import vue_tape from 'vue-tape';
+import vue_tape from '../../../src/core';
 
 vue.use(vue_tape);
 
@@ -14,7 +14,6 @@ export function init(app, name) {
         name,
         config,
         width: 750,
-        unit: 100,
         el: '#app'
     });
 }

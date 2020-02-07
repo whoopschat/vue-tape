@@ -19,6 +19,13 @@ textarea {
         font: 0.12rem/1.5tahoma, arial, \5b8b\4f53;
 }
 
+body {
+        position : relative;
+        padding  : 0px;
+        margin   : 0px auto;
+        font-size: 0.32rem !important;
+}
+
 h1,
 h2,
 h3,
@@ -98,30 +105,8 @@ table {
         word-break : break-all;
 }
 
-.--vue-tape-toast {
-        position         : fixed;
-        display          : flex;
-        top              : 50%;
-        left             : 50%;
-        max-width        : 90%;
-        color            : #fff;
-        font-size        : 0.28rem;
-        line-height      : 0.3rem;
-        border-radius    : 0.1rem;
-        align-items      : center;
-        flex-direction   : column;
-        box-sizing       : border-box;
-        background-color : rgba(0, 0, 0, .7);
-        padding          : 0.2rem 0.2rem;
-        z-index          : 980;
-        text-align       : center;
-        white-space      : normal;
-        word-break       : break-all;
-        transform        : translate3d(-50%, -50%, 0);
-        -webkit-transform: translate3d(-50%, -50%, 0);
-}
-
-.--vue-tape-loading {
+/* popup */
+.--vue-tape-popup {
         position        : fixed;
         left            : 0;
         top             : 0;
@@ -129,6 +114,128 @@ table {
         bottom          : 0;
         background-color: rgba(0, 0, 0, 0.3);
         z-index         : 990;
+}
+
+
+.--vue-tape-popup .box {
+        position         : fixed;
+        width            : 5.76rem;
+        max-height       : 8.8rem;
+        background       : rgba(255, 255, 255, 1);
+        border-radius    : 0.12rem;
+        top              : 50%;
+        left             : 50%;
+        transform        : translate3d(-50%, -50%, 0);
+        -webkit-transform: translate3d(-50%, -50%, 0);
+        padding-bottom   : 0.24rem;
+        padding-top      : 0.24rem;
+}
+
+.--vue-tape-popup .box .line1 {
+        height: 0.01rem;
+}
+
+.--vue-tape-popup .box .line24 {
+        height: 0.24rem;
+}
+
+.--vue-tape-popup .box .icon {
+        display          : block;
+        max-width        : 60%;
+        max-height       : 2rem;
+        font-size        : 0.34rem;
+        font-family      : PingFangSC-Medium, PingFang SC;
+        font-weight      : 500;
+        color            : rgba(49, 51, 50, 1);
+        margin-left      : 50%;
+        transform        : translate3d(-50%, 0, 0);
+        -webkit-transform: translate3d(-50%, 0, 0);
+}
+
+.--vue-tape-popup .box .title {
+        width        : 4.56rem;
+        font-size    : 0.34rem;
+        text-align   : center;
+        font-family  : PingFangSC-Medium, PingFang SC;
+        font-weight  : 500;
+        color        : rgba(49, 51, 50, 1);
+        line-height  : 0.48rem;
+        margin-left  : 0.6rem;
+        margin-right : 0.6rem;
+        margin-top   : 0.24rem;
+        margin-bottom: 0.24rem;
+}
+
+.--vue-tape-popup .box .message {
+        width        : 4.56rem;
+        max-height   : 4.4rem;
+        font-size    : 0.30rem;
+        font-family  : PingFangSC-Light, PingFang SC;
+        font-weight  : 300;
+        color        : rgba(49, 51, 50, 1);
+        line-height  : 0.42rem;
+        margin-left  : 0.6rem;
+        margin-bottom: 0.24rem;
+        overflow-x   : hidden;
+        overflow-y   : auto;
+}
+
+.--vue-tape-popup .box .btns {
+        display: flex;
+        padding: 0rem 0.3rem;
+}
+
+.--vue-tape-popup .box .btns .btn {
+        border         : none;
+        border-radius  : 0.08rem;
+        height         : 0.88rem;
+        margin-left    : 0.1rem;
+        margin-right   : 0.1rem;
+        flex           : 1;
+        color          : #333333;
+        outline        : none;
+        display        : flex;
+        justify-content: center;
+        align-items    : center;
+        font-size      : 0.34rem;
+        font-family    : PingFangSC-Regular, PingFang SC;
+        font-weight    : 400;
+        margin-bottom  : 0.24rem;
+}
+
+/* toast */
+.--vue-tape-toast {
+        position         : fixed;
+        display          : flex;
+        top              : 40%;
+        left             : 50%;
+        max-width        : 90%;
+        min-width        : 30%;
+        color            : #fff;
+        font-size        : 0.32rem;
+        line-height      : 0.48rem;
+        border-radius    : 0.12rem;
+        align-items      : center;
+        flex-direction   : column;
+        box-sizing       : border-box;
+        background-color : rgba(0, 0, 0, 0.8);
+        padding          : 0.2rem 0.3rem;
+        z-index          : 1000;
+        white-space      : normal;
+        word-break       : break-all;
+        transform        : translate3d(-50%, -50%, 0);
+        -webkit-transform: translate3d(-50%, -50%, 0);
+}
+
+/* loading */
+.--vue-tape-loading {
+        position        : fixed;
+        left            : 0;
+        top             : 0;
+        right           : 0;
+        bottom          : 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index         : 980;
 }
 
 .--vue-tape-loading .loading {

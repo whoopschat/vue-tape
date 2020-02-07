@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>#vue-tape-name# - home</h1>
-    <hr>Hello
+    <h1>#vue-tape-name# - create by vue-tape #vue-tape-version#</h1>
+    <hr />page name: home
   </div>
 </template>
 
@@ -13,12 +13,6 @@
 export default {
   data() {
     return {};
-  },
-  methods: {},
-  created() {
-    Tape.onShow(() => {
-      // page on show
-    });
   }
 };
 </script>

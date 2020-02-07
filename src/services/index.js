@@ -12,6 +12,7 @@ import { backListener } from "./utils/_back";
 import { formatDate } from "./utils/_date";
 import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
+import { showModal } from "./comps/_modal";
 import { showLoading, hideLoading } from "./comps/_loading";
 import { showToast } from "./comps/_toast";
 import { remToPixel } from "./utils/_rempixel";
@@ -41,6 +42,7 @@ export function create(vue) {
         onHide,
         offShow,
         offHide,
+        showModal,
         showLoading,
         hideLoading,
         showToast,

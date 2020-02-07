@@ -1,8 +1,4 @@
 const Conf = {
-  local: {
-    PROD: false,
-    XXX: 'LOCAL XXX',
-  },
   qa: {
     PROD: false,
     XXX: 'QA XXX',
@@ -17,4 +13,4 @@ const Conf = {
   },
 }
 
-export default Conf[process.env.VUE_APP_CURRENTMODE || 'local'] || {}
+export default Conf[process.env.VUE_APP_CURRENTMODE || 'qa'] || {}

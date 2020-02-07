@@ -10,7 +10,7 @@ function _initLoading() {
         return;
     }
     _inited = true;
-    const comp = createHtmlComponent('', { num: 0 });
+    const comp = createHtmlComponent('', {});
     const instance = new comp();
     instance.$mount(document.createElement('div'))
     document.body.appendChild(instance.$el);

@@ -54,13 +54,16 @@ function _listSync(src) {
 
 function _copySync(src, dst, filter, map, options) {
     _folderSync(dst);
-    let content = fs.readFileSync(src, 'utf-8');
+    let content = null;
     if (filter && filter(src)) {
+        content = fs.readFileSync(src, 'utf-8');
         Object.keys(options).forEach(key => {
             if (key != options[key]) {
                 content = func.stringReplaceAll(content, key, options[key]);
             }
         });
+    } else {
+        content = fs.readFileSync(src);
     }
     if (map) {
         dst = map(dst);

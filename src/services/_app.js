@@ -17,11 +17,11 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, loadjs, config, width, unit, lazy, el }, handler) {
+export function initApp({ name, app, loadjs, config, width, lazy, el }, handler) {
     let _init = () => {
         _app_ = app;
         _app_name_ = name || 'default';
-        _pixelToRem(width, unit);
+        _pixelToRem(width);
         _initConfig(config);
         _initLifeCycle();
         let _vue = getVue();

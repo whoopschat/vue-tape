@@ -12,7 +12,6 @@ declare interface Tape {
         loadjs: ?string,
         config: ?object,
         width: ?number,
-        unit: ?number,
         lazy: ?object,
         el: ?string,
     }, handler: ?(vue: ?object) => void): void;
@@ -149,6 +148,25 @@ declare interface Tape {
     hideIframe(): void;
 
     /**
+     * 显示Modal弹窗
+     * @param msg 内容
+     * @param duration 时间
+     */
+    showModal(options: {
+        title: ?string,
+        message: ?string,
+        icon: ?string,
+        cancelText: ?string,
+        confirmText: ?string,
+        btnColor: ?string,
+        cancelColor: ?string,
+        confirmColor: ?string,
+        flexable: ?boolean,
+        cancelable: ?boolean,
+        callback: ?(confirm: number) => any
+    }): void;
+
+    /**
      * 显示Loading弹窗
      * @param msg 内容
      * @param duration 时间
@@ -172,6 +190,7 @@ declare interface Tape {
      * @param rem 数值
      */
     remToPixel(rem: number): number;
+
 }
 
 /**

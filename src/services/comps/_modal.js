@@ -21,7 +21,7 @@ function _initModal() {
             btnColor = "#00C882",
             cancelColor = "",
             confirmColor = "",
-            flexable = false,
+            flexable = true,
             cancelable = true,
             callback
         } = options;
@@ -49,7 +49,7 @@ function _initModal() {
         let message_html = message ? `<div class="message">${message}</div><div class="line1"></div>` : ''
         let cancel_html = cancelText ? `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](0)" style="color: ${useCancelColor};border:1px solid ${useCancelColor};">${cancelText}</div>` : ''
         let confirm_html = confirmText ? `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](1)" style="color: #ffffff;background: ${useConfirmColor};border:1px solid ${useConfirmColor};">${confirmText}</div>` : ''
-        let btns_html = (cancel_html + confirm_html) ? flexable ? `<div class="line24"></div><div class="btns">${cancel_html}${confirm_html}</div>` : `<div class="line24"></div><div class="btns">${cancel_html}</div><div class="btns">${confirm_html}</div>` : ''
+        let btns_html = (cancel_html + confirm_html) ? flexable ? `<div class="line24"></div><div class="btns">${cancel_html}${confirm_html}</div>` : `<div class="line24"></div><div class="btns">${confirm_html}</div><div class="btns">${cancel_html}</div>` : ''
         instance.html = `<div class="--vue-tape-popup" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](-1)">
             <div class="box" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](-2,event)">
                 ${icon_html}

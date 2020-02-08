@@ -157,7 +157,7 @@ table {
         font-size    : 0.34rem;
         text-align   : center;
         font-family  : PingFangSC-Medium, PingFang SC;
-        font-weight  : 500;
+        font-weight  : 550;
         color        : rgba(49, 51, 50, 1);
         line-height  : 0.48rem;
         margin-left  : 0.6rem;
@@ -169,11 +169,11 @@ table {
 .--vue-tape-popup .box .message {
         width        : 4.56rem;
         max-height   : 4.4rem;
-        font-size    : 0.30rem;
+        font-size    : 0.34rem;
         font-family  : PingFangSC-Light, PingFang SC;
         font-weight  : 300;
         color        : rgba(49, 51, 50, 1);
-        line-height  : 0.42rem;
+        line-height  : 0.48rem;
         margin-left  : 0.6rem;
         margin-bottom: 0.24rem;
         overflow-x   : hidden;
@@ -188,7 +188,8 @@ table {
 .--vue-tape-popup .box .btns .btn {
         border         : none;
         border-radius  : 0.08rem;
-        height         : 0.88rem;
+        height         : 0.78rem;
+        line-height    : 0.78rem;
         margin-left    : 0.1rem;
         margin-right   : 0.1rem;
         flex           : 1;
@@ -200,7 +201,7 @@ table {
         font-size      : 0.34rem;
         font-family    : PingFangSC-Regular, PingFang SC;
         font-weight    : 400;
-        margin-bottom  : 0.24rem;
+        margin-bottom  : 0.18rem;
 }
 
 /* toast */

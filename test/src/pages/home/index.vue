@@ -17,12 +17,15 @@ export default {
   methods: {},
   created() {
     Tape.showModal({
-      // icon:  require("../../assets/icon.png"),
-      title: "无法解绑！若此微信需要绑定其他账号这是一个弹窗",
+      icon:  require("../../assets/icon.png"),
+      title: "退出登录",
       btnColor: "#FF6666",
+      cancelText: "确定",
       confirmText: "确定",
-      message:
-        "此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！此微信是唯一绑定<span style=\"color:#3399ff\">账号</span>，无法解绑！若此微信需要绑定其他账号，请登录其他账号进行绑定！"
+      message: "确认退出当前账号？",
+      callback: confirm => {
+        alert(confirm);
+      }
     });
   }
 };

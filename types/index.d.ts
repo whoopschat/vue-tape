@@ -1,5 +1,15 @@
 /// <reference no-default-lib="true"/>
 
+/**
+ * 弹窗按钮选项
+ */
+interface btnOptions {
+    text: string,
+    color: ?string,
+    border: ?string,
+    bg: ?string
+}
+
 declare interface Tape {
 
     /**
@@ -147,6 +157,7 @@ declare interface Tape {
      */
     hideIframe(): void;
 
+
     /**
      * 显示Modal弹窗
      * @param msg 内容
@@ -156,8 +167,8 @@ declare interface Tape {
         title: ?string,
         message: ?string,
         icon: ?string,
-        cancelText: ?string,
-        confirmText: ?string,
+        cancelText: ?string | btnOptions,
+        confirmText: ?string | Array<string | btnOptions>,
         btnColor: ?string,
         cancelColor: ?string,
         confirmColor: ?string,

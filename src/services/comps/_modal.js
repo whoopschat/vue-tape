@@ -46,10 +46,42 @@ function _initModal() {
         let useConfirmColor = confirmColor || btnColor;
         let icon_html = icon ? `<img class="icon" src="${icon}">` : ''
         let title_html = title ? `<div class="title">${title}</div><div class="line1"></div>` : ''
-        let message_html = message ? `<div class="message">${message}</div><div class="line1"></div>` : ''
-        let cancel_html = cancelText ? `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](0)" style="color: ${useCancelColor};border:1px solid ${useCancelColor};">${cancelText}</div>` : ''
-        let confirm_html = confirmText ? `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](1)" style="color: #ffffff;background: ${useConfirmColor};border:1px solid ${useConfirmColor};">${confirmText}</div>` : ''
-        let btns_html = (cancel_html + confirm_html) ? flexable ? `<div class="line24"></div><div class="btns">${cancel_html}${confirm_html}</div>` : `<div class="line24"></div><div class="btns">${confirm_html}</div><div class="btns">${cancel_html}</div>` : ''
+        let message_html = message ? `<div class="message">${message}</div><div class="line1"></div>` : '';
+        let createBtn = (type, options) => {
+            let btn = `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](${type})" style="color: ${options.color};background: ${options.bg};border:1px solid ${options.border || options.bg};">${options.text}</div>`;
+            if (flexable) {
+                return btn;
+            }
+            return `<div class="btns">${btn}</div>`
+        }
+        let confirm_html = "";
+        if (confirmText) {
+            let def = { color: "#ffffff", bg: useConfirmColor }
+            if (confirmText instanceof Array) {
+                if (confirmText.length > 1) {
+                    flexable = false;
+                }
+                confirmText.forEach((options, index) => {
+                    if (typeof options == "object") {
+                        confirm_html += createBtn(index + 1, Object.assign({}, def, options));
+                    } else {
+                        confirm_html += createBtn(index + 1, Object.assign({}, def, { text: options }));
+                    }
+                });
+            } else {
+                confirm_html = createBtn(1, Object.assign({}, def, { text: confirmText }));
+            }
+        }
+        let cancel_html = "";
+        if (cancelText) {
+            let def = { color: useCancelColor }
+            if (typeof cancelText == "object") {
+                cancel_html += createBtn(0, Object.assign({}, def, cancelText));
+            } else {
+                cancel_html += createBtn(0, Object.assign({}, def, { text: cancelText }));
+            }
+        }
+        let btns_html = (cancel_html + confirm_html) ? flexable ? `<div class="line24"></div><div class="btns">${confirm_html}${cancel_html}</div>` : `<div class="line24"></div>${confirm_html}${cancel_html}</div>` : ''
         instance.html = `<div class="--vue-tape-popup" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](-1)">
             <div class="box" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](-2,event)">
                 ${icon_html}

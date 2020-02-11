@@ -17,14 +17,17 @@ export default {
   methods: {},
   created() {
     Tape.showModal({
-      icon:  require("../../assets/icon.png"),
+      icon: require("../../assets/icon.png"),
       title: "退出登录",
       btnColor: "#FF6666",
-      cancelText: "确定",
-      confirmText: "确定",
+      cancelColor: "#919191",
+      cancelText: "取消",
+      confirmText: ["理解并同意"],
       message: "确认退出当前账号？",
       callback: confirm => {
-        alert(confirm);
+        Tape.showToast(
+          "确认退出当前账号？确认退出当前账号？确认退出当前账号？确认退出当前账号？"
+        );
       }
     });
   }

@@ -17,10 +17,10 @@ export default {
   methods: {},
   created() {
     Tape.showModal({
-      icon: require("../../assets/icon.png"),
+      // icon: require("../../assets/icon.png"),
       title: "退出登录",
-      btnColor: "#FF6666",
       cancelColor: "#919191",
+      confirmColor: "#FF6666",
       cancelText: "取消",
       confirmText: [
         {

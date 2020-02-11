@@ -164,12 +164,11 @@ declare interface Tape {
      * @param duration 时间
      */
     showModal(options: {
+        icon: ?string,
         title: ?string,
         message: ?string,
-        icon: ?string,
         cancelText: ?string | btnOptions,
         confirmText: ?string | btnOptions | Array<string | btnOptions>,
-        btnColor: ?string,
         cancelColor: ?string,
         confirmColor: ?string,
         flexable: ?boolean,

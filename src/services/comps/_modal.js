@@ -18,11 +18,10 @@ function _initModal() {
             message = "",
             cancelText = "",
             confirmText = "我知道了",
-            btnColor = "#00C882",
-            cancelColor = "",
-            confirmColor = "",
+            cancelColor = "#919191",
+            confirmColor = "#00C882",
+            cancelable = false,
             flexable = true,
-            cancelable = true,
             callback
         } = options;
         let id = Date.now();
@@ -42,9 +41,9 @@ function _initModal() {
                 hide()
             }
         }
-        let useCancelColor = cancelColor || btnColor;
-        let useConfirmColor = confirmColor || btnColor;
-        let icon_html = icon ? `<img class="icon" src="${icon}">` : ''
+        let useCancelColor = cancelColor;
+        let useConfirmColor = confirmColor;
+        let icon_html = icon ? `<img class="icon" src="${icon}"><div class="line1"></div>` : ''
         let title_html = title ? `<div class="title">${title}</div><div class="line1"></div>` : ''
         let message_html = message ? `<div class="message">${message}</div><div class="line1"></div>` : '';
         let createBtn = (type, options) => {

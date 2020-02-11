@@ -146,6 +146,7 @@ table {
         margin-left      : 50%;
         transform        : translate3d(-50%, 0, 0);
         -webkit-transform: translate3d(-50%, 0, 0);
+        margin-bottom    : 0.12rem;
 }
 
 .--vue-tape-popup .box .title {
@@ -171,6 +172,7 @@ table {
         font-weight  : 300;
         line-height  : 0.44rem;
         margin-left  : 0.6rem;
+        margin-top   : 0.24rem;
         margin-bottom: 0.24rem;
         overflow-x   : hidden;
         overflow-y   : auto;

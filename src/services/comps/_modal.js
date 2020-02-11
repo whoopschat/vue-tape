@@ -48,7 +48,7 @@ function _initModal() {
         let title_html = title ? `<div class="title">${title}</div><div class="line1"></div>` : ''
         let message_html = message ? `<div class="message">${message}</div><div class="line1"></div>` : '';
         let createBtn = (type, options) => {
-            let btn = `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](${type})" style="color: ${options.color};background: ${options.bg};border:1px solid ${options.border || options.bg};">${options.text}</div>`;
+            let btn = `<div class="btn" onclick="_TAPE_MODAL_CLICK_MAP_[${id}](${type})" style="color: ${options.color};background: ${options.bg};border:1px solid ${options.border};">${options.text}</div>`;
             if (flexable) {
                 return btn;
             }
@@ -56,7 +56,7 @@ function _initModal() {
         }
         let confirm_html = "";
         if (confirmText) {
-            let def = { color: "#ffffff", bg: useConfirmColor }
+            let def = { color: useConfirmColor }
             if (confirmText instanceof Array) {
                 if (confirmText.length > 1) {
                     flexable = false;
@@ -68,8 +68,10 @@ function _initModal() {
                         confirm_html += createBtn(index + 1, Object.assign({}, def, { text: options }));
                     }
                 });
+            } else if (typeof confirmText == "object") {
+                confirm_html += createBtn(1, Object.assign({}, def, confirmText));
             } else {
-                confirm_html = createBtn(1, Object.assign({}, def, { text: confirmText }));
+                confirm_html += createBtn(1, Object.assign({}, def, { text: confirmText }));
             }
         }
         let cancel_html = "";

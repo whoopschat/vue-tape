@@ -168,7 +168,7 @@ declare interface Tape {
         message: ?string,
         icon: ?string,
         cancelText: ?string | btnOptions,
-        confirmText: ?string | Array<string | btnOptions>,
+        confirmText: ?string | btnOptions | Array<string | btnOptions>,
         btnColor: ?string,
         cancelColor: ?string,
         confirmColor: ?string,

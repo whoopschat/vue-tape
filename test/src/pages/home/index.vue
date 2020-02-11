@@ -22,7 +22,11 @@ export default {
       btnColor: "#FF6666",
       cancelColor: "#919191",
       cancelText: "取消",
-      confirmText: ["理解并同意"],
+      confirmText: [
+        {
+          text: "理解并同意"
+        }
+      ],
       message: "确认退出当前账号？",
       callback: confirm => {
         Tape.showToast(

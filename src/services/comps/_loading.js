@@ -1,4 +1,5 @@
 import { createHtmlComponent } from "./_component";
+import { toAny } from "../utils/_toany";
 
 let _inited = false;
 let _timer = null;
@@ -38,7 +39,7 @@ function _initLoading() {
 
 export function showLoading(msg = '', duration) {
     _initLoading();
-    _showLoading && _showLoading(msg, duration);
+    _showLoading && _showLoading(toAny(msg, ''), duration);
 }
 
 export function hideLoading() {

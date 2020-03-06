@@ -1,17 +1,41 @@
 import { createHtmlComponent } from "./_component";
 
-function _initModal() {
+let _map = {};
+let _has = false;
+let _padding = [];
+let _current = {};
+
+function _handlePadding() {
+    if (_padding.length > 0) {
+        let options = _padding.pop();
+        showModal(options);
+    }
+}
+
+function _initModal(options) {
+    if (options && options.key && _map[options.key]) {
+        return _map[options.key]
+    }
     if (!window._TAPE_MODAL_CLICK_MAP_) {
         window._TAPE_MODAL_CLICK_MAP_ = {};
     }
     const comp = createHtmlComponent('', {});
     const instance = new comp();
     instance.$mount(document.createElement('div'))
-    document.body.appendChild(instance.$el);
-    return (options) => {
-        let hide = () => {
-            document.body.removeChild(instance.$el);
+    let realShow = () => {
+        _has = true;
+        document.body.appendChild(instance.$el);
+    }
+    let realHide = () => {
+        _has = false;
+        document.body.removeChild(instance.$el);
+        if (options && options.key) {
+            delete _map[options.key];
         }
+        _handlePadding();
+    }
+    let _show = (options) => {
+        realShow();
         let {
             icon,
             title = "提示",
@@ -32,13 +56,13 @@ function _initModal() {
             }
             if (confirm == -1) {
                 if (cancelable) {
-                    hide();
+                    realHide();
                 }
                 return;
             }
             let flag = callback && callback(confirm);
             if (!flag) {
-                hide()
+                realHide()
             }
         }
         let useCancelColor = cancelColor;
@@ -92,9 +116,27 @@ function _initModal() {
             </div>
         </div>`;
     }
+    if (options && options.key) {
+        _map[options.key] = _show;
+    }
+    return _show;
 }
 
-export function showModal(msg = '') {
-    let _showModal = _initModal();
-    _showModal && _showModal(msg);
+export function showModal(options) {
+    if (typeof options !== 'object') {
+        return;
+    }
+    if (options && options.key && options.key == _current.key) {
+        return;
+    }
+    if (!_has) {
+        _current = options;
+        let _showModal = _initModal(options);
+        _showModal && _showModal(options);
+    } else {
+        if (options && options.key && _padding.filter(item => options.key == item.key).length > 0) {
+            return;
+        }
+        _padding.push(options);
+    }
 }

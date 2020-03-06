@@ -160,10 +160,10 @@ declare interface Tape {
 
     /**
      * 显示Modal弹窗
-     * @param msg 内容
-     * @param duration 时间
+     * @param options 弹窗选项
      */
     showModal(options: {
+        key: ?string,
         icon: ?string,
         title: ?string,
         message: ?string,

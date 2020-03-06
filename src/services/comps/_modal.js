@@ -1,21 +1,16 @@
 import { createHtmlComponent } from "./_component";
 
-let _map = {};
 let _has = false;
+let _current = null;
 let _padding = [];
-let _current = {};
 
 function _handlePadding() {
     if (_padding.length > 0) {
-        let options = _padding.pop();
-        showModal(options);
+        showModal(_padding.pop());
     }
 }
 
 function _initModal(options) {
-    if (options && options.key && _map[options.key]) {
-        return _map[options.key]
-    }
     if (!window._TAPE_MODAL_CLICK_MAP_) {
         window._TAPE_MODAL_CLICK_MAP_ = {};
     }
@@ -31,12 +26,9 @@ function _initModal(options) {
         _has = false;
         _current = null;
         document.body.removeChild(instance.$el);
-        if (options && options.key) {
-            delete _map[options.key];
-        }
         _handlePadding();
     }
-    let _show = (options) => {
+    return (options) => {
         realShow();
         let {
             icon,
@@ -118,17 +110,13 @@ function _initModal(options) {
             </div>
         </div>`;
     }
-    if (options && options.key) {
-        _map[options.key] = _show;
-    }
-    return _show;
 }
 
 export function showModal(options) {
     if (typeof options !== 'object') {
         return;
     }
-    if (options && options.key && options.key == _current.key) {
+    if (_current && options && options.key && options.key == _current.key) {
         return;
     }
     if (!_has) {

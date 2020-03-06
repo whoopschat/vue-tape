@@ -18,8 +18,7 @@ export default {
     return {};
   },
   created() {
-    this.showModal();
-    this.showModal();
+    // nothing
   },
   methods: {
     showLoading() {
@@ -31,6 +30,7 @@ export default {
     showModal() {
       Tape.showModal({
         // icon: require("../../assets/icon.png"),
+        key: "111",
         title: "退出登录",
         cancelColor: "#919191",
         confirmColor: "#FF6666",

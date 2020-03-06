@@ -24,10 +24,12 @@ function _initModal(options) {
     instance.$mount(document.createElement('div'))
     let realShow = () => {
         _has = true;
+        _current = options;
         document.body.appendChild(instance.$el);
     }
     let realHide = () => {
         _has = false;
+        _current = null;
         document.body.removeChild(instance.$el);
         if (options && options.key) {
             delete _map[options.key];
@@ -130,7 +132,6 @@ export function showModal(options) {
         return;
     }
     if (!_has) {
-        _current = options;
         let _showModal = _initModal(options);
         _showModal && _showModal(options);
     } else {

@@ -1,7 +1,9 @@
-let _isshow = true;
+let _isshow = false;
 let _time = 0;
 let _shows = [];
 let _hides = [];
+let _caller_show = null;
+let _caller_hide = null;
 
 function _getSSLTime(connectEnd, secureConnectionStart) {
     let ssl_time = 0;
@@ -61,21 +63,44 @@ export function _initLifeCycle() {
     _time = performance.now();
     let { hidden, visibilityChange } = _visibilityChangeInfo();
     document.addEventListener(visibilityChange, () => {
-        if (!document[hidden]) {
-            _isshow = true;
-            _time = performance.now();
-            _shows.forEach(show => {
-                show && show();
-            });
+        if (document[hidden]) {
+            callHide();
         } else {
-            _isshow = false;
-            _hides.forEach(hide => {
-                hide && hide({
-                    time: performance.now() - _time
-                });
-            });
+            callShow();
         }
     }, false);
+    window.addEventListener("pageshow", () => {
+        callShow()
+    }, false);
+}
+
+function callShow() {
+    _isshow = true;
+    if (_caller_show) {
+        return;
+    }
+    _caller_show = setTimeout(() => {
+        _caller_show = null;
+        _time = performance.now();
+        _shows.forEach(show => {
+            show && show();
+        });
+    }, 100);
+}
+
+function callHide() {
+    _isshow = false;
+    if (_caller_hide) {
+        return;
+    }
+    _caller_hide = setTimeout(() => {
+        _caller_hide = null;
+        _hides.forEach(hide => {
+            hide && hide({
+                time: performance.now() - _time
+            });
+        });
+    }, 0);
 }
 
 export function onLoad(callback) {

@@ -5,12 +5,12 @@ declare module "vue-tape" {
  */
     interface btnOptions {
         text: string,
-        color: ?string,
-        border: ?string,
-        bg: ?string
+        color?: string,
+        border?: string,
+        bg?: string
     }
 
-    declare interface Tape {
+    interface Tape {
 
         /**
          * 初始化APP
@@ -19,11 +19,11 @@ declare module "vue-tape" {
         initApp(options: {
             name: string,
             page: object,
-            config: ?object,
-            width: ?number,
-            lazy: ?object,
-            el: ?string,
-        }, handler: ?(vue: ?object) => void): void;
+            config?: object,
+            width?: number,
+            lazy?: object,
+            el?: string,
+        }, handler?: (vue?: object) => void): void;
 
         /**
          * 获取vue实例
@@ -46,14 +46,14 @@ declare module "vue-tape" {
          * @param key 参数名称
          * @param def 默认值
          */
-        getQuery(key: string, def: ?any): string;
+        getQuery(key: string, def?: any): string;
 
         /**
          * 获取配置项
          * @param key 配置项
          * @param def 默认值
          */
-        getConfig(key: string, def: ?any): any;
+        getConfig(key: string, def?: any): any;
 
         /**
          * 获取VUE-TAPE版本号
@@ -64,21 +64,21 @@ declare module "vue-tape" {
          * 获取页面中元素的位置
          * @param el 元素
          */
-        getPosition(el: ?any): { left: number, top: number, height: number, width: number };
+        getPosition(el?: any): { left: number, top: number, height: number, width: number };
 
         /**
          * 设置storage数据
          * @param key 配置项
          * @param value 数据值
          */
-        setStorage(key: string, value: ?any): void;
+        setStorage(key: string, value?: any): void;
 
         /**
          * 获取storage数据
          * @param key 配置项
          * @param def 默认值
          */
-        getStorage(key: string, def: ?any): any;
+        getStorage(key: string, def?: any): any;
 
         /**
          * 字符串BASE64编码
@@ -112,7 +112,7 @@ declare module "vue-tape" {
          * @param delay 延时帧数
          * @param count 执行次数
          */
-        frameLoop(callback: (time: number) => void, delay: ?number, count: ?number): { clearLoop: () => void };
+        frameLoop(callback: (time: number) => void, delay?: number, count?: number): { clearLoop: () => void };
 
         /**
          * 页面加载完成
@@ -149,7 +149,7 @@ declare module "vue-tape" {
          * @param url 链接
          * @param sandbox 沙箱选项，默认：allow-same-origin allow-scripts
          */
-        showIframe(url: string, sandbox: ?string): void;
+        showIframe(url: string, sandbox?: string): void;
 
         /**
          * 隐藏Iframe弹窗
@@ -162,17 +162,17 @@ declare module "vue-tape" {
          * @param options 弹窗选项
          */
         showModal(options: {
-            key: ?string,
-            icon: ?string,
-            title: ?string,
-            message: ?string,
-            cancelText: ?string | btnOptions,
-            confirmText: ?string | btnOptions | Array<string | btnOptions>,
-            cancelColor: ?string,
-            confirmColor: ?string,
-            flexable: ?boolean,
-            cancelable: ?boolean,
-            callback: ?(confirm: number) => any
+            key?: string,
+            icon?: string,
+            title?: string,
+            message?: string,
+            cancelText?: string | btnOptions,
+            confirmText?: string | btnOptions | Array<string | btnOptions>,
+            cancelColor?: string,
+            confirmColor?: string,
+            flexable?: boolean,
+            cancelable?: boolean,
+            callback?: (confirm: number) => any
         }): void;
 
         /**
@@ -180,7 +180,7 @@ declare module "vue-tape" {
          * @param msg 内容
          * @param duration 时间
          */
-        showLoading(msg: ?string, duration: ?number): void;
+        showLoading(msg?: string, duration?: number): void;
 
         /**
          * 隐藏Loading弹窗
@@ -192,7 +192,7 @@ declare module "vue-tape" {
          * @param msg 内容
          * @param duration 时间
          */
-        showToast(msg: string, duration: ?number): void;
+        showToast(msg: string, duration?: number): void;
 
         /**
          * 将rem单位转为pixel单位
@@ -205,15 +205,15 @@ declare module "vue-tape" {
     /**
      * TapeInstaller
      */
-    declare interface TapeInstaller {
-    
+    interface TapeInstaller {
+
         /**
          * 安装Tape到全局
          * @param vue vue对象
          * @param alias 别名
          */
-        install(vue: any, alias: ?string): void;
-    
+        install(vue: any, alias?: string): void;
+
     }
 }
 

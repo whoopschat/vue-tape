@@ -72,6 +72,11 @@ export function _initLifeCycle() {
     window.addEventListener("pageshow", () => {
         callShow()
     }, false);
+    onLoad(() => {
+        if (!_isshow) {
+            callShow()
+        }
+    })
 }
 
 function callShow() {

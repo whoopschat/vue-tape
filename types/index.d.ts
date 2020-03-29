@@ -1,8 +1,8 @@
 /** Module */
 declare module "vue-tape" {
     /**
- * 弹窗按钮选项
- */
+     * 弹窗按钮选项
+     */
     interface btnOptions {
         text: string,
         color?: string,

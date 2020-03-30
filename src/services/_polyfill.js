@@ -1,11 +1,3 @@
-if (typeof window === 'undefined') {
-    window = {};
-    window.self = window;
-    window.parent = window;
-    window.window = window;
-    window.global = window;
-}
-
 // Object.assign
 if (typeof Object.assign != 'function') {
     // Must be writable: true, enumerable: false, configurable: true

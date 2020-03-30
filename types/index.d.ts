@@ -1,5 +1,8 @@
 /** Module */
 declare module "vue-tape" {
+
+    function install(vue: any): void;
+
     /**
      * 弹窗按钮选项
      */
@@ -36,10 +39,20 @@ declare module "vue-tape" {
         getApp(): any;
 
         /**
+         * 获取app name
+         */
+        getAppName(): any;
+
+        /**
          * 设置debug模式
          * @param debug 开关
          */
         setDebug(debug: boolean): void;
+
+        /**
+         * 是否为debug模式
+         */
+        isDebug(): boolean;
 
         /**
          * 获取URL中携带的参数
@@ -145,19 +158,6 @@ declare module "vue-tape" {
         offHide(callback: () => void): void;
 
         /**
-         * 显示Iframe弹窗
-         * @param url 链接
-         * @param sandbox 沙箱选项，默认：allow-same-origin allow-scripts
-         */
-        showIframe(url: string, sandbox?: string): void;
-
-        /**
-         * 隐藏Iframe弹窗
-         */
-        hideIframe(): void;
-
-
-        /**
          * 显示Modal弹窗
          * @param options 弹窗选项
          */
@@ -202,22 +202,8 @@ declare module "vue-tape" {
 
     }
 
-    /**
-     * TapeInstaller
-     */
-    interface TapeInstaller {
-
-        /**
-         * 安装Tape到全局
-         * @param vue vue对象
-         * @param alias 别名
-         */
-        install(vue: any, alias?: string): void;
-
-    }
 }
 
 interface Window {
     Tape: import("vue-tape").Tape;
-    TapeInstaller: import("vue-tape").TapeInstaller;
 }

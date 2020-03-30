@@ -16,20 +16,13 @@ function setGlobal(key, value, vue) {
     }
 }
 
-_instance.install = function (vue, alias = 'Tape') {
+_instance.install = function (vue) {
     if (_installed || !vue) {
         return;
     }
     let tape = create(vue);
     setGlobal('Tape', tape, vue);
-    if (alias != 'Tape') {
-        setGlobal(alias, tape, vue);
-    }
     _installed = true;
-}
-
-if (typeof window !== 'undefined') {
-    window['TapeInstaller'] = _instance;
 }
 
 export default _instance;

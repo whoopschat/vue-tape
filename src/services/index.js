@@ -1,7 +1,7 @@
 import "./_polyfill";
 import { setVue, getVue } from "./__vue";
-import { initApp, getApp } from "./_app";
-import { setDebug } from "./utils/_debug";
+import { initApp, getApp, getAppName } from "./_app";
+import { setDebug, isDebug } from "./utils/_debug";
 import { getQuery } from "./utils/_query";
 import { getConfig } from "./utils/_config";
 import { getVersion } from "./utils/_version";
@@ -25,7 +25,9 @@ export function create(vue) {
         initApp,
         getVue,
         getApp,
+        getAppName,
         setDebug,
+        isDebug,
         getQuery,
         getConfig,
         getVersion,

@@ -62,6 +62,19 @@ declare module "vue-tape" {
         getQuery(key: string, def?: any): string;
 
         /**
+         * 获取URL中携带的参数
+         * @param path 地址路径
+         */
+        parseQueryParams(path: string): { url: string, params: object };
+
+        /**
+         * 获取URL中携带的参数
+         * @param path 地址路径
+         * @param query 追加参数
+         */
+        appendQueryParams(path: string, query: object): string;
+
+        /**
          * 获取配置项
          * @param key 配置项
          * @param def 默认值

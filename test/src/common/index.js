@@ -13,7 +13,9 @@ export function init(app, name) {
         app,
         name,
         config,
-        width: 750,
+        width: 1024,
+        maxWidth: 1024,
+        remUnit: 100,
         el: '#app'
     });
 }

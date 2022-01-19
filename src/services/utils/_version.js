@@ -1,3 +1,8 @@
+let version = '${lib_version}';
+
 export function getVersion() {
-    return '${lib_version}';
+    if (version && version.indexOf("${") == 0) {
+        return "0.0.0"
+    }
+    return version;
 }

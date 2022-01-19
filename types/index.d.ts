@@ -24,6 +24,7 @@ declare module "vue-tape" {
             page: object,
             config?: object,
             width?: number,
+            maxWidth?: number,
             minWidth?: number,
             remUnit?: number,
             lazy?: object,

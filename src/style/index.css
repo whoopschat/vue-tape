@@ -1,12 +1,12 @@
 * {
-        margin                     : 0;
-        padding                    : 0;
-        -moz-user-select           : none;
-        -o-user-select             : none;
-        -khtml-user-select         : none;
-        -webkit-user-select        : none;
-        -ms-user-select            : none;
-        user-select                : none;
+        margin: 0;
+        padding: 0;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         -webkit-tap-highlight-color: transparent;
 }
@@ -20,10 +20,10 @@ textarea {
 }
 
 body {
-        position : relative;
-        padding  : 0px;
-        margin   : 0px auto;
-        font-size: 0.32rem !important;
+        position: relative;
+        padding: 0px;
+        margin: 0px auto;
+        font-size: 0.16rem !important;
 }
 
 h1,
@@ -93,44 +93,43 @@ textarea {
 
 table {
         border-collapse: collapse;
-        border-spacing : 0;
+        border-spacing: 0;
 }
 
 .--vue-tape-error {
-        color      : #ff0000;
-        font-size  : 0.16rem;
-        line-height: 0.3rem;
-        padding    : 0.2rem;
+        color: #ff0000;
+        font-size: 0.16rem;
+        line-height: 0.22rem;
+        padding: 0.2rem;
         white-space: normal;
-        word-break : break-all;
+        word-break: break-all;
 }
 
 /* popup */
 .--vue-tape-popup {
-        position         : fixed;
-        left             : 0;
-        top              : 0;
-        right            : 0;
-        bottom           : 0;
-        background-color : rgba(0, 0, 0, 0.3);
-        z-index          : 990;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 990;
         -webkit-animation: --vue-tape-show 0.3s ease-in-out;
-        animation        : --vue-tape-show 0.3s ease-in-out;
+        animation: --vue-tape-show 0.3s ease-in-out;
 }
 
 
 .--vue-tape-popup .box {
-        position         : fixed;
-        width            : 5.76rem;
-        max-height       : 8.8rem;
-        background       : rgba(255, 255, 255, 1);
-        border-radius    : 0.12rem;
-        top              : 50%;
-        left             : 50%;
-        transform        : translate3d(-50%, -50%, 0);
+        position: fixed;
+        max-height: 4.4rem;
+        background: rgba(255, 255, 255, 1);
+        border-radius: 0.12rem;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
         -webkit-transform: translate3d(-50%, -50%, 0);
-        padding-bottom   : 0.24rem;
-        padding-top      : 0.24rem;
+        padding-bottom: 0.12rem;
+        padding-top: 0.12rem;
 }
 
 .--vue-tape-popup .box .line1 {
@@ -142,151 +141,155 @@ table {
 }
 
 .--vue-tape-popup .box .icon {
-        display          : block;
-        max-width        : 60%;
-        max-height       : 2rem;
-        margin-left      : 50%;
-        transform        : translate3d(-50%, 0, 0);
+        display: block;
+        max-width: 60%;
+        max-height: 2rem;
+        margin-left: 50%;
+        transform: translate3d(-50%, 0, 0);
         -webkit-transform: translate3d(-50%, 0, 0);
-        margin-bottom    : 0.12rem;
+        margin-bottom: 0.12rem;
 }
 
 .--vue-tape-popup .box .title {
-        width        : 4.56rem;
-        font-size    : 0.34rem;
-        text-align   : center;
-        font-family  : PingFangSC-Medium, PingFang SC;
-        font-weight  : bold;
-        color        : #333333;
-        line-height  : 0.48rem;
-        margin-left  : 0.6rem;
-        margin-right : 0.6rem;
-        margin-top   : 0.24rem;
-        margin-bottom: 0.24rem;
+        width: 2.28rem;
+        font-size: 0.18rem;
+        text-align: center;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: bold;
+        color: #333333;
+        line-height: 0.24rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.12rem;
+        margin-bottom: 0.12rem;
 }
 
 .--vue-tape-popup .box .message {
-        width        : 4.56rem;
-        color        : #919191;
-        max-height   : 4.4rem;
-        font-size    : 0.30rem;
-        font-family  : PingFangSC-Light, PingFang SC;
-        font-weight  : 300;
-        line-height  : 0.44rem;
-        margin-left  : 0.6rem;
-        margin-top   : 0.24rem;
-        margin-bottom: 0.24rem;
-        overflow-x   : hidden;
-        overflow-y   : auto;
+        min-width: 2.28rem;
+        max-width: 4rem;
+        color: #919191;
+        max-height: 2.2rem;
+        font-size: 0.16rem;
+        font-family: PingFangSC-Light, PingFang SC;
+        font-weight: 300;
+        line-height: 0.22rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0.12rem;
+        margin-bottom: 0.12rem;
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+        overflow-x: hidden;
+        overflow-y: auto;
 }
 
 .--vue-tape-popup .box .btns {
         display: flex;
         padding: 0rem 0.3rem;
+        margin-bottom: 0.18rem;
 }
 
 .--vue-tape-popup .box .btns .btn {
-        border         : none;
-        border-radius  : 0.08rem;
-        height         : 0.78rem;
-        line-height    : 0.78rem;
-        margin-left    : 0.1rem;
-        margin-right   : 0.1rem;
-        flex           : 1;
-        color          : #333333;
-        outline        : none;
-        display        : flex;
+        border: none;
+        border-radius: 0.08rem;
+        height: 0.39rem;
+        line-height: 0.39rem;
+        margin-left: 0.1rem;
+        margin-right: 0.1rem;
+        flex: 1;
+        color: #333333;
+        outline: none;
+        display: flex;
         justify-content: center;
-        align-items    : center;
-        font-size      : 0.34rem;
-        font-family    : PingFangSC-Regular, PingFang SC;
-        font-weight    : 400;
-        margin-bottom  : 0.18rem;
+        align-items: center;
+        font-size: 0.18rem;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
 }
 
 /* toast */
 .--vue-tape-toast {
-        position         : fixed;
-        display          : flex;
-        width            : 6rem;
-        top              : 75%;
-        left             : 50%;
-        transform        : translate3d(-50%, -50%, 0);
+        position: fixed;
+        display: flex;
+        width: 6rem;
+        top: 75%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
         -webkit-transform: translate3d(-50%, -50%, 0);
-        z-index          : 1000;
+        z-index: 1000;
 }
 
 .--vue-tape-toast .text {
-        width            : auto;
-        margin           : 0 auto;
-        min-width        : 1rem;
-        color            : #fff;
-        font-size        : 0.32rem;
-        line-height      : 0.48rem;
-        border-radius    : 0.12rem;
-        align-items      : center;
-        background-color : rgba(0, 0, 0, 0.8);
-        padding          : 0.2rem 0.3rem;
-        white-space      : normal;
-        word-break       : break-all;
+        width: auto;
+        margin: 0 auto;
+        min-width: 0.5rem;
+        color: #fff;
+        font-size: 0.16rem;
+        line-height: 0.24rem;
+        border-radius: 0.08rem;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 0.1rem 0.15rem;
+        white-space: normal;
+        word-break: break-all;
         -webkit-animation: --vue-tape-show 0.3s ease-in-out;
-        animation        : --vue-tape-show 0.3s ease-in-out;
+        animation: --vue-tape-show 0.3s ease-in-out;
 }
 
 /* loading */
 .--vue-tape-loading {
-        position         : fixed;
-        left             : 0;
-        top              : 0;
-        right            : 0;
-        bottom           : 0;
-        background-color : rgba(0, 0, 0, 0.3);
-        z-index          : 980;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 980;
         -webkit-animation: --vue-tape-show 0.3s ease-in-out;
-        animation        : --vue-tape-show 0.3s ease-in-out;
+        animation: --vue-tape-show 0.3s ease-in-out;
 }
 
 .--vue-tape-loading .loading {
-        position   : fixed;
-        text-align : center;
-        width      : 3rem;
-        left       : 50%;
-        top        : 50%;
+        position: fixed;
+        text-align: center;
+        width: 3rem;
+        left: 50%;
+        top: 50%;
         margin-left: -1.5rem;
-        margin-top : -1rem;
+        margin-top: -1rem;
 }
 
 .--vue-tape-loading .loading .text {
-        width      : 3rem;
-        color      : #fff;
-        font-size  : 0.28rem;
+        width: 3rem;
+        color: #fff;
+        font-size: 0.14rem;
         line-height: 0.3rem;
-        text-align : center;
+        text-align: center;
         white-space: normal;
-        word-break : break-all;
+        word-break: break-all;
 }
 
 .--vue-tape-loading .spinner>div {
-        width                      : .2rem;
-        height                     : .2rem;
-        margin                     : 0rem 0.05rem;
-        background-color           : #ffffff;
-        border-radius              : 100%;
-        display                    : inline-block;
-        -webkit-animation          : --vue-tape-bouncedelay 1.4s infinite ease-in-out;
-        animation                  : --vue-tape-bouncedelay 1.4s infinite ease-in-out;
+        width: .1rem;
+        height: .1rem;
+        margin: 0rem 0.05rem;
+        background-color: #ffffff;
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: --vue-tape-bouncedelay 1.4s infinite ease-in-out;
+        animation: --vue-tape-bouncedelay 1.4s infinite ease-in-out;
         -webkit-animation-fill-mode: both;
-        animation-fill-mode        : both;
+        animation-fill-mode: both;
 }
 
 .--vue-tape-loading .spinner .bounce1 {
         -webkit-animation-delay: -0.32s;
-        animation-delay        : -0.32s;
+        animation-delay: -0.32s;
 }
 
 .--vue-tape-loading .spinner .bounce2 {
         -webkit-animation-delay: -0.16s;
-        animation-delay        : -0.16s;
+        animation-delay: -0.16s;
 }
 
 @-webkit-keyframes --vue-tape-show {
@@ -360,12 +363,12 @@ table {
         0%,
         80%,
         100% {
-                transform        : scale(0.0);
+                transform: scale(0.0);
                 -webkit-transform: scale(0.0);
         }
 
         40% {
-                transform        : scale(1.0);
+                transform: scale(1.0);
                 -webkit-transform: scale(1.0);
         }
 }

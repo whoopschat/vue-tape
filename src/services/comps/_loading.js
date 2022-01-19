@@ -39,7 +39,11 @@ function _initLoading() {
 
 export function showLoading(msg = '', duration) {
     _initLoading();
-    _showLoading && _showLoading(toAny(msg, ''), duration);
+    if (typeof msg === "string") {
+        _showLoading && _showLoading(msg, duration);
+    } else {
+        _showLoading && _showLoading("", duration);
+    }
 }
 
 export function hideLoading() {

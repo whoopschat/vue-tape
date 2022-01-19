@@ -34,5 +34,7 @@ function _initToast() {
 
 export function showToast(msg, duration) {
     _initToast();
-    _showToast && _showToast(toAny(msg, ''), duration);
+    if (typeof msg === "string" && msg) {
+        _showToast && _showToast(msg, duration);
+    }
 }

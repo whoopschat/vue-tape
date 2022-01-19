@@ -16,10 +16,10 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, config, width, minWidth, remUnit, lazy, el }, handler) {
+export function initApp({ name, app, config, width, maxWidth, minWidth, remUnit, lazy, el }, handler) {
     _app_ = app;
     _app_name_ = name || 'default';
-    _pixelToRem(width, minWidth, remUnit);
+    _pixelToRem(width, maxWidth || width, minWidth || width, remUnit);
     _initConfig(config);
     _initLifeCycle();
     let _vue = getVue();

@@ -22,10 +22,10 @@ export default {
   },
   methods: {
     showLoading() {
-      Tape.showLoading({});
+      Tape.showLoading("正在加载数据中", 2000);
     },
     showToast() {
-      Tape.showToast({});
+      Tape.showToast("提示内容");
     },
     showModal() {
       Tape.showModal({
@@ -35,15 +35,13 @@ export default {
         cancelColor: "#919191",
         confirmColor: "#FF6666",
         cancelText: "取消",
-        confirmText: [
-          {
+        confirmText: ["理解并同意1",{
             text: "理解并同意"
-          }
-        ],
+        }],
         message: "确认退出当前账号？",
         callback: confirm => {
           Tape.showToast(
-            "确认退出当前账号？确认退出当前账号？确认退出当前账号？确认退出当前账号？"
+            "确认退出当前账号？" + confirm
           );
         }
       });

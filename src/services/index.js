@@ -2,7 +2,7 @@ import "./_polyfill";
 import { setVue, getVue } from "./__vue";
 import { initApp, getApp, getAppName } from "./_app";
 import { setDebug, isDebug } from "./utils/_debug";
-import { getQuery } from "./utils/_query";
+import { getQuery, parseQueryParams, appendQueryParams } from "./utils/_query";
 import { getConfig } from "./utils/_config";
 import { getVersion } from "./utils/_version";
 import { getPosition } from "./utils/_position";
@@ -29,6 +29,8 @@ export function create(vue) {
         setDebug,
         isDebug,
         getQuery,
+        parseQueryParams,
+        appendQueryParams,
         getConfig,
         getVersion,
         getPosition,

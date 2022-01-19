@@ -10,7 +10,7 @@ export function remToPixel(rem) {
     return remSize * rem;
 }
 
-export function _pixelToRem(maxWidth = 750, remUnit = 100) {
+export function _pixelToRem(maxWidth = 750, minWidth = 350, remUnit = 100) {
     const docEl = document.documentElement;
     const dpr = window.devicePixelRatio || 1;
     // adjust body font size
@@ -26,9 +26,9 @@ export function _pixelToRem(maxWidth = 750, remUnit = 100) {
     // set 1rem = viewWidth / 10
     function setRemUnit() {
         let clientWidth = docEl.clientWidth;
-        let clientHeight = docEl.clientHeight;
-        let horizontalWidth = maxWidth * clientHeight / clientWidth;
-        let rem = Math.min(horizontalWidth, maxWidth, clientWidth) / (maxWidth / remUnit);
+        // let clientHeight = docEl.clientHeight;
+        // let horizontalWidth = maxWidth * clientHeight / clientWidth;
+        let rem = Math.max(Math.min(maxWidth, clientWidth), minWidth) / (maxWidth / remUnit);
         _setFontSize(rem);
         const defaultFontSize = parseFloat(window.getComputedStyle(document.documentElement, null).getPropertyValue('font-size'));
         if (defaultFontSize !== rem) {

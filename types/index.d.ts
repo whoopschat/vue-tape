@@ -24,6 +24,8 @@ declare module "vue-tape" {
             page: object,
             config?: object,
             width?: number,
+            minWidth?: number,
+            remUnit?: number,
             lazy?: object,
             el?: string,
         }, handler?: (vue?: object) => void): void;

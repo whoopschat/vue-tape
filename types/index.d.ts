@@ -29,6 +29,7 @@ declare module "vue-tape" {
             remUnit?: number,
             lazy?: object,
             el?: string,
+            options?: object,
         }, handler?: (vue?: object) => void): void;
 
         /**

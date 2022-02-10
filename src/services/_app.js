@@ -16,7 +16,7 @@ export function getAppName() {
     return _app_name_;
 }
 
-export function initApp({ name, app, config, width, maxWidth, minWidth, remUnit, lazy, el }, handler) {
+export function initApp({ name, app, config, width, maxWidth, minWidth, remUnit, lazy, el, options }, handler) {
     _app_ = app;
     _app_name_ = name || 'default';
     _pixelToRem(width, maxWidth || width, minWidth || width, remUnit);
@@ -26,8 +26,8 @@ export function initApp({ name, app, config, width, maxWidth, minWidth, remUnit,
     _vue.use(lazyload, lazy || {});
     _vue.config.productionTip = false;
     handler && handler(_vue);
-    new _vue({
+    new _vue(Object.assign(options || {}, {
         el: el || '#app',
         render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))
-    })
+    }))
 }

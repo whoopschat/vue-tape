@@ -11,7 +11,7 @@ import { encodeBase64, decodeBase64 } from "./utils/_base64";
 import { backListener } from "./utils/_back";
 import { formatDate } from "./utils/_date";
 import { frameLoop } from "./utils/_loop";
-import { onLoad, onShow, onHide, offShow, offHide } from "./_cycle";
+import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from "./_cycle";
 import { showModal } from "./comps/_modal";
 import { showLoading, hideLoading } from "./comps/_loading";
 import { showToast } from "./comps/_toast";
@@ -44,8 +44,10 @@ export function create(vue) {
         onLoad,
         onShow,
         onHide,
+        onResize,
         offShow,
         offHide,
+        offResize,
         showModal,
         showLoading,
         hideLoading,

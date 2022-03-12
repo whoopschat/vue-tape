@@ -163,6 +163,12 @@ declare module "vue-tape" {
         onHide(callback: () => void): void;
 
         /**
+         * 监听页面尺寸发生变化
+         * @param callbac 回调  
+         */
+        onResize(callback: () => void): void;
+
+        /**
          * 取消监听界面回到前台
          * @param callback 回调
          */
@@ -173,6 +179,12 @@ declare module "vue-tape" {
          * @param callback 回调
          */
         offHide(callback: () => void): void;
+
+        /**
+         * 取消监听页面尺寸发生变化
+         * @param callback 回调
+         */
+        offResize(callback: () => void): void;
 
         /**
          * 显示Modal弹窗

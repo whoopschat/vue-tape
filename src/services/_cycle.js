@@ -2,8 +2,10 @@ let _isshow = false;
 let _time = 0;
 let _shows = [];
 let _hides = [];
+let _resizes = [];
 let _caller_show = null;
 let _caller_hide = null;
+let _caller_resize = null;
 
 function _getSSLTime(connectEnd, secureConnectionStart) {
     let ssl_time = 0;
@@ -69,6 +71,9 @@ export function _initLifeCycle() {
             callShow();
         }
     }, false);
+    window.addEventListener("resize", () => {
+        callResize();
+    }, false);
     window.addEventListener("pageshow", () => {
         callShow()
     }, false);
@@ -106,6 +111,18 @@ function callHide() {
             });
         });
     }, 0);
+}
+
+function callResize() {
+    if (_caller_resize) {
+        return;
+    }
+    _caller_resize = setTimeout(() => {
+        _caller_resize = null;
+        _resizes.forEach(resize => {
+            resize && resize();
+        });
+    }, 100);
 }
 
 export function onLoad(callback) {
@@ -146,5 +163,18 @@ export function offHide(hide) {
     let index = _hides.indexOf(hide);
     if (index >= 0) {
         _hides.splice(index, 1);
+    }
+}
+
+export function onResize(resize) {
+    if (resize && typeof resize == 'function' && _resizes.indexOf(resize) < 0) {
+        _resizes.push(resize);
+    }
+}
+
+export function offResize(resize) {
+    let index = _resizes.indexOf(resize);
+    if (index >= 0) {
+        _resizes.splice(index, 1);
     }
 }

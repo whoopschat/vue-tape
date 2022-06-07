@@ -15,7 +15,6 @@ import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from ".
 import { showModal } from "./comps/_modal";
 import { showLoading, hideLoading } from "./comps/_loading";
 import { showToast } from "./comps/_toast";
-import { remToPixel } from "./utils/_rempixel";
 
 export function create(vue) {
     setVue(vue);
@@ -52,6 +51,5 @@ export function create(vue) {
         showLoading,
         hideLoading,
         showToast,
-        remToPixel,
     };
 }

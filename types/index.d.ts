@@ -23,10 +23,6 @@ declare module "vue-tape" {
             name: string,
             page: object,
             config?: object,
-            width?: number,
-            maxWidth?: number,
-            minWidth?: number,
-            remUnit?: number,
             lazy?: object,
             el?: string,
             options?: object,
@@ -222,12 +218,6 @@ declare module "vue-tape" {
          * @param duration 时间
          */
         showToast(msg: string, duration?: number): void;
-
-        /**
-         * 将rem单位转为pixel单位
-         * @param rem 数值
-         */
-        remToPixel(rem: number): number;
 
     }
 

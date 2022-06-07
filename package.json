@@ -1,6 +1,6 @@
 {
   "name": "vue-tape",
-  "version": "4.1.10",
+  "version": "4.2.0",
   "description": "a vue library",
   "main": "lib/index.js",
   "types": "types/index.d.ts",

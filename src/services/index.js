@@ -12,9 +12,6 @@ import { backListener } from "./utils/_back";
 import { formatDate } from "./utils/_date";
 import { frameLoop } from "./utils/_loop";
 import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from "./_cycle";
-import { showModal } from "./comps/_modal";
-import { showLoading, hideLoading } from "./comps/_loading";
-import { showToast } from "./comps/_toast";
 
 export function create(vue) {
     setVue(vue);
@@ -42,14 +39,10 @@ export function create(vue) {
         frameLoop,
         onLoad,
         onShow,
-        onHide,
-        onResize,
         offShow,
+        onHide,
         offHide,
-        offResize,
-        showModal,
-        showLoading,
-        hideLoading,
-        showToast,
+        onResize,
+        offResize
     };
 }

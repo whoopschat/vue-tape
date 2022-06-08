@@ -3,16 +3,6 @@ declare module "vue-tape" {
 
     function install(vue: any): void;
 
-    /**
-     * 弹窗按钮选项
-     */
-    interface btnOptions {
-        text: string,
-        color?: string,
-        border?: string,
-        bg?: string
-    }
-
     interface Tape {
 
         /**
@@ -153,22 +143,16 @@ declare module "vue-tape" {
         onShow(callback: () => void): void;
 
         /**
-         * 监听界面退至后台
-         * @param callback 回调
-         */
-        onHide(callback: () => void): void;
-
-        /**
-         * 监听页面尺寸发生变化
-         * @param callbac 回调  
-         */
-        onResize(callback: () => void): void;
-
-        /**
          * 取消监听界面回到前台
          * @param callback 回调
          */
         offShow(callback: () => void): void;
+
+        /**
+         * 监听界面退至后台
+         * @param callback 回调
+         */
+        onHide(callback: () => void): void;
 
         /**
          * 取消监听界面退至后台
@@ -177,47 +161,16 @@ declare module "vue-tape" {
         offHide(callback: () => void): void;
 
         /**
+         * 监听页面尺寸发生变化
+         * @param callbac 回调  
+         */
+        onResize(callback: () => void): void;
+
+        /**
          * 取消监听页面尺寸发生变化
          * @param callback 回调
          */
         offResize(callback: () => void): void;
-
-        /**
-         * 显示Modal弹窗
-         * @param options 弹窗选项
-         */
-        showModal(options: {
-            key?: string,
-            icon?: string,
-            title?: string,
-            message?: string,
-            cancelText?: string | btnOptions,
-            confirmText?: string | btnOptions | Array<string | btnOptions>,
-            cancelColor?: string,
-            confirmColor?: string,
-            flexable?: boolean,
-            cancelable?: boolean,
-            callback?: (confirm: number) => any
-        }): void;
-
-        /**
-         * 显示Loading弹窗
-         * @param msg 内容
-         * @param duration 时间
-         */
-        showLoading(msg?: string, duration?: number): void;
-
-        /**
-         * 隐藏Loading弹窗
-         */
-        hideLoading(): void;
-
-        /**
-         * Toast消息弹窗
-         * @param msg 内容
-         * @param duration 时间
-         */
-        showToast(msg: string, duration?: number): void;
 
     }
 

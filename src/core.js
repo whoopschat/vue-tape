@@ -1,28 +1,30 @@
 import './style'
 import { create } from './services'
 
-const _instance = {};
+class Instance {
 
-let _installed = false;
+  _instance = null;
+  _installed = false;
 
-function setGlobal(key, value, vue) {
-    if (key && value && typeof key == 'string') {
-        if (typeof window !== 'undefined') {
-            window[key] = value;
-        }
-        if (vue && vue.prototype) {
-            vue.prototype[key] = value;
-        }
+  get instance() {
+    return this._instance;
+  }
+
+  install(vue) {
+    if (this._installed || !vue) {
+      return;
     }
+    this._instance = create(vue);
+    vue.prototype.$tape = this._instance;
+    this._installed = true;
+  }
+
 }
 
-_instance.install = function (vue) {
-    if (_installed || !vue) {
-        return;
-    }
-    let tape = create(vue);
-    setGlobal('Tape', tape, vue);
-    _installed = true;
+const instance = new Instance;
+
+export function getInstance() {
+  return instance.instance;
 }
 
-export default _instance;
+export default instance;

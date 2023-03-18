@@ -1,21 +1,24 @@
 import './style.less';
 import vue from 'vue';
-import config from './config';
-import vue_tape from '../../../src/core';
+import vueTape, { getInstance } from '../../../src/core';
+import conf from './config'
 
-vue.use(vue_tape);
+vue.use(vueTape);
 
-export function init(app, name) {
-    // set debug mode
-    Tape.setDebug(!config.PROD);
-    // init app
-    Tape.initApp({
-        app,
-        name,
-        config,
-        width: 1024,
-        maxWidth: 1024,
-        remUnit: 100,
-        el: '#app'
-    });
+export function init(app, callback) {
+  // init app
+  getInstance().initApp({
+    el: '#app',
+    app,
+    dataOptions: {
+      defaultValues: {
+        randomValue: Math.random()
+      }
+    }
+  }, (vue) => {
+    vue.prototype.getConfig = (key, def) => {
+      return getInstance().get(conf, key, def);
+    };
+    callback && callback(vue);
+  });
 }

@@ -1,81 +1,84 @@
+function _inferType(value) {
+  if (typeof value !== 'string') {
+    return typeof value;
+  }
+  try {
+    const parsed = JSON.parse(value);
+    return typeof parsed;
+  } catch (ex) {
+    // might be a pure number
+    const number = parseFloat(value);
+    if (!isNaN(number) && `${number}` === value) {
+      return 'number';
+    }
+    return 'string';
+  }
+}
+
 function _toBoolean_(value) {
-    return !!value && value != 'false' && value != '0';
+  return !!value && value != 'false' && value != '0';
 }
 
 function _toNumber_(value) {
-    try {
-        return JSON.parse(value);
-    } catch (ex) {
-        return parseFloat(value);
-    }
+  if (typeof value === 'number') {
+    return value;
+  }
+  return Number(value);
 }
 
 function _toObject_(value) {
-    if (typeof value === 'object') {
-        return value;
-    }
-    try {
-        return JSON.parse(value);
-    } catch (ex) {
-        return null;
-    }
-}
-
-function _inferType(value) {
-    if (typeof value !== 'string') {
-        return typeof value;
-    }
-    try {
-        const parsed = JSON.parse(value);
-        return typeof parsed;
-    } catch (ex) {
-        // might be a pure number
-        const number = parseFloat(value);
-        if (!isNaN(number) && `${number}` === value) {
-            return 'number';
-        }
-        return 'string';
-    }
+  if (typeof value === 'object') {
+    return value;
+  }
+  let p = JSON.parse(value);
+  if (typeof p === 'object') {
+    return p;
+  }
 }
 
 function _toString_(value) {
-    try {
-        let type = typeof value;
-        if (type === 'string') {
-            return value;
-        } else if (type === 'boolean') {
-            return value ? 'true' : 'false';
-        } else if (type === 'number') {
-            return `${value}`;
-        } else if (type === 'object') {
-            return JSON.stringify(value);
-        }
-        return null;
-    } catch (ex) {
-        return null;
-    }
+  let type = typeof value;
+  if (type === 'string') {
+    return value;
+  } else if (type === 'boolean') {
+    return value ? 'true' : 'false';
+  } else if (type === 'number') {
+    return `${value}`;
+  } else if (type === 'object') {
+    return JSON.stringify(value);
+  }
 }
 
 export function toAny(value, defaultValue) {
-    if (value === undefined || value === null) {
-        return defaultValue;
-    }
-    // try to infer type and return
-    let type = _inferType(value);
-    if (defaultValue !== undefined && defaultValue !== null) {
-        type = typeof defaultValue;
-    }
+  if (value === undefined || value === null) {
+    return defaultValue;
+  }
+  // try to infer type and return
+  let type = _inferType(value);
+  if (defaultValue !== undefined && defaultValue !== null) {
+    type = typeof defaultValue;
+  }
+  try {
     switch (type) {
-        case 'boolean':
-            return _toBoolean_(value);
-        case 'number':
-            return _toNumber_(value);
-        case 'object':
-            return _toObject_(value);
-        case 'string':
-            return _toString_(value);
-        default:
-            break;
+      case 'boolean':
+        value = _toBoolean_(value);
+        break;
+      case 'number':
+        value = _toNumber_(value);
+        break;
+      case 'object':
+        value = _toObject_(value);
+        break;
+      case 'string':
+        value = _toString_(value);
+        break;
+      default:
+        break;
     }
-    return value;
+  } catch (error) {
+  }
+  if (value === undefined || value === null || typeof value != type) {
+    return defaultValue;
+  }
+  return value;
 }

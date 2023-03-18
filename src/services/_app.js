@@ -1,31 +1,29 @@
-import lazyload from 'vue-lazyload';
 import { getVue } from './__vue';
-import { createErrorComponent } from './comps/_component';
+import { getVersion } from "./utils/_version";
+import { createHtmlComponent } from './_comp';
 import { _initLifeCycle } from './_cycle';
-import { _initConfig } from './utils/_config';
+import { _initData } from './_data';
 
-let _app_ = null;
-let _app_name_ = '';
-
-export function getApp() {
-    return _app_;
-}
-
-export function getAppName() {
-    return _app_name_;
-}
-
-export function initApp({ name, app, config, lazy, el, options }, handler) {
-    _app_ = app;
-    _app_name_ = name || 'default';
-    _initConfig(config);
-    _initLifeCycle();
+export function initApp({ el, app, options, dataOptions }, handler) {
+  _initLifeCycle();
+  _initData(dataOptions, (dataState) => {
     let _vue = getVue();
-    _vue.use(lazyload, lazy || {});
-    _vue.config.productionTip = false;
-    handler && handler(_vue);
-    new _vue(Object.assign(options || {}, {
-        el: el || '#app',
-        render: h => h(app || createErrorComponent('Invalid parameters [app] -> Tape.initApp({ ... })'))
-    }))
-}
+    if (_vue && typeof _vue.observable === 'function') {
+      _vue.observable(dataState);
+    }
+  });
+  let _vue = getVue();
+  handler && handler(_vue);
+  new _vue(Object.assign(options || {}, {
+    el: el || '#app',
+    render: h => h(app || createHtmlComponent('<div class="--vue-tape-error">'
+      + '<span style="color:#333333; font-size: 16px;">'
+      + '<a href="https://github.com/whoopschat/vue-tape">VUE-TAPE</a>'
+      + '<span style="color:#919191; font-size: 14px; margin-left: 10px;">'
+      + `(version: ${getVersion()})`
+      + '</span>'
+      + '</span>'
+      + '<br/>Error: Invalid parameters [app] -> initApp({ ... })'
+      + '</div>'))
+  }))
+} 

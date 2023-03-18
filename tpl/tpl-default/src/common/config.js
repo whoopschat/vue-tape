@@ -1,20 +1,21 @@
-const Conf = {
+
+const Config = {
   local: {
+    ENV: 'LOCAL',
     PROD: false,
-    XXX: 'LOCAL XXX',
   },
   qa: {
+    XXX: 'QA',
     PROD: false,
-    XXX: 'QA XXX',
   },
   pre: {
+    XXX: 'PRE',
     PROD: false,
-    XXX: 'PRE XXX',
   },
   prod: {
+    XXX: 'PROD',
     PROD: true,
-    XXX: 'PROD XXX',
   },
 }
 
-export default Conf[process.env.VUE_APP_CURRENTMODE || 'local'] || {}
+export default Config[process.env.VUE_APP_CURRENTMODE || 'local'] || {}

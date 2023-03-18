@@ -1,10 +1,14 @@
 import { toAny } from './_toany';
 
-export function setStorage(key, value) {
-    localStorage.setItem(`tape_data_${key}`, toAny(value, ""));
+export function setLocalStorage(key, value) {
+  if (value === undefined || value === null) {
+    localStorage.removeItem(`${key}`)
+    return;
+  }
+  localStorage.setItem(`${key}`, toAny(value, ""));
 }
 
-export function getStorage(key, def) {
-    let data = localStorage.getItem(`tape_data_${key}`);
-    return toAny(data, def);
+export function getLocalStorage(key, def) {
+  let data = localStorage.getItem(`${key}`);
+  return toAny(data, def);
 }

@@ -1,13 +1,16 @@
-# vue-tape 4.x
+# vue-tape 5.0.x
+
 > a vue library
 
 #### [API definition (in TypeScript)](types)
 
-## Cli
+## CLI
+
 #### install
 ```
 > npm install vue-tape -g
 ```
+
 #### usage
 ```
 > vue-tape
@@ -16,14 +19,6 @@
          page  -  create vue-tape template page
 
 ```
-
-## Change log
-
-version | change |  date  
--|-|-
-4.0.0 | add `showModal` feature | 2020-02-08 |
-3.x | - | - |
-
 
 ## Getting started
 * make sure node and npm installed;

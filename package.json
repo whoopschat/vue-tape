@@ -1,6 +1,6 @@
 {
   "name": "vue-tape",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "a vue library",
   "main": "lib/index.js",
   "types": "types/index.d.ts",

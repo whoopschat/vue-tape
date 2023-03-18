@@ -1,3 +1,27 @@
+import { get } from "./_get";
+
+export function join(host, path, split = "/") {
+  let hosts = `${host}`.split(split);
+  let bases = hosts.filter((item, index) => {
+    return !!item && index != hosts.length - 1;
+  });
+  let paths = `${path}`.split(split).filter(item => {
+    return !!item && item != "."
+  });
+  let newPaths = [];
+  let nextDiscard = false;
+  [...bases, ...paths].forEach((item) => {
+    if (item == "..") {
+      nextDiscard = true;
+    } else if (nextDiscard) {
+      nextDiscard = false;
+    } else {
+      newPaths.push(item);
+    }
+  })
+  return newPaths.join(split)
+}
+
 export function stringifyQuery(query) {
   return Object.keys(query).map(key => {
     const value = query[key];
@@ -20,6 +44,7 @@ export function parseQueryParams(path) {
     return { url, params }
   }
   let queryString = '';
+  let routeString = '';
   let indexE = path.indexOf('?');
   let indexW = path.indexOf('#');
   let indexQ = path.indexOf('=');
@@ -33,6 +58,9 @@ export function parseQueryParams(path) {
     url = path;
     queryString = '';
   }
+  if (indexW >= 0) {
+    routeString = path.substring(indexW + 1, path.length)
+  }
   queryString.split('&').map(item => {
     let index = item.indexOf("=");
     if (index > 0) {
@@ -41,6 +69,20 @@ export function parseQueryParams(path) {
       params[key] = decodeURIComponent(value);
     }
   });
+  try {
+    // route string params
+    if (routeString.indexOf('?') >= 0) {
+      routeString.split('?').pop().split('&').map(item => {
+        let index = item.indexOf("=");
+        if (index > 0) {
+          let key = item.substring(0, index);
+          let value = item.substring(index + 1);
+          params[key] = decodeURIComponent(value);
+        }
+      });
+    }
+  } catch (error) {
+  }
   return { url, params };
 }
 
@@ -68,6 +110,32 @@ export function appendQueryParams(path, query = {}) {
 }
 
 export function getQueryString(key, def) {
-  let { params } = parseQueryParams(window.location.href);
-  return params[key] || def;
+  let params = {};
+  try {
+    if (typeof window != "undefined") {
+      params = parseQueryParams(window.location.href).params;
+    }
+  } catch (error) {
+  }
+  return get(params, key, def);
+}
+
+export function genUrl(path, querys = {}, append = false, appendProtocol = true) {
+  if (typeof window != "undefined" && path) {
+    if (window.location && appendProtocol) {
+      let index = path.indexOf('//')
+      if (index === 0) {
+        path = window.location.protocol + path;
+      } else if (index === -1) {
+        path = window.location.protocol + '//' + window.location.host + "/" + join(window.location.pathname, path);
+      }
+    }
+    let { url, params } = parseQueryParams(path);
+    if (append) {
+      return appendQueryParams(url, Object.assign({}, params, querys || {}));
+    } else {
+      return appendQueryParams(url, Object.assign({}, querys || {}));
+    }
+  }
+  return path;
 }

@@ -51,13 +51,6 @@ declare module "vue-tape" {
   }): Data;
 
   /**
-   * 格式化日期
-   * @param date 日期
-   * @param format 格式,默认yyyy-MM-dd
-   */
-  function formatDate(date: Date, format: string): void;
-
-  /**
    * 获取URL中携带的参数
    * @param key 参数名称
    * @param def 默认值
@@ -69,6 +62,15 @@ declare module "vue-tape" {
    * @param content 
    */
   function setClipboard(content: string): boolean;
+
+  /**
+   * 创建URL地址
+   * @param path 地址路径
+   * @param querys URL参数
+   * @param append 是否拼接当前参数
+   * @param appendProtocol 是否拼接当前协议头
+   */
+  function genUrl(path: string, querys?: Object, append?: boolean, appendProtocol?: boolean): string;
 
   /**
    * 获取URL中携带的参数
@@ -108,6 +110,24 @@ declare module "vue-tape" {
    * @param key 配置项
    */
   function removeLocalStorage(key: string, def?: any): any;
+
+  /**
+   * 取消监听Window消息
+   * @param callback 回调函数
+   */
+  function offWindowMessage(callback: Function): void;
+
+  /**
+   * 监听Window消息
+   * @param callback 回调函数
+   */
+  function onWindowMessage(callback: Function): void;
+
+  /**
+   * 发送消息给父级窗口
+   * @param data 
+   */
+  function postMessageToParent(data: any): void
 
   /**
    * 字符串BASE64编码
@@ -162,6 +182,13 @@ declare module "vue-tape" {
    * @param callback 回调
    */
   function offResize(callback: () => void): void;
+
+  /**
+   * 格式化日期
+   * @param date 日期
+   * @param format 格式,默认yyyy-MM-dd
+   */
+  function formatDate(date: Date, format?: string): void;
 
   /**
    * 将原数据转换为默认值相同的数据类型

@@ -2,9 +2,10 @@ import './style'
 import "./_polyfill";
 import { initApp } from "./_app";
 import { setVue, getVue } from "./__vue";
-import { getQueryString, parseQueryParams, appendQueryParams } from "./utils/_query";
+import { genUrl, getQueryString, parseQueryParams, appendQueryParams } from "./utils/_query";
 import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from "./_cycle";
 import { setLocalStorage, getLocalStorage, removeLocalStorage } from "./utils/_storage";
+import { offWindowMessage, onWindowMessage, postMessageToParent } from './utils/_msg';
 import { getElementPosition } from "./utils/_position";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
 import { setClipboard } from './utils/_clipboard';
@@ -27,15 +28,23 @@ const tape = {
   createData,
   setClipboard,
   getQueryString,
+  // url query
+  genUrl,
   parseQueryParams,
   appendQueryParams,
   getElementPosition,
-  setLocalStorage,
+  // local storage
   getLocalStorage,
+  setLocalStorage,
   removeLocalStorage,
+  // window message
+  onWindowMessage,
+  offWindowMessage,
+  postMessageToParent,
+  // base 64
   encodeBase64,
   decodeBase64,
-  formatDate,
+  // life cycle
   onLoad,
   onShow,
   offShow,
@@ -43,6 +52,8 @@ const tape = {
   offHide,
   onResize,
   offResize,
+  // data
+  formatDate,
   toAny,
   get,
 }

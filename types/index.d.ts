@@ -3,158 +3,208 @@ declare module "vue-tape" {
 
   function install(vue: any): void;
 
-  function getInstance(): Tape;
+  /** 数据管理实例 */
+  var data: Data;
+
+  /** 时钟管理实例 */
+  var timer: Timer;
+
+  /**
+   * 初始化APP
+   * @param options 初始化选项
+   */
+  function initApp(options: {
+    el: string,
+    app: any,
+    options?: object,
+    dataOptions?: {
+      // 数据前缀
+      keyPrefix?: String,
+      // 默认数据
+      defaultValues?: Object
+      // 保存数据
+      saveData?: (key: string, value) => Promise<any>;
+      // 移除数据
+      removeData?: (keys: string[]) => Promise<any>;
+      // 加载数据
+      loadData?: () => Promise<{ key: string, value: any }[]>;
+    }
+  }, handler?: (vue?: object) => void): void;
+
+  /**
+   * 获取VUE-TAPE版本号
+   */
+  function getVersion(): string;
+
+  /**
+   * 从目标对象中获取数据
+   * @param object 
+   * @param path 
+   * @param def 
+   */
+  function get(object: object, path?: string | any[], def?: any)
+
+  /**
+   * 将原数据转换为任意格式
+   * @param val
+   * @param def 
+   */
+  function toAny(val: any, def?: any)
+
+  /**
+   * 格式化日期
+   * @param date 日期
+   * @param format 格式,默认yyyy-MM-dd
+   */
+  function formatDate(date: Date, format: string): void;
+
+  /**
+   * 获取URL中携带的参数
+   * @param key 参数名称
+   * @param def 默认值
+   */
+  function getQueryString(key: string, def?: any): string;
+
+  /**
+   * 获取URL中携带的参数
+   * @param path 地址路径
+   */
+  function parseQueryParams(path: string): { url: string, params: object };
+
+  /**
+   * 获取URL中携带的参数
+   * @param path 地址路径
+   * @param query 追加参数
+   */
+  function appendQueryParams(path: string, query: object): string;
+
+  /**
+   * 获取页面中元素的位置
+   * @param el 元素
+   */
+  function getElementPosition(el?: any): { left: number, top: number, height: number, width: number };
+
+  /**
+   * 设置localStorage数据
+   * @param key 配置项
+   * @param value 数据值
+   */
+  function setLocalStorage(key: string, value?: any): void;
+
+  /**
+   * 获取localStorage数据
+   * @param key 配置项
+   * @param def 默认值
+   */
+  function getLocalStorage(key: string, def?: any): any;
+
+  /**
+   * 字符串BASE64编码
+   * @param str 原始字符串
+   */
+  function encodeBase64(str: string): string;
+
+  /**
+   * 字符串BASE64解码
+   * @param str BASE64字符串
+   */
+  function decodeBase64(str: string): string;
+
+  /**
+   * 页面加载完成
+   * @param callback 回调
+   */
+  function onLoad(callback: (info: any) => void): void;
+
+  /**
+   * 监听界面回到前台
+   * @param callback 回调
+   */
+  function onShow(callback: () => void): void;
+
+  /**
+   * 取消监听界面回到前台
+   * @param callback 回调
+   */
+  function offShow(callback: () => void): void;
+
+  /**
+   * 监听界面退至后台
+   * @param callback 回调
+   */
+  function onHide(callback: () => void): void;
+
+  /**
+   * 取消监听界面退至后台
+   * @param callback 回调
+   */
+  function offHide(callback: () => void): void;
+
+  /**
+   * 监听页面尺寸发生变化
+   * @param callbac 回调  
+   */
+  function onResize(callback: () => void): void;
+
+  /**
+   * 取消监听页面尺寸发生变化
+   * @param callback 回调
+   */
+  function offResize(callback: () => void): void;
 
 
-  interface Tape {
-
-    /** 时钟管理类 */
-    timer: Timer;
+  /**  数据模块 */
+  interface Data {
 
     /**
-     * 初始化APP
-     * @param options 初始化选项
+     * 加载数据
      */
-    initApp(options: {
-      el: string,
-      app: any,
-      options?: object,
-      dataOptions?: {
-        // 数据前缀
-        keyPrefix?: String,
-        // 默认数据
-        defaultValues?: Object
-        // 保存数据
-        saveData?: (key: string, value) => Promise<any>;
-        // 移除数据
-        removeData?: (keys: string[]) => Promise<any>;
-        // 加载数据
-        loadData?: () => Promise<{ key: string, value: any }[]>;
-      }
-    }, handler?: (vue?: object) => void): void;
+    load(): Promise<void>;
 
     /**
-     * 获取VUE-TAPE版本号
+     * 是否加载成功
      */
-    getVersion(): string;
+    isReady(): boolean;
 
     /**
-     * 从目标对象中获取数据
-     * @param object 
-     * @param path 
-     * @param def 
+     * 设置数据
+     * @param key 
+     * @param value
+     * @param onlyNotExists
      */
-    get(object: object, path?: string | any[], def?: any)
+    set(key: string, value: any, onlyNotExists?: boolean): void;
 
     /**
-     * 将原数据转换为任意格式
-     * @param val
-     * @param def 
+     * 获取数据
+     * @param key 
+     * @param defValue
      */
-    toAny(val: any, def?: any)
+    get(key: string, defValue?: any): any;
 
     /**
-     * 格式化日期
-     * @param date 日期
-     * @param format 格式,默认yyyy-MM-dd
+     * 移除数据
+     * @param key 
      */
-    formatDate(date: Date, format: string): void;
+    remove(key: string): void;
 
     /**
-     * 获取URL中携带的参数
-     * @param key 参数名称
-     * @param def 默认值
+     * 获取key列表
      */
-    getQueryString(key: string, def?: any): string;
+    keys(): string[];
 
     /**
-     * 获取URL中携带的参数
-     * @param path 地址路径
+     * 是否存在数据
+     * @param key
      */
-    parseQueryParams(path: string): { url: string, params: object };
+    has(key: string): boolean;
 
     /**
-     * 获取URL中携带的参数
-     * @param path 地址路径
-     * @param query 追加参数
+     * 清空数据
      */
-    appendQueryParams(path: string, query: object): string;
-
-    /**
-     * 获取页面中元素的位置
-     * @param el 元素
-     */
-    getElementPosition(el?: any): { left: number, top: number, height: number, width: number };
-
-    /**
-     * 设置localStorage数据
-     * @param key 配置项
-     * @param value 数据值
-     */
-    setLocalStorage(key: string, value?: any): void;
-
-    /**
-     * 获取localStorage数据
-     * @param key 配置项
-     * @param def 默认值
-     */
-    getLocalStorage(key: string, def?: any): any;
-
-    /**
-     * 字符串BASE64编码
-     * @param str 原始字符串
-     */
-    encodeBase64(str: string): string;
-
-    /**
-     * 字符串BASE64解码
-     * @param str BASE64字符串
-     */
-    decodeBase64(str: string): string;
-
-    /**
-     * 页面加载完成
-     * @param callback 回调
-     */
-    onLoad(callback: (info: any) => void): void;
-
-    /**
-     * 监听界面回到前台
-     * @param callback 回调
-     */
-    onShow(callback: () => void): void;
-
-    /**
-     * 取消监听界面回到前台
-     * @param callback 回调
-     */
-    offShow(callback: () => void): void;
-
-    /**
-     * 监听界面退至后台
-     * @param callback 回调
-     */
-    onHide(callback: () => void): void;
-
-    /**
-     * 取消监听界面退至后台
-     * @param callback 回调
-     */
-    offHide(callback: () => void): void;
-
-    /**
-     * 监听页面尺寸发生变化
-     * @param callbac 回调  
-     */
-    onResize(callback: () => void): void;
-
-    /**
-     * 取消监听页面尺寸发生变化
-     * @param callback 回调
-     */
-    offResize(callback: () => void): void;
+    clear(): void;
 
   }
+
 
   /** 时钟管理类 */
   interface Timer {

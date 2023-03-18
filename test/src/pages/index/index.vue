@@ -5,7 +5,7 @@
       <div class="page-desc">
         #vue-tape-name# - create by vue-tape #vue-tape-version#
       </div>
-      <div class="page-slogan">{{ text }} {{ getConfig() }}</div>
+      <div class="page-slogan">{{ text }}</div>
     </div>
   </div>
 </template>

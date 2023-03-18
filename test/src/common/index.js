@@ -1,13 +1,13 @@
 import './style.less';
 import vue from 'vue';
-import vueTape, { getInstance } from '../../../src/core';
+import vueTape from '../../../src/services';
 import conf from './config'
 
 vue.use(vueTape);
 
 export function init(app, callback) {
   // init app
-  getInstance().initApp({
+  vueTape.initApp({
     el: '#app',
     app,
     dataOptions: {
@@ -17,7 +17,7 @@ export function init(app, callback) {
     }
   }, (vue) => {
     vue.prototype.getConfig = (key, def) => {
-      return getInstance().get(conf, key, def);
+      return vueTape.get(conf, key, def);
     };
     callback && callback(vue);
   });

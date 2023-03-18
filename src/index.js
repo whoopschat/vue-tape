@@ -1,2 +1,4 @@
-import core from './core'
-module.exports = core;
+import './style'
+import tape from './services'
+
+module.exports = tape;

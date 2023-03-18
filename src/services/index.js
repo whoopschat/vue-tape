@@ -15,33 +15,45 @@ import data from "./_data";
 
 const timer = new Timer;
 
-export function create(vue) {
+let _installed = false;
+const tape = {
+  data,
+  timer,
+  install,
+  initApp,
+  getVersion,
+  getQueryString,
+  parseQueryParams,
+  appendQueryParams,
+  getElementPosition,
+  setLocalStorage,
+  getLocalStorage,
+  encodeBase64,
+  decodeBase64,
+  get,
+  toAny,
+  formatDate,
+  onLoad,
+  onShow,
+  offShow,
+  onHide,
+  offHide,
+  onResize,
+  offResize
+}
+
+function install(vue) {
+  if (_installed || !vue) {
+    return;
+  }
   setVue(vue);
-  console.log("VUE: version " + get(vue, 'version'))
+  if (vue.version) {
+    console.log("VUE: version " + vue.version)
+  }
   console.log("VUE-TAPE: version " + getVersion())
   console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
-  return {
-    data,
-    timer,
-    initApp,
-    getVersion,
-    getQueryString,
-    parseQueryParams,
-    appendQueryParams,
-    getElementPosition,
-    setLocalStorage,
-    getLocalStorage,
-    encodeBase64,
-    decodeBase64,
-    get,
-    toAny,
-    formatDate,
-    onLoad,
-    onShow,
-    offShow,
-    onHide,
-    offHide,
-    onResize,
-    offResize
-  };
+  vue.prototype.$tape = tape;
+  _installed = true;
 }
+
+export default tape;

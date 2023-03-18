@@ -3,11 +3,11 @@ declare module "vue-tape" {
 
   function install(vue: any): void;
 
-  /** 数据管理实例 */
-  var data: Data;
-
   /** 时钟管理实例 */
   var timer: Timer;
+
+  /** 状态管理实例 */
+  var state: State;
 
   /**
    * 初始化APP
@@ -17,17 +17,12 @@ declare module "vue-tape" {
     el: string,
     app: any,
     options?: object,
-    dataOptions?: {
+    // 状态配置
+    stateOptions?: {
       // 数据前缀
       keyPrefix?: String,
       // 默认数据
       defaultValues?: Object
-      // 保存数据
-      saveData?: (key: string, value) => Promise<any>;
-      // 移除数据
-      removeData?: (keys: string[]) => Promise<any>;
-      // 加载数据
-      loadData?: () => Promise<{ key: string, value: any }[]>;
     }
   }, handler?: (vue?: object) => void): void;
 
@@ -37,19 +32,23 @@ declare module "vue-tape" {
   function getVersion(): string;
 
   /**
-   * 从目标对象中获取数据
-   * @param object 
-   * @param path 
-   * @param def 
+   * 创建数据管理
+   * @param dataOptions 数据配置
    */
-  function get(object: object, path?: string | any[], def?: any)
-
-  /**
-   * 将原数据转换为任意格式
-   * @param val
-   * @param def 
-   */
-  function toAny(val: any, def?: any)
+  function createData(dataOptions?: {
+    // 本地模式
+    local: boolean;
+    // 数据前缀
+    keyPrefix?: String;
+    // 默认数据
+    defaultValues?: Object;
+    // 保存数据
+    saveData?: (key: string, value) => Promise<any>;
+    // 移除数据
+    removeData?: (keys: string[]) => Promise<any>;
+    // 加载数据
+    loadData?: () => Promise<{ key: string, value: any }[]>;
+  }): Data;
 
   /**
    * 格式化日期
@@ -79,7 +78,7 @@ declare module "vue-tape" {
   function appendQueryParams(path: string, query: object): string;
 
   /**
-   * 获取页面中元素的位置
+   * 获取元素在页面中的位置
    * @param el 元素
    */
   function getElementPosition(el?: any): { left: number, top: number, height: number, width: number };
@@ -97,6 +96,12 @@ declare module "vue-tape" {
    * @param def 默认值
    */
   function getLocalStorage(key: string, def?: any): any;
+
+  /**
+   * 移除localStorage数据
+   * @param key 配置项
+   */
+  function removeLocalStorage(key: string, def?: any): any;
 
   /**
    * 字符串BASE64编码
@@ -152,14 +157,24 @@ declare module "vue-tape" {
    */
   function offResize(callback: () => void): void;
 
+  /**
+   * 将原数据转换为默认值相同的数据类型
+   * @param val 数据值
+   * @param def 默认值
+   */
+  function toAny(val: any, def?: any)
+
+  /**
+   * 安全的从对象中获取数据
+   * @param object 对象
+   * @param path 取值路径
+   * @param def 默认值
+   */
+  function get(object: object, path?: string | any[], def?: any)
+
 
   /**  数据模块 */
   interface Data {
-
-    /**
-     * 加载数据
-     */
-    load(): Promise<void>;
 
     /**
      * 是否加载成功
@@ -167,12 +182,16 @@ declare module "vue-tape" {
     isReady(): boolean;
 
     /**
+     * 加载数据
+     */
+    checkReady(): Promise<void>;
+
+    /**
      * 设置数据
      * @param key 
      * @param value
-     * @param onlyNotExists
      */
-    set(key: string, value: any, onlyNotExists?: boolean): void;
+    set(key: string, value: any): void;
 
     /**
      * 获取数据
@@ -205,6 +224,25 @@ declare module "vue-tape" {
 
   }
 
+
+  /**  状态模块 */
+  interface State {
+
+    /**
+     * 设置数据
+     * @param key 
+     * @param value
+     */
+    set(key: string, value: any): void;
+
+    /**
+     * 获取数据
+     * @param key 
+     * @param defValue
+     */
+    get(key: string, defValue?: any): any;
+
+  }
 
   /** 时钟管理类 */
   interface Timer {

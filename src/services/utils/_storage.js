@@ -1,5 +1,9 @@
 import { toAny } from './_toany';
 
+export function removeLocalStorage(key) {
+  localStorage.removeItem(`${key}`);
+}
+
 export function setLocalStorage(key, value) {
   if (value === undefined || value === null) {
     localStorage.removeItem(`${key}`)

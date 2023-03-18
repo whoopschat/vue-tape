@@ -12,11 +12,7 @@ export function get(object, path, defaultValue) {
         if (!obj) {
           return defaultValue;
         }
-        if (typeof obj === 'object') {
-          obj = obj[key];
-        } else {
-          obj = undefined;
-        }
+        obj = toAny(obj, {})[key];
       }
     }
   }

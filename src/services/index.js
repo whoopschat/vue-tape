@@ -1,3 +1,4 @@
+import './style'
 import "./_polyfill";
 import { initApp } from "./_app";
 import { setVue, getVue } from "./__vue";
@@ -6,17 +7,17 @@ import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from ".
 import { setLocalStorage, getLocalStorage, removeLocalStorage } from "./utils/_storage";
 import { getElementPosition } from "./utils/_position";
 import { encodeBase64, decodeBase64 } from "./utils/_base64";
+import { setClipboard } from './utils/_clipboard';
 import { getVersion } from "./utils/_version";
 import { formatDate } from "./utils/_date";
 import { Timer } from "./timer/Timer";
 import { toAny } from "./utils/_toany";
 import { get } from "./utils/_get";
-import state from "./manager/_state";
 import { Data } from "./manager/_data";
+import state from "./manager/_state";
 
 const timer = new Timer;
 
-let _installed = false;
 const tape = {
   timer,
   state,
@@ -24,6 +25,7 @@ const tape = {
   initApp,
   getVersion,
   createData,
+  setClipboard,
   getQueryString,
   parseQueryParams,
   appendQueryParams,
@@ -33,8 +35,6 @@ const tape = {
   removeLocalStorage,
   encodeBase64,
   decodeBase64,
-  get,
-  toAny,
   formatDate,
   onLoad,
   onShow,
@@ -42,19 +42,21 @@ const tape = {
   onHide,
   offHide,
   onResize,
-  offResize
+  offResize,
+  toAny,
+  get,
 }
 
 function createData(dataOptions) {
-  let data = new Data(dataOptions, (state) => {
+  return new Data(dataOptions, (state) => {
     let _vue = getVue();
     if (_vue && typeof _vue.observable === 'function') {
       _vue.observable(state);
     }
   })
-  console.log(data)
-  return data;
 }
+
+let _installed = false;
 
 function install(vue, options = {}) {
   if (_installed || !vue) {

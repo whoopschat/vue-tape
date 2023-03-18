@@ -65,6 +65,12 @@ declare module "vue-tape" {
   function getQueryString(key: string, def?: any): string;
 
   /**
+   * 复制内容到剪切板
+   * @param content 
+   */
+  function setClipboard(content: string): boolean;
+
+  /**
    * 获取URL中携带的参数
    * @param path 地址路径
    */
@@ -241,6 +247,11 @@ declare module "vue-tape" {
      * @param defValue
      */
     get(key: string, defValue?: any): any;
+
+    /**
+     * 重置数据
+     */
+    reset(): void;
 
   }
 

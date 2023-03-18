@@ -154,10 +154,9 @@ export class Data {
     if (!this.isReady()) {
       return;
     }
-    let strValue = toAny(value, '');
-    if (this.__dataState.values[key] !== strValue) {
-      this.__dataState.values[key] = strValue;
-      this.__saveData(key, strValue);
+    if (this.__dataState.values[key] !== value) {
+      this.__dataState.values[key] = value;
+      this.__saveData(key, value);
     }
   }
 

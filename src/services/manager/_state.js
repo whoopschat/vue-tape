@@ -49,9 +49,8 @@ function set(key, value) {
   if (!_dataState.ready) {
     return;
   }
-  let strValue = toAny(value, '');
-  if (_dataState.values[key] !== strValue) {
-    _dataState.values[key] = strValue;
+  if (_dataState.values[key] !== value) {
+    _dataState.values[key] = value;
     __saveState(_dataState.values);
     __refreshObser();
   }
@@ -70,7 +69,17 @@ function get(key, def) {
   return getSalf(_dataState.values, key, def);
 }
 
-export default {
-  get,
-  set
+/**
+ * 重置数据
+ * @returns {void}
+ */
+function reset() {
+  if (!_dataState.ready) {
+    return;
+  }
+  _dataState.values = Object.assign({}, getSalf(__state_options__, "defaultValues", {}));
+  __saveState(_dataState.values);
+  __refreshObser();
 }
+
+export default { set, get, reset }

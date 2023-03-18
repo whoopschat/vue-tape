@@ -1,12 +1,13 @@
 import './style.less';
 import vue from 'vue';
 import vueTape from '../../../src/services';
-import state from './state'
+import state, { readState } from './state'
 import conf from './config'
 
 vue.use(vueTape);
 
 export function init(app, callback) {
+  readState("title")
   // init app
   vueTape.initApp({
     el: '#app',
@@ -16,6 +17,7 @@ export function init(app, callback) {
       defaultValues: state
     }
   }, (vue) => {
+    console.log(readState("title"))
     vue.prototype.$_data = vueTape.createData({
       keyPrefix: "biz-task-",
       defaultValues: {

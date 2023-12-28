@@ -45,9 +45,9 @@ export function initApp({ el, app, error, options, stateOptions }, handler) {
       }))
     }).catch((err) => {
       console.error(err);
+      _vue.prototype.$errorData = err;
       __vueEventBus = new _vue(Object.assign(options || {}, {
         el: el || '#app',
-        errorData: err,
         render: h => h(error || createErrorComp(err))
       }))
     })

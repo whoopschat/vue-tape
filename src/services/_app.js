@@ -4,6 +4,8 @@ import { createHtmlComponent } from './_comp';
 import { _initLifeCycle } from './_cycle';
 import { ready } from './manager/_state';
 
+let __vueEventBus = null;
+
 function createErrorComp(errorMsg) {
   return createHtmlComponent('<div class="--vue-tape-error">'
     + '<div style="color:#333333; font-size: 20px; margin-bottom: 10px;">'
@@ -19,7 +21,11 @@ function createErrorComp(errorMsg) {
     + '</div>')
 }
 
-export function initApp({ el, app, options, stateOptions }, handler) {
+export function getEventBus() {
+  return __vueEventBus;
+}
+
+export function initApp({ el, app, error, options, stateOptions }, handler) {
   // init life cycle
   _initLifeCycle();
   // init vue app
@@ -33,15 +39,16 @@ export function initApp({ el, app, options, stateOptions }, handler) {
     return Promise.resolve().then(() => {
       return handler && handler(_vue);
     }).then(() => {
-      new _vue(Object.assign(options || {}, {
+      __vueEventBus = new _vue(Object.assign(options || {}, {
         el: el || '#app',
         render: h => h(app || createErrorComp("Error: Invalid parameters [app] -> initApp({ ... })"))
       }))
     }).catch((err) => {
       console.error(err);
-      new _vue(Object.assign(options || {}, {
+      __vueEventBus = new _vue(Object.assign(options || {}, {
         el: el || '#app',
-        render: h => h(createErrorComp(err))
+        errorData: err,
+        render: h => h(error || createErrorComp(err))
       }))
     })
   })

@@ -1,6 +1,6 @@
 import './style'
 import "./_polyfill";
-import { initApp } from "./_app";
+import { initApp, getEventBus } from "./_app";
 import { setVue, getVue } from "./__vue";
 import { genUrl, getQueryString, parseQueryParams, appendQueryParams } from "./utils/_query";
 import { onLoad, onShow, onHide, onResize, offShow, offHide, offResize } from "./_cycle";
@@ -24,6 +24,7 @@ const tape = {
   state,
   install,
   initApp,
+  getEventBus,
   getVersion,
   createData,
   setClipboard,
@@ -80,6 +81,7 @@ function install(vue, options = {}) {
   console.log("VUE-TAPE: version " + getVersion())
   console.log("VUE-TAPE: github https://github.com/whoopschat/vue-tape")
   vue.prototype.$tape = tape;
+  vue.prototype.$getEventBus = getEventBus;
   _installed = true;
 }
 

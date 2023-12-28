@@ -29,13 +29,13 @@ export function initApp({ el, app, error, options, stateOptions }, handler) {
   // init life cycle
   _initLifeCycle();
   // init vue app
-  let _vue = getVue();
   ready(stateOptions, (state) => {
     let _vue = getVue();
     if (_vue && typeof _vue.observable === 'function') {
       _vue.observable(state);
     }
   }).then(() => {
+    let _vue = getVue();
     return Promise.resolve().then(() => {
       return handler && handler(_vue);
     }).then(() => {

@@ -280,6 +280,11 @@ declare module "vue-tape" {
      */
     reset(): void;
 
+    /**
+     * 重新加载数据
+     */
+    reload(): void;
+
   }
 
   /** 时钟管理类 */

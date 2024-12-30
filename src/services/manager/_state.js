@@ -27,6 +27,15 @@ function __refreshObser() {
   __obser_callback__ && __obser_callback__(_dataState);
 }
 
+function __reloadState() {
+  _dataState.ready = false;
+  return __loadState().then(stateValues => {
+    _dataState.ready = true;
+    _dataState.values = Object.assign({}, getSalf(__state_options__, "defaultValues", {}), stateValues || {});
+    __refreshObser();
+  });
+}
+
 export function ready(options, observableCallback) {
   __state_options__ = options;
   __obser_callback__ = observableCallback;
@@ -77,9 +86,27 @@ function reset() {
   if (!_dataState.ready) {
     return;
   }
-  _dataState.values = Object.assign({}, getSalf(__state_options__, "defaultValues", {}));
+  _dataState.values = Object.assign({}, getSalf(__state_options__,
+    "defaultValues", {}));
   __saveState(_dataState.values);
   __refreshObser();
 }
 
-export default { set, get, reset }
+
+/**
+ * 重新加载数据，适用于切换页码时，刷新最新的存档
+ * @returns 
+ */
+function reload() {
+  if (!_dataState.ready) {
+    return;
+  }
+  __reloadState();
+}
+
+export default {
+  set,
+  get,
+  reset,
+  reload
+}
